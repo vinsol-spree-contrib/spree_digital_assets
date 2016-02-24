@@ -3,12 +3,12 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_digital_assets'
   s.version     = '3.0.6.1'
-  s.summary     = 'TODO: Add gem summary here'
-  s.description = 'TODO: Add (optional) gem description here'
+  s.summary     = 'Add gem summary here'
+  s.description = 'Add (optional) gem description here'
   s.required_ruby_version = '>= 2.0.0'
 
-  # s.author    = 'You'
-  # s.email     = 'you@example.com'
+  s.author    = 'vinsol'
+  s.email     = 'abc@vinsol.com'
   # s.homepage  = 'http://www.spreecommerce.com'
 
   #s.files       = `git ls-files`.split("\n")
@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
   s.requirements << 'none'
 
   s.add_dependency 'spree_core', '~> 3.0.6.1'
+  s.add_dependency 'remotipart', '~> 1.2'
 
   s.add_development_dependency 'capybara', '~> 2.4'
   s.add_development_dependency 'coffee-rails'

@@ -1,0 +1,5 @@
+$('.tree-menu .active').removeClass('active').addClass('inactive');
+$(".tree-menu [data-id=<%= @folder.id %>]").parent().addClass('active').removeClass('inactive');
+$('#folder_content').html("<%= j render 'content' %>");
+$('#asset_folder_id').val("<%= @folder.id %>");
+$('#upload_asset_button').removeClass('disabled').removeAttr('disabled');
