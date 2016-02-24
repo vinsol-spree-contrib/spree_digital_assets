@@ -1,0 +1,35 @@
+<div id = 'folder_index' class="row">
+  <div id = 'folder_list' class="col-md-3">
+    <%= render 'list' %>
+  </div>
+  <div id = 'folder_content' class="col-md-7">
+    <%= render 'content' %>
+  </div>
+
+  <div class = 'col-md-2'>
+    <div id = 'asset_upload_buton'>
+      <button type="button" class="btn btn-info btn-lg disabled"  id="upload_asset_button"  disabled = 'true' data-toggle="modal" data-target="#upload_asset_modal">Upload Asset</button>
+    </div>
+  </div>
+
+  <div id="upload_asset_modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Asset Uploader</h4>
+        </div>
+        <div id = 'upload_asset_modal_body' class="modal-body">
+          <%= render 'spree/admin/digital_assets/form' %>
+        </div>
+        <div  class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
