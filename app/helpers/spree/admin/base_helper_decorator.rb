@@ -18,9 +18,4 @@ Spree::Admin::BaseHelper.class_eval do
     end
   end
 
-
-  def digital_assets_list
-    @folder.try(:digital_assets) || @digital_asset.try(:folder).try(:digital_assets) || Spree::DigitalAsset.all
-  end
-
 end
