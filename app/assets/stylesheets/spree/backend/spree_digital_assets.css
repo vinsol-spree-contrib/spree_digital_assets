@@ -9,7 +9,9 @@ the installer will append this file to the app vendored assets here: 'vendor/ass
 .tree-menu-container {
   border-bottom: solid 1px #eee;
   border-right: solid 1px #eee;
-  margin: -15px 0 0 -20px;
+  border-left: solid 1px #eee;
+  /*margin: -15px 0 0 -20px;*/
+  margin-top: 15px;
   height: 100%;
   box-shadow: 0 0 0 0 #000000;
 }
@@ -53,3 +55,24 @@ the installer will append this file to the app vendored assets here: 'vendor/ass
 .tree-menu-container .tree-menu > li > .btn-group .btn {
   background: none !important;
 }
+
+.asset-area {
+  height: 150px;
+  padding: 10px;
+  position: relative;
+}
+.asset-area:hover {
+  box-shadow: 0 0 0 1px #e2e2e2 inset;
+}
+
+.asset-area.active {
+  box-shadow: 0 0 0 5px #fff inset;
+  background-color: #e2e2e2;
+}
+
+.asset-area img {
+  max-width: 140px !important;
+  max-height: 140px !important;
+
+}
+
