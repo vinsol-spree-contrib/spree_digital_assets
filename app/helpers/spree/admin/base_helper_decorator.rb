@@ -7,14 +7,13 @@ Spree::Admin::BaseHelper.class_eval do
     if node.try(:leaf?)
       ''
     else
-      string = ' '
-      string << "<ul class = 'tree-menu'>"
+      output = ' '
+      output << "<ul class = 'tree-menu'>"
       child_nodes.each do |child|
-        li_class = (child == @folder) ? 'active' : 'inactive'
-        string << ["<li class='#{li_class}'>", capture(child, &block), build_nested_set_tree(child, &block), '</li>'].join('').html_safe
+        output << ['<li>', capture(child, &block), build_nested_set_tree(child, &block), '</li>'].join('').html_safe
       end
 
-      (string << '</ul>').html_safe
+      (output << '</ul>').html_safe
     end
   end
 
