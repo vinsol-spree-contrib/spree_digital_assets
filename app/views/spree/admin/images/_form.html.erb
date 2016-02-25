@@ -13,7 +13,7 @@
     <button type="button" class="btn btn-block btn-default"  id="upload_asset_button" data-toggle="modal" data-target="#associate_asset_modal">Upload Asset</button>
 
       </span>
-      <input type="text" class="form-control" placeholder="Search for...">
+      <input type="text" id="digital_asset_file_name" disabled='true' class="form-control" placeholder="Search for...">
     </div>
     <div data-hook="variant" class="form-group">
       <%= f.label :viewable_id, Spree::Variant.model_name.human %>

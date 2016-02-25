@@ -9,6 +9,7 @@ $( document ).ready(function() {
 
   $('#associate_asset_modal').on('click', '.attachment', function() {
     $('#digital_asset_id_field').val($(this).attr('data-id'));
+    $('#digital_asset_file_name').val($(this).attr('data-name'));
     $(this).parent().siblings().removeClass('active');
     $(this).parent().addClass('active');
   });
