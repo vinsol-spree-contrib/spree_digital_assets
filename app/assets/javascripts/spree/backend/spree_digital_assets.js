@@ -7,7 +7,7 @@ $( document ).ready(function() {
     $(this).parent().find('.tree-menu').slideToggle();
   });
 
-  $('#associate_asset_modal .attachment').on('click', '', function() {
+  $('#associate_asset_modal').on('click', '.attachment', function() {
     $('#digital_asset_id_field').val($(this).attr('data-id'));
     $(this).parent().siblings().removeClass('active');
     $(this).parent().addClass('active');
