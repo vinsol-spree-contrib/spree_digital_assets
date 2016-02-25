@@ -1,3 +1,6 @@
 <% assets.each do |asset|%>
-  <%= image_tag(asset.attachment.url(:thumb)) %>
+  <div class="col-sm-3 text-center asset-area">
+    <%= image_tag(asset.attachment.url(:thumb), class: 'img-thumbnail')  %>
+  </div>
 <% end %>
+
