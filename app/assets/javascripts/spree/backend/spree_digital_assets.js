@@ -6,4 +6,7 @@ $( document ).ready(function() {
   $('#folder_list').on('click', '.toggle_list_menu', function() {
     $(this).parent().find('.tree-menu').slideToggle();
   });
+  $('.attachment').on('click', '', function() {
+    $('#digital_asset_id_field').val($(this).attr('data-id'));
+  });
 });
