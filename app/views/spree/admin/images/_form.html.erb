@@ -1,9 +1,20 @@
 <div data-hook="admin_image_form_fields" class="row">
   <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-7"><label><input type="radio" name="abcdefgh"> Choose from Digital Assets</label></div>
+      <div  class="col-md-5"><label><input type="radio" name="abcdefgh"> Upload File</label></div>
+    </div>
     <div data-hook="file" class="form-group">
       <%= f.label :attachment, Spree.t(:filename) %>
-      <%= f.file_field :attachment %>
+      <%= f.file_field :attachment, class: 'form-control' %>
     </div>
+    <div class="input-group form-group">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Upload Asset</button>
+      </span>
+      <input type="text" class="form-control" placeholder="Search for...">
+    </div>
+    <%= render 'digital_assets' %>
     <div data-hook="variant" class="form-group">
       <%= f.label :viewable_id, Spree::Variant.model_name.human %>
       <%= f.select :viewable_id, @variants, {}, {:class => 'select2'} %>
@@ -18,4 +29,30 @@
   <%= f.hidden_field :digital_asset_id, id: 'digital_asset_id_field' %>
 </div>
 
-<%= render 'digital_assets' %>
+
+<div id="associate_asset_modal" class="modal fade" >
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><strong>Asset Uploader</strong></h4>
+      </div>
+      <div id = 'upload_asset_modal_body' class="modal-body">
+        <div class="row">
+          <div id = 'folder_list' class="col-md-4">
+            <%= render 'spree/admin/shared/folder_list' %>
+          </div>
+          <div id = 'folder_content' class="col-md-8">
+            <% @digital_assets = Spree::DigitalAsset.all %>
+            <%= render 'spree/admin/digital_assets/content' %>
+          </div>
+        </div>
+      </div>
+      <div  class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
