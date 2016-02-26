@@ -4,7 +4,10 @@ module Spree
     class DigitalAssetsController < ResourceController
 
       def index
-        @digital_assets = @digital_assets.where(folder_id: params[:folder_id]) if params[:folder_id].present?
+        if params[:folder_id].present?
+          @current_folder = Spree::Folder.find_by(id: params[:folder_id])
+          @digital_assets = @digital_assets.where(folder: @current_folder.self_and_descendants) if @current_folder.present?
+        end
       end
 
     end
