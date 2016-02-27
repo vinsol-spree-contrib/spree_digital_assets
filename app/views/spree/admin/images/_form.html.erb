@@ -1,13 +1,5 @@
 <div data-hook="admin_image_form_fields" class="row">
   <div class="col-md-6">
-    <div class="row">
-      <div class="col-md-7"><label><input type="radio" name="abcdefgh"> Choose from Digital Assets</label></div>
-      <div  class="col-md-5"><label><input type="radio" name="abcdefgh"> Upload File</label></div>
-    </div>
-    <div data-hook="file" class="form-group">
-      <%= f.label :attachment, Spree.t(:filename) %>
-      <%= f.file_field :attachment, class: 'form-control' %>
-    </div>
     <div class="input-group form-group">
       <span class="input-group-btn " id= 'asset_upload_buton'>
     <button type="button" class="btn btn-block btn-default"  id="upload_asset_button" data-toggle="modal" data-target="#associate_asset_modal">Upload Asset</button>
@@ -44,9 +36,8 @@
           <div id = 'folder_list' class="col-md-4">
             <%= render 'spree/admin/shared/folder_list' %>
           </div>
-          <div id = 'folder_content' class="col-md-8">
-            <% @digital_assets = Spree::DigitalAsset.all %>
-            <%= render 'spree/admin/digital_assets/content' %>
+          <div id='folder_assets' class="col-md-8">
+            <%= render partial: 'spree/admin/shared/digital_asset', collection: Spree::DigitalAsset.all  %>
           </div>
         </div>
       </div>
