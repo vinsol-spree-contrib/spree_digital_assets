@@ -1,9 +1,0 @@
-<% assets.each do |asset|%>
-
-  <div class="col-sm-3 text-center asset-area">
-    <%= image_tag(asset.attachment.url(:thumb), class: 'img-thumbnail attachment' ,
-      data: { id: asset.id, name: asset.attachment_file_name } )  %>
-  </div>
-
-<% end %>
-
