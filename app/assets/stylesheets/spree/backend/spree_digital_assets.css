@@ -73,3 +73,15 @@ the installer will append this file to the app vendored assets here: 'vendor/ass
 
 }
 
+.nav.nav-sidebar .tree-menu-container {
+  margin-top: 0;
+}
+
+.nav.nav-sidebar .tree-menu-container .tree-menu > li > .btn-group {
+  margin-top: 3px;
+}
+
+.nav.nav-sidebar .tree-menu-container .tree-menu .dropdown-menu {
+  left: auto;
+  right: 0;
+}
