@@ -3,7 +3,7 @@
 //= require jquery.remotipart
 
 $( document ).ready(function() {
-  $('#folder_list').on('click', '.toggle_list_menu', function() {
+  $('.tree-menu-container').on('click', '.toggle_list_menu', function() {
     $(this).parent().find('.tree-menu').slideToggle();
   });
 
@@ -12,6 +12,12 @@ $( document ).ready(function() {
     $('#digital_asset_file_name').val($(this).attr('data-name'));
     $(this).parent().siblings().removeClass('active');
     $(this).parent().addClass('active');
+  });
+
+  $(window).scroll(function() {
+     if($(window).scrollTop() + $(window).height() == $(document).height()) {
+
+     }
   });
 
 });

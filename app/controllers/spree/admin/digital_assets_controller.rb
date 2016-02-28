@@ -3,6 +3,8 @@ module Spree
 
     class DigitalAssetsController < ResourceController
 
+      respond_to :json,:html,:js
+
       def index
         if params[:folder_id].present?
           @current_folder = Spree::Folder.find_by(id: params[:folder_id])

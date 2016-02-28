@@ -1,2 +1,8 @@
-$('#folder_assets').html("<%= j render partial: 'spree/admin/shared/digital_asset', collection: @digital_asset.folder.digital_assets %>");
-$('#upload_asset_modal').modal('hide');
+<% if @digital_asset.valid? %>
+  $('#folder_assets').append("<%= j render partial: 'spree/admin/shared/digital_asset', object: @digital_asset %>");
+  $('#upload_asset_modal').modal('hide');
+  $('#new_digital_asset_form')[0].reset();
+  show_flash('success', '<%= flash[:success] %>');
+<% else %>
+  $('#upload_asset_modal_body').html("<%= j render 'form' %>");
+<% end %>
