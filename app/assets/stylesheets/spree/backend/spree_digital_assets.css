@@ -99,3 +99,42 @@ the installer will append this file to the app vendored assets here: 'vendor/ass
   left: auto;
   right: 0;
 }
+
+.digital-assets-image {
+  min-height: 125px;
+}
+
+.sidebar-default-font {
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+  display: block;
+  color: #478DC1;
+}
+li.active .link.sidebar-default-font {
+  color: #7DB942;
+  background: transparent!important;
+}
+.sidebar-default-font:hover {
+  background: #eee;
+  text-decoration: none!important;
+}
+.sidebar-default-font:active,
+.sidebar-default-font:focus,
+.sidebar-default-font:visited {
+  text-decoration: none!important;
+}
+.no-border {
+  border: 0 solid transparent !important;
+}
+.asset-area {
+  height: 175px;
+}
+.asset-area img {
+  max-width: 100px!important;
+  max-height: 100px!important;
+}
+.select-file {
+  font-size: 12px;
+  line-height: 16px;
+}
