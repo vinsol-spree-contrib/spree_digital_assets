@@ -6,7 +6,7 @@ module Spree
       before_action :filter_digital_assets_by_folder, if: 'params[:folder_id].present?'
 
       def index
-        @digital_assets = @digital_assets.page(params[:page]).per(16)
+        @digital_assets = @digital_assets.page(params[:page]).per(36)
         render 'view_more' if params[:page].to_i > 1
       end
 
