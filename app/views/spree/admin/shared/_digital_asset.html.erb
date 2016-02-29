@@ -1,6 +1,9 @@
 <div class="col-sm-3 text-center asset-area">
   <%= image_tag(digital_asset.attachment.url(:thumb), class: 'img-thumbnail attachment' ,
-    data: { id: digital_asset.id, name: digital_asset.attachment_file_name } )  %>
+    data: { id: digital_asset.id, name: digital_asset.attachment_file_name } )  %><br>
+    <%= digital_asset.name %><br>
+    <%= link_to 'x', admin_digital_asset_path(digital_asset), method: :delete, remote: true,
+    class: 'btn btn-warning delete_digital_asset_button' %>
 </div>
 
 

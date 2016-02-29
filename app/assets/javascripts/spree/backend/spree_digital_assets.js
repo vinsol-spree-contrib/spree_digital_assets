@@ -31,6 +31,10 @@ $( document ).ready(function() {
     load_more_objects();
   });
 
+  $('#main-part').on('ajax:success', '.delete_digital_asset_button', function() {
+    $(this).closest('.asset-area').remove();
+  });
+
 
   $(window).scroll(function() {
     load_more_objects();
