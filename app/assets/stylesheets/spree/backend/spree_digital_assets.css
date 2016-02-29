@@ -54,23 +54,37 @@ the installer will append this file to the app vendored assets here: 'vendor/ass
 }
 
 .asset-area {
-  height: 150px;
-  padding: 10px;
+  display: inline-block;
+  width: 170px;
+  margin: 7px;
+  height: 200px;
+  padding: 15px;
   position: relative;
-}
-.asset-area:hover {
-  box-shadow: 0 0 0 1px #e2e2e2 inset;
+  box-shadow: 0 0 0 1px #e2e2e2;
+  background: #f5f5f5;
+  vertical-align: top;
 }
 
+
 .asset-area.active {
-  box-shadow: 0 0 0 5px #fff inset;
-  background-color: #e2e2e2;
+  background-color: #478DC1;
+  color: #fff;
 }
 
 .asset-area img {
   max-width: 140px !important;
   max-height: 140px !important;
+  margin-bottom: 15px;
 
+}
+.asset-area .corner-menu {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.asset-area .dropdown-menu {
+  left: auto;
+  right: 0;
 }
 
 .nav.nav-sidebar .tree-menu-container {
