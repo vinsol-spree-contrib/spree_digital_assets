@@ -17,6 +17,7 @@ Bundle your dependencies and run the installation generator:
 ```shell
 bundle
 bundle exec rails g spree_digital_assets:install
+bundle exec rails g spree_digital_assets:seed
 ```
 
 Testing
