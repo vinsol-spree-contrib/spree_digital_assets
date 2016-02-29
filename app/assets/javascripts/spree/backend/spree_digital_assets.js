@@ -3,6 +3,7 @@
 //= require jquery.remotipart
 
 $( document ).ready(function() {
+
   $('.tree-menu-container').on('click', '.toggle_list_menu', function() {
     $(this).parent().find('.tree-menu').slideToggle();
   });
@@ -15,9 +16,15 @@ $( document ).ready(function() {
   });
 
   $(window).scroll(function() {
-     if($(window).scrollTop() + $(window).height() == $(document).height()) {
-
-     }
+    viewMore = $('#view-more');
+    url = viewMore.find('a').attr('href');
+    if(($(window).scrollTop() + $(window).height() == $(document).height()) && $('#folder_assets').length > 0 && url) {
+      $.ajax({
+        url: url,
+        method: 'GET',
+        dataType: 'script'
+      });
+    }
   });
 
 });
