@@ -17,7 +17,8 @@ $( document ).ready(function() {
 
   var load_more_objects = function() {
     url = $('#folder_assets').attr('data-next-url');
-    if(($(this).scrollTop() + $(this).height() == $(document).height()) && $('#folder_assets').length > 0 && url) {
+
+    if(($(window).scrollTop() >= $('#folder_assets').offset().top + $('#folder_assets').outerHeight() - window.innerHeight) && $('#folder_assets').length > 0 && url) {
       $.ajax({
         url: url,
         method: 'GET',
