@@ -1,0 +1,11 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:editing_resource, resource: Spree::DigitalAsset.model_name.human) %>
+<% end %>
+
+<div class="row">
+  <div class="col-md-12">
+    <%= form_for [:admin, @digital_asset], html: { multipart: true, class: 'form-horizontal' }, authenticity_token: true do |f| %>
+      <%= render :partial => 'form', locals: { f: f } %>
+    <% end %>
+  </div>
+</div>

@@ -8,11 +8,11 @@ $( document ).ready(function() {
     $(this).parent().find('.tree-menu').slideToggle();
   });
 
-  $('#associate_asset_modal').on('click', '.attachment', function() {
-    $('#digital_asset_id_field').val($(this).attr('data-id'));
-    $('#digital_asset_file_name').val($(this).attr('data-name'));
-    $(this).parent().siblings().removeClass('active');
-    $(this).parent().addClass('active');
+  $('#associate_asset_modal').on('click', '.asset-area', function() {
+    $('#digital_asset_id_field').val($(this).find('.attachment').attr('data-id'));
+    $('#digital_asset_file_name').val($(this).find('.attachment').attr('data-name'));
+    $(this).siblings().removeClass('active');
+    $(this).addClass('active');
   });
 
   var load_more_objects = function() {
@@ -38,6 +38,10 @@ $( document ).ready(function() {
 
   $(window).scroll(function() {
     load_more_objects();
+  });
+
+  $("body").on('click', '#main-sidebar #folder_list a[data-remote=true]', function(){
+    history.pushState('', '', $(this).attr('href'));
   });
 
 });

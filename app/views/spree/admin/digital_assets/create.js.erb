@@ -4,5 +4,5 @@
   $('#new_digital_asset_form')[0].reset();
   show_flash('success', '<%= flash[:success] %>');
 <% else %>
-  $('#upload_asset_modal_body').html("<%= j render 'form' %>");
+  $('#upload_asset_modal_body').html("<%= j render 'upload_asset_form' %>");
 <% end %>

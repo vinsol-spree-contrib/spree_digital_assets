@@ -2,7 +2,11 @@
   <div  class="col-md-12">
     <div class="row">
       <div  id='asset_upload_buton' class="col-md-12">
-        <button type="button" class="btn btn-primary disabled pull-right"  id="upload_asset_button"  disabled='true' data-toggle="modal" data-target="#upload_asset_modal"><i class="glyphicon glyphicon-cloud-upload"></i>Upload Asset</button>
+        <% if @current_folder.present? %>
+          <button type="button" class="btn btn-primary pull-right"  id="upload_asset_button" data-toggle="modal" data-target="#upload_asset_modal"><i class="glyphicon glyphicon-cloud-upload"></i>Upload Asset</button>
+        <% else %>
+          <button type="button" class="btn btn-primary pull-right disabled"  id="upload_asset_button" data-toggle="modal" data-target="#upload_asset_modal"><i class="glyphicon glyphicon-cloud-upload" disabled=true></i>Upload Asset</button>
+        <% end %>
       </div>
     </div>
     <div id='folder_assets' class="row" data-next-url="<%= admin_digital_assets_path(folder_id: @current_folder.try(:id), page: (@digital_assets.current_page + 1)) %>">
@@ -13,18 +17,14 @@
 
 <div id="upload_asset_modal" class="modal fade" role="dialog">
   <div class="modal-dialog">
-    <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Asset Uploader</h4>
       </div>
       <div id='upload_asset_modal_body' class="modal-body">
-        <%= render 'form' %>
+        <%= render partial: 'upload_asset_form' %>
       </div>
-<!--       <div  class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div> -->
     </div>
   </div>
 </div>

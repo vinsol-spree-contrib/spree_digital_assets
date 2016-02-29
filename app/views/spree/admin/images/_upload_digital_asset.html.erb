@@ -1,0 +1,38 @@
+<div data-hook="file" class="form-group">
+  <span class="input-group-btn " id= 'asset_upload_buton'>
+    <button type="button" class="btn btn-block btn-default"  id="upload_asset_button" data-toggle="modal" data-target="#associate_asset_modal">Upload Asset</button>
+  </span>
+  <input type="text" id="digital_asset_file_name" disabled='true' value = "<%= @image.attachment_file_name %>" class="form-control" placeholder="Search for...">
+</div>
+
+<div id="associate_asset_modal" class="modal fade" >
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><strong>Asset Uploader</strong></h4>
+      </div>
+      <div id = 'upload_asset_modal_body' class="modal-body">
+        <div class="row">
+          <div id = 'folder_list' class="col-md-4">
+            <div class="tree-menu-container">
+              <%= build_nested_set_tree(Spree::Folder.all) do |folder| %>
+
+                <a href="#" class="toggle_list_menu glyphicon glyphicon-chevron-right"></a>
+                <%= link_to folder.name, admin_digital_assets_path(folder_id: folder.id), class: 'link', data: { id: folder.id, remote: true } %>
+              <% end %>
+            </div>
+
+          </div>
+          <div id='folder_assets' class="col-md-8">
+            <%= render partial: 'spree/admin/shared/digital_asset', collection: Spree::DigitalAsset.all  %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= f.hidden_field :digital_asset_id, id: 'digital_asset_id_field' %>
