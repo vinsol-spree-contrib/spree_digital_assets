@@ -15,16 +15,24 @@ $( document ).ready(function() {
     $(this).parent().addClass('active');
   });
 
-  $(window).scroll(function() {
-    viewMore = $('#view-more');
-    url = viewMore.find('a').attr('href');
-    if(($(window).scrollTop() + $(window).height() == $(document).height()) && $('#folder_assets').length > 0 && url) {
+  var load_more_objects = function() {
+    url = $('#folder_assets').attr('data-next-url');
+    if(($(this).scrollTop() + $(this).height() == $(document).height()) && $('#folder_assets').length > 0 && url) {
       $.ajax({
         url: url,
         method: 'GET',
         dataType: 'script'
       });
     }
+  }
+
+  $('#associate_asset_modal').on('scroll', function() {
+    load_more_objects();
+  });
+
+
+  $(window).scroll(function() {
+    load_more_objects();
   });
 
 });

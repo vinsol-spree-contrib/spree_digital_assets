@@ -5,14 +5,12 @@
         <button type="button" class="btn btn-primary disabled pull-right"  id="upload_asset_button"  disabled='true' data-toggle="modal" data-target="#upload_asset_modal"><i class="glyphicon glyphicon-cloud-upload"></i>Upload Asset</button>
       </div>
     </div>
-    <div id='folder_assets' class="row">
+    <div id='folder_assets' class="row" data-next-url="<%= admin_digital_assets_path(folder_id: @current_folder.try(:id), page: (@digital_assets.current_page + 1)) %>">
       <%= render partial: 'spree/admin/shared/digital_asset', collection: @digital_assets  %>
     </div>
   </div>
 </div>
-<p id="view-more">
-  <%= link_to 'View More', admin_digital_assets_path(folder_id: @current_folder.try(:id), page: (@digital_assets.current_page + 1)), id: 'view_more_button' %>
-</p>
+
 <div id="upload_asset_modal" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->

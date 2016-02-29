@@ -1,12 +1,13 @@
 $('.tree-menu .active').removeClass('active');
 $(".tree-menu [data-id=<%= @current_folder.try(:id) %>]").parent().addClass('active');
 
-if ($('#folder_assets').length == 0) {
+if ($('#folder_assets :visible').length == 0) {
   $('#main-part').html("<%= j render 'content' %>");
 }
 else {
   $('#folder_assets').html("<%= j render partial: 'spree/admin/shared/digital_asset', collection: @digital_assets %>");
 }
-$('#view_more_button').attr('href', "<%= admin_digital_assets_path folder_id: @current_folder.try(:id), page: (@digital_assets.current_page + 1) %>");
+$('#folder_assets').attr('data-next-url', "<%= admin_digital_assets_path folder_id: @current_folder.try(:id), page: (@digital_assets.current_page + 1) %>");
 $('#asset_folder_id').val("<%= @current_folder.try(:id) %>");
 $('#upload_asset_button').removeClass('disabled').removeAttr('disabled');
+window.scrollTo(0, 0);
