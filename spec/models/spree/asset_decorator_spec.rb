@@ -6,8 +6,26 @@ describe Spree::Asset, :type => :model do
   let(:digital_asset) { Spree::DigitalAsset.create!(name: 'abc', folder: folder, attachment: File.new(Spree::Core::Engine.root + "spec/fixtures" + 'thinking-cat.jpg')) }
   let(:image) { Spree::Image.new }
 
+  describe 'before_validation' do
+    context 'digital_asset_id not passed' do
+      it { expect(image).not_to receive(:build_from_digital_asset) }
+
+      after { image.valid? }
+    end
+
+    context 'digital_asset_id passed' do
+      before do
+        image.digital_asset_id = digital_asset.id
+      end
+
+      it { expect(image).to receive(:build_from_digital_asset) }
+
+      after { image.valid? }
+    end
+  end
+
   describe '#build_from_digital_asset' do
-    context 'when valid id passed' do
+    context 'when valid digital_asset_id passed' do
       before do
         image.digital_asset_id = digital_asset.id
         image.save
@@ -15,7 +33,8 @@ describe Spree::Asset, :type => :model do
 
       it { expect(image.attachment_file_name).to eq(digital_asset.attachment_file_name) }
     end
-    context 'when valid id not passed' do
+
+    context 'when invalid digital_asset_id passed' do
       before do
         image.digital_asset_id = 5
         image.save

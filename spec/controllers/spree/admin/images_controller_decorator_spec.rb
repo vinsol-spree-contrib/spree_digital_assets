@@ -8,6 +8,7 @@ describe Spree::Admin::ImagesController do
   let(:product) { mock_model(Spree::Product) }
   let(:variants) { double(ActiveRecord::Relation) }
   let(:variant) { double(Spree::Variant) }
+  let(:user) { mock_model(Spree::User) }
 
   before do
     allow(Spree::Product).to receive(:friendly).and_return(products)
@@ -25,10 +26,10 @@ describe Spree::Admin::ImagesController do
   end
 
   before do
-    allow(controller).to receive(:spree_current_user).and_return(@user)
+    allow(controller).to receive(:spree_current_user).and_return(user)
     allow(controller).to receive(:authorize_admin).and_return(true)
     allow(controller).to receive(:authorize!).and_return(true)
-    allow(@user).to receive(:generate_spree_api_key!).and_return(true)
+    allow(user).to receive(:generate_spree_api_key!).and_return(true)
   end
 
   describe '#load_folder_and_digital_assets' do
