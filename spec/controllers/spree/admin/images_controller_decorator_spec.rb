@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Spree::Admin::ImagesController do
+
   let(:digital_assets) { double(ActiveRecord::Relation) }
   let(:folders) { double(ActiveRecord::Relation) }
   let(:products) { double(ActiveRecord::Relation) }
@@ -18,6 +19,7 @@ describe Spree::Admin::ImagesController do
     allow(variant).to receive(:id).and_return(1)
     allow(variants).to receive(:insert).and_return(variants)
   end
+
   def send_request
     get :new, product_id: 1
   end
@@ -36,6 +38,7 @@ describe Spree::Admin::ImagesController do
       allow(digital_assets).to receive(:per).and_return(digital_assets)
       send_request
     end
+
     it { expect(assigns[:folders]).to eq(folders) }
     it { expect(assigns[:digital_assets]).to eq(digital_assets) }
   end
