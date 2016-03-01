@@ -6,6 +6,10 @@ describe Spree::Asset, :type => :model do
   let(:digital_asset) { Spree::DigitalAsset.create!(name: 'abc', folder: folder, attachment: File.new(Spree::Core::Engine.root + "spec/fixtures" + 'thinking-cat.jpg')) }
   let(:image) { Spree::Image.new }
 
+  describe 'attr_accessor' do
+    it { should have_attr_accessor(:digital_asset_id) }
+  end
+
   describe 'before_validation' do
     context 'digital_asset_id not passed' do
       it { expect(image).not_to receive(:build_from_digital_asset) }
