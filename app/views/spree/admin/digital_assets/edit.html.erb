@@ -6,7 +6,6 @@
   <div class="col-md-12">
     <%= form_for [:admin, @digital_asset], html: { multipart: true, class: 'form-horizontal' }, authenticity_token: true do |f| %>
       <%= render :partial => 'form', locals: { f: f } %>
-
       <div class="form-group">
         <div class="col-md-offset-4 col-md-6">
           <%= button Spree.t('actions.update'), 'save' %>
