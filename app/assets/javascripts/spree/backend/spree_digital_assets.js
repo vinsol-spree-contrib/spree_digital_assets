@@ -57,4 +57,21 @@ $( document ).ready(function() {
     $("#progress").fadeOut();
   });
 
+  $('#upload_asset_modal_body #folder_list a[data-remote=true]').on('ajax:beforeSend', function(){
+    show_loader('#folder_assets');
+  });
+
+  $('#upload_asset_modal_body #folder_list a[data-remote=true]').on('ajax:complete', function(){
+    hide_loader();
+  });
+
 });
+
+function show_loader(selector){
+  var $loader = $('<div>').addClass('loader').html('<div class="spinner folder-assets-loader"></div><div class="section-overlay"></div>');
+  $(selector).append($loader);
+}
+
+function hide_loader(){
+  $('.loader').remove();
+}
