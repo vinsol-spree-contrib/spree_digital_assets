@@ -49,4 +49,12 @@ $( document ).ready(function() {
     history.pushState('', '', $(this).attr('href'));
   });
 
+  $('#main-sidebar #folder_list a[data-remote=true]').on('ajax:beforeSend', function(){
+    $("#progress").stop(true, true).fadeIn();
+  });
+
+  $('#main-sidebar #folder_list a[data-remote=true]').on('ajax:complete', function(){
+    $("#progress").fadeOut();
+  });
+
 });
