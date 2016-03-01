@@ -65,8 +65,8 @@ $( document ).ready(function() {
     hide_loader();
   });
 
-  $(".modal").on("hidden.bs.modal", function(){
-    $(this).find('form')[0].reset();
+  $("#upload_asset_modal").on("shown.bs.modal", function(){
+    $(this).find('#new_digital_asset_form')[0].reset();
     $(this).find('.formError').remove();
   })
 
