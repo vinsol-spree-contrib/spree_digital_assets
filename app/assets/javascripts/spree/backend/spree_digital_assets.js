@@ -15,6 +15,11 @@ $( document ).ready(function() {
     $(this).addClass('active');
   });
 
+
+  $('#associate_asset_modal').on('dblclick', '.asset-area', function() {
+    $('#associate_asset_modal').modal('hide');
+  });
+
   var load_more_objects = function() {
     url = $('#folder_assets').attr('data-next-url');
 

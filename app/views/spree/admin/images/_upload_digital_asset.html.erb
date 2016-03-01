@@ -1,8 +1,12 @@
-<div data-hook="file" class="form-group">
+
+
+
+<div class="input-group form-group">
   <span class="input-group-btn " id= 'asset_upload_buton'>
-    <button type="button" class="btn btn-block btn-default"  id="upload_asset_button" data-toggle="modal" data-target="#associate_asset_modal">Upload Asset</button>
+<button type="button" class="btn btn-block btn-default"  id="upload_asset_button" data-toggle="modal" data-target="#associate_asset_modal">Upload Asset</button>
+
   </span>
-  <input type="text" id="digital_asset_file_name" disabled='true' value = "<%= @image.attachment_file_name %>" class="form-control" placeholder="Search for...">
+  <input type="text" id="digital_asset_file_name" disabled='true' class="form-control">
 </div>
 
 <div id="associate_asset_modal" class="modal fade" >
