@@ -1,0 +1,3 @@
+<div id='folder_assets' class="col-md-8" data-next-url="<%= admin_digital_assets_path(folder_id: @current_folder.try(:id), page: (@digital_assets.current_page + 1)) %>">
+  <%= render partial: 'spree/admin/shared/digital_asset', collection: @digital_assets  %>
+</div>
