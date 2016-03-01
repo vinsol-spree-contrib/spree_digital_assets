@@ -159,3 +159,6 @@ li.active .link.sidebar-default-font {
   z-index: 8;
   background: rgba(0, 0, 0, .3);
 }
+#upload_asset_modal_body .corner-menu {
+  display: none;
+}
