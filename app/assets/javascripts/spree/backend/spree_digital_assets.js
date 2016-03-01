@@ -65,6 +65,11 @@ $( document ).ready(function() {
     hide_loader();
   });
 
+  $(".modal").on("hidden.bs.modal", function(){
+    $(this).find('form')[0].reset();
+    $(this).find('.formError').remove();
+  })
+
 });
 
 function show_loader(selector){
