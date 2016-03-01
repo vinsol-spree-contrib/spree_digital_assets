@@ -19,15 +19,20 @@ $( document ).ready(function() {
   $('#associate_asset_modal').on('dblclick', '.asset-area', function() {
     $('#associate_asset_modal').modal('hide');
   });
+  var ready = true;
 
   var load_more_objects = function() {
     url = $('#folder_assets').attr('data-next-url');
 
-    if(($(window).scrollTop() >= $('#folder_assets').offset().top + $('#folder_assets').outerHeight() - window.innerHeight) && $('#folder_assets').length > 0 && url) {
+    if(ready && ($(window).scrollTop() >= $('#folder_assets').offset().top + $('#folder_assets').outerHeight() - window.innerHeight) && $('#folder_assets').length > 0 && url) {
+      ready = false;
       $.ajax({
         url: url,
         method: 'GET',
-        dataType: 'script'
+        dataType: 'script',
+        complete: function(){
+          ready = true;
+        }
       });
     }
   }
