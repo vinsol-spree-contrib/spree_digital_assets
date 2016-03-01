@@ -138,3 +138,24 @@ li.active .link.sidebar-default-font {
   font-size: 12px;
   line-height: 16px;
 }
+
+.folder-assets-block-section {
+  position: relative;
+}
+
+.folder-assets-block-section .folder-assets-loader {
+  position: absolute;
+  top: 110px;
+  left: 45%;
+  z-index: 8;
+}
+
+.folder-assets-block-section .section-overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 8;
+  background: rgba(0, 0, 0, .3);
+}
