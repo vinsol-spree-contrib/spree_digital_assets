@@ -7,7 +7,8 @@ describe Spree::Asset, :type => :model do
   let(:image) { Spree::Image.new }
 
   describe 'attr_accessor' do
-    it { should have_attr_accessor(:digital_asset_id) }
+    it { expect(image).to respond_to(:digital_asset_id) }
+    it { expect(image).to respond_to(:digital_asset_id=) }
   end
 
   describe 'before_validation' do
