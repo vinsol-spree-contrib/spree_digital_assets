@@ -22,12 +22,12 @@
               <%= build_nested_set_tree(@folders) do |folder| %>
 
                 <a href="javascript:void(0)" class="toggle_list_menu glyphicon glyphicon-chevron-right"></a>
-                <%= link_to folder.name, admin_digital_assets_path(folder_id: folder.id), class: 'link', data: { id: folder.id, remote: true } %>
+                <%= link_to folder.name, spree.admin_digital_assets_path(folder_id: folder.id), class: 'link', data: { id: folder.id, remote: true } %>
               <% end %>
             </div>
 
           </div>
-          <div id='folder_assets' class="col-md-8 folder-assets-block-section" data-next-url="<%= admin_digital_assets_path(folder_id: @current_folder.try(:id), page: (@digital_assets.current_page + 1)) %>">
+          <div id='folder_assets' class="col-md-8 folder-assets-block-section" data-next-url="<%= spree.admin_digital_assets_path(folder_id: @current_folder.try(:id), page: (@digital_assets.current_page + 1)) %>">
             <%= render partial: 'spree/admin/shared/digital_asset', collection: @digital_assets %>
           </div>
         </div>

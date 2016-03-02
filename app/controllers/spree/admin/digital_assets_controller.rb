@@ -12,9 +12,8 @@ module Spree
 
       private
         def filter_digital_assets_by_folder
-          if params[:folder_id].present?
-            @current_folder = Spree::Folder.find_by(id: params[:folder_id])
-            @digital_assets = @digital_assets.where(folder: @current_folder.self_and_descendants) if @current_folder.present?
+          if params[:folder_id].present? && (@current_folder = Spree::Folder.find_by(id: params[:folder_id]))
+            @digital_assets = @digital_assets.where(folder: @current_folder.self_and_descendants)
           end
         end
 
