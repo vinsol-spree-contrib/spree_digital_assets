@@ -21,11 +21,11 @@ $( document ).ready(function() {
   });
   var ready = true;
 
-  var load_more_objects = function() {
-    var $folder_assets = $('#folder_assets'),
+  var load_more_objects = function(folder_assets) {
+    var $folder_assets = folder_assets || $('#folder_assets'),
       url = $folder_assets.attr('data-next-url');
 
-    if(ready && url && $folder_assets.length && ($folder_assets.scrollTop() + $folder_assets.innerHeight() == $folder_assets[0].scrollHeight)) {
+    if(ready && url && $folder_assets.length) {
       ready = false;
       $.ajax({
         url: url,
@@ -39,7 +39,10 @@ $( document ).ready(function() {
   }
 
   $('#folder_assets').scroll(function(){
-    load_more_objects();
+    var $folder_assets = $('#folder_assets');
+    if($folder_assets.scrollTop() + $folder_assets.innerHeight() == $folder_assets[0].scrollHeight){
+      load_more_objects($folder_assets);
+    }
   });
 
   $('#main-part').on('ajax:success', '.delete_digital_asset_button', function() {
@@ -48,7 +51,9 @@ $( document ).ready(function() {
 
 
   $(window).scroll(function() {
-    load_more_objects();
+    if($(window).scrollTop() + window.innerHeight == document.body.offsetHeight){
+      load_more_objects();
+    }
   });
 
   $("body").on('click', '#main-sidebar #folder_list a[data-remote=true]', function(){
