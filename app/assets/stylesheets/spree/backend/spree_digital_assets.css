@@ -154,6 +154,8 @@ li.active .link.sidebar-default-font {
 
 .folder-assets-block-section {
   position: relative;
+  max-height: 480px;
+  overflow: auto;
 }
 
 .folder-assets-block-section .folder-assets-loader {
@@ -175,4 +177,8 @@ li.active .link.sidebar-default-font {
 
 #upload_asset_modal_body .digital_asset_action_menu {
   display: none;
+}
+
+.formError {
+  color: #f55753 !important;
 }
