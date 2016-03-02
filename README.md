@@ -1,7 +1,27 @@
 SpreeDigitalAssets
 ==================
 
-Introduction goes here.
+This gem allows you to have a central repository of the assets. The assets can be uploaded well
+in advance and can be associated with the products/variants at the time of product/variant
+creation.
+
+This will also act as a central repository that can be used to access all the assets of the system
+and can then be used in different products.
+
+## Features
+
+* Has default folders “Documents”, “Photos” and “Graphics”
+
+* Assets can be uploaded to each folder by using the upload feature
+
+* Ability to view assets in List view
+
+* Excellent UI
+
+* Ability to remove / edit / download each asset
+
+* Associate assets while creating product / variant
+
 
 Installation
 ------------
@@ -37,4 +57,4 @@ Simply add this require statement to your spec_helper:
 require 'spree_digital_assets/factories'
 ```
 
-Copyright (c) 2016 [name of extension creator], released under the New BSD License
+Copyright (c) 2016 [vinsol], released under the New BSD License
