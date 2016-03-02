@@ -4,6 +4,6 @@ Spree::Admin::ImagesController.class_eval do
   private
     def load_folder_and_digital_assets
       @folders = Spree::Folder.all
-      @digital_assets = Spree::DigitalAsset.page(params[:page]).per(36)
+      @digital_assets = Spree::DigitalAsset.page(params[:page])
     end
 end
