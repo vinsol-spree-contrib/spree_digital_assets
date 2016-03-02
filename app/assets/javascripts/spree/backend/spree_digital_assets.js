@@ -22,9 +22,10 @@ $( document ).ready(function() {
   var ready = true;
 
   var load_more_objects = function() {
-    url = $('#folder_assets').attr('data-next-url');
+    var $folder_assets = $('#folder_assets'),
+      url = $folder_assets.attr('data-next-url');
 
-    if(ready && url && $('#folder_assets').length && ($(window).scrollTop() >= $('#folder_assets').offset().top + $('#folder_assets').outerHeight() - window.innerHeight)) {
+    if(ready && url && $folder_assets.length && ($folder_assets.scrollTop() + $folder_assets.innerHeight() == $folder_assets[0].scrollHeight)) {
       ready = false;
       $.ajax({
         url: url,
@@ -37,7 +38,7 @@ $( document ).ready(function() {
     }
   }
 
-  $('#associate_asset_modal').on('scroll', function() {
+  $('#folder_assets').scroll(function(){
     load_more_objects();
   });
 
