@@ -12,10 +12,10 @@
     </button>
     <ul class="dropdown-menu">
       <li>
-        <%= link_to 'Remove', admin_digital_asset_path(digital_asset), method: :delete, remote: true, class: 'delete_digital_asset_button' %>
+        <%= link_to 'Remove', spree.admin_digital_asset_path(digital_asset), method: :delete, remote: true, class: 'delete_digital_asset_button' %>
       </li>
       <li>
-        <%= link_to 'Edit', edit_admin_digital_asset_path(digital_asset) %>
+        <%= link_to 'Edit', spree.edit_admin_digital_asset_path(digital_asset) %>
       </li>
       <li role="separator" class="divider"></li>
       <li><%= link_to 'Download', digital_asset.attachment.url(:original, false), target: '_blank' %></li>
