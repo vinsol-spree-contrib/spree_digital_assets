@@ -1,17 +1,16 @@
 /*
 Placeholder manifest file.
 the installer will append this file to the app vendored assets here: 'vendor/assets/stylesheets/spree/backend/all.css'
-
 */
 .tree-menu-container {
   border-bottom: solid 1px #eee;
   border-right: solid 1px #eee;
   border-left: solid 1px #eee;
-  /*margin: -15px 0 0 -20px;*/
   margin-top: 15px;
   height: 100%;
   box-shadow: 0 0 0 0 #000000;
 }
+
 .tree-menu-container .tree-menu {
   display: block;
   padding-left: 20px;
@@ -22,14 +21,17 @@ the installer will append this file to the app vendored assets here: 'vendor/ass
 .tree-menu-container .tree-menu .tree-menu{
   display: none;
 }
+
 .tree-menu-container .tree-menu:first-child {
   padding-left: 0;
 }
+
 .tree-menu-container .tree-menu > li {
   display: block;
   /*position: relative;*/
   border-top: solid 1px #eee;
 }
+
 .tree-menu-container .tree-menu > li.active > .link{
   background: #eee;
 }
@@ -37,18 +39,22 @@ the installer will append this file to the app vendored assets here: 'vendor/ass
   display: block;
   padding: 10px 15px 10px 30px;
 }
+
 .tree-menu-container .tree-menu > li > .toggle_list_menu {
   display: block;
   float: left;
   padding: 10px 15px;
 }
+
 .tree-menu-container .tree-menu > li > .btn-group {
   float: right;
   margin-top: 8px;
 }
+
 .tree-menu-container .tree-menu > li > .btn-group.open {
   z-index: 999;
 }
+
 .tree-menu-container .tree-menu > li > .btn-group .btn {
   background: none !important;
 }
@@ -65,7 +71,6 @@ the installer will append this file to the app vendored assets here: 'vendor/ass
   vertical-align: top;
 }
 
-
 .asset-area.active {
   background-color: #478DC1;
   color: #fff;
@@ -75,13 +80,14 @@ the installer will append this file to the app vendored assets here: 'vendor/ass
   max-width: 140px !important;
   max-height: 140px !important;
   margin-bottom: 15px;
-
 }
+
 .asset-area .corner-menu {
   position: absolute;
   right: 0;
   top: 0;
 }
+
 .asset-area .dropdown-menu {
   left: auto;
   right: 0;
@@ -111,29 +117,36 @@ the installer will append this file to the app vendored assets here: 'vendor/ass
   display: block;
   color: #478DC1;
 }
+
 li.active .link.sidebar-default-font {
   color: #7DB942;
   background: transparent!important;
 }
+
 .sidebar-default-font:hover {
   background: #eee;
   text-decoration: none!important;
 }
+
 .sidebar-default-font:active,
 .sidebar-default-font:focus,
 .sidebar-default-font:visited {
   text-decoration: none!important;
 }
+
 .no-border {
   border: 0 solid transparent !important;
 }
+
 .asset-area {
   height: 175px;
 }
+
 .asset-area img {
   max-width: 100px!important;
   max-height: 100px!important;
 }
+
 .select-file {
   font-size: 12px;
   line-height: 16px;
@@ -159,6 +172,7 @@ li.active .link.sidebar-default-font {
   z-index: 8;
   background: rgba(0, 0, 0, .3);
 }
+
 #upload_asset_modal_body .digital_asset_action_menu {
   display: none;
 }
