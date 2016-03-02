@@ -7,8 +7,8 @@ Gem::Specification.new do |s|
   s.description = 'Add (optional) gem description here'
   s.required_ruby_version = '>= 2.0.0'
 
-  s.author    = 'vinsol'
-  s.email     = 'abc@vinsol.com'
+  s.authors    = ['Ankit Kalia', 'Siddharth Sharma']
+  s.email     = ['ankit.kalia@vinsol.com', 'siddharth@vinsol.com']
   # s.homepage  = 'http://www.spreecommerce.com'
 
   #s.files       = `git ls-files`.split("\n")
@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'spree_core', '~> 3.0.0'
   s.add_dependency 'remotipart', '~> 1.2'
 
-  s.add_development_dependency 'shoulda-matchers', '2.8'
+  s.add_development_dependency 'shoulda-matchers', '~> 2.6.2'
   s.add_development_dependency 'rspec-activemodel-mocks'
 
   s.add_development_dependency 'capybara', '~> 2.4'
