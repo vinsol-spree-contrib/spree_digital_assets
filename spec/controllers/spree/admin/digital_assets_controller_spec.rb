@@ -13,7 +13,6 @@ describe Spree::Admin::DigitalAssetsController do
     allow(user).to receive(:generate_spree_api_key!).and_return(true)
     allow(controller).to receive(:collection).and_return(digital_assets)
     allow(digital_assets).to receive(:page).and_return(digital_assets)
-    allow(digital_assets).to receive(:per).and_return(digital_assets)
   end
 
   describe 'GET#index' do
@@ -24,7 +23,6 @@ describe Spree::Admin::DigitalAssetsController do
     describe 'Methods' do
       context 'when params folder_id not present' do
         it { expect(digital_assets).to receive(:page).and_return(digital_assets) }
-        it { expect(digital_assets).to receive(:per).and_return(digital_assets) }
 
         after { send_request }
       end
@@ -60,7 +58,6 @@ describe Spree::Admin::DigitalAssetsController do
 
     describe 'Methods' do
       it { expect(Spree::Folder).to receive(:find_by).and_return(folder) }
-      it { expect(folder).to receive(:present?).and_return(true) }
       it { expect(folder).to receive(:self_and_descendants).and_return([folder]) }
 
       after { send_request(folder_id: 1) }

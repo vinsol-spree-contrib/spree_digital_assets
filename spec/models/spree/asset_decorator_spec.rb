@@ -45,7 +45,19 @@ describe Spree::Asset, :type => :model do
         image.save
       end
 
-      it { expect(image.errors[:base]).to include('invalid digital_asset_id passed') }
+      it { expect(image.errors[:base]).to include('invalid digital asset id passed') }
+    end
+  end
+
+  describe '#digital_asset_id?' do
+    context 'digital_asset_id present' do
+      before { image.digital_asset_id = digital_asset.id }
+
+      it { expect(image.digital_asset_id?).to be_truthy }
+    end
+
+    context 'digital_asset_id not present' do
+      it { expect(image.digital_asset_id?).to be_falsey }
     end
   end
 
