@@ -18,4 +18,8 @@ Spree::Admin::BaseHelper.class_eval do
     end
   end
 
+  def digital_assets_next_page_path(digital_assets, current_folder)
+    digital_assets.last_page? ? '' : spree.admin_digital_assets_path(folder_id: current_folder.try(:id), page: (digital_assets.next_page))
+  end
+
 end

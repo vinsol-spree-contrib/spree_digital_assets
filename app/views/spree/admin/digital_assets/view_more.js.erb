@@ -1,6 +1,2 @@
 $('#folder_assets').append("<%= j render partial: 'spree/admin/shared/digital_asset', collection: @digital_assets %>");
-<% if @digital_assets.current_page < @digital_assets.total_pages %>
-  $('#folder_assets').attr('data-next-url', "<%= spree.admin_digital_assets_path folder_id: @current_folder.try(:id), page: (@digital_assets.current_page + 1) %>");
-<% else %>
-  $('#folder_assets').attr('data-next-url', '');
-<% end %>
+$('#folder_assets').attr('data-next-url', "<%= digital_assets_next_page_path(@digital_assets, @current_folder) %>");
