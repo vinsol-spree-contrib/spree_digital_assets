@@ -6,3 +6,4 @@
 //= require spree/backend/spree_digital_assets/folder_list
 //= require spree/backend/spree_digital_assets/infinite_scroll
 //= require spree/backend/spree_digital_assets/new_digital_asset_form
+//= require spree/backend/spree_digital_assets/no_digital_asset_found

@@ -8,10 +8,10 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 2.0.0'
 
   s.authors    = ['Ankit Kalia', 'Siddharth Sharma']
-  s.email     = ['ankit.kalia@vinsol.com', 'siddharth@vinsol.com']
-  # s.homepage  = 'http://www.spreecommerce.com'
+  s.email     = 'info@vinsol.com'
+  s.homepage  = 'http://vinsol.com'
 
-  #s.files       = `git ls-files`.split("\n")
+  s.files       = `git ls-files`.split("\n")
   #s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.require_path = 'lib'
   s.requirements << 'none'
