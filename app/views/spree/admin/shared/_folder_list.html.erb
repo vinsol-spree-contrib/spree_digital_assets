@@ -1,0 +1,19 @@
+<ul class="nav nav-sidebar" id='folder_list'>
+  <li class="sidebar-menu-item">
+    <a data-toggle="collapse" data-parent="#sidebar" href="#sidebar-assets">
+      <span class="icon icon-file"></span>
+      <span class="text"> Assets</span>
+      <span class="icon icon-chevron-left pull-right"></span>
+    </a>
+    <ul data-hook="admin_configurations_sidebar_menu" class="collapse nav nav-pills nav-stacked" id="sidebar-assets">
+      <li>
+        <div class="tree-menu-container">
+          <%= build_nested_set_tree(Spree::Folder.all) do |folder| %>
+            <%= link_to folder.name, spree.admin_digital_assets_path(folder_id: folder.id), class: 'link sidebar-default-font', remote: true,
+              data: { id: folder.id } %>
+          <% end %>
+        </div>
+      </li>
+    </ul>
+  </li>
+</ul>

@@ -1,0 +1,24 @@
+<div class="text-center asset-area">
+  <div class="digital-assets-image">
+    <%= image_tag(digital_asset.attachment.url(:small), class: 'img-thumbnail attachment digital_asset_attachment' ,
+      data: { id: digital_asset.id, name: digital_asset.name }, onerror: 'imgError(this);')  %>
+  </div>
+  <p>
+    <%= digital_asset.name %>
+  </p>
+  <div class="btn-group corner-menu digital_asset_action_menu">
+    <button type="button" class="btn btn-xs btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   <span class="glyphicon glyphicon-option-vertical"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li>
+        <%= link_to 'Remove', spree.admin_digital_asset_path(digital_asset), method: :delete, remote: true, class: 'delete_digital_asset_button' %>
+      </li>
+      <li>
+        <%= link_to 'Edit', spree.edit_admin_digital_asset_path(digital_asset) %>
+      </li>
+      <li role="separator" class="divider"></li>
+      <li><%= link_to 'Download', digital_asset.attachment.url(:original, false), target: '_blank' %></li>
+    </ul>
+  </div>
+</div>
