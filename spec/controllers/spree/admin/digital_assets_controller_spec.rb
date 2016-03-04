@@ -26,7 +26,7 @@ describe Spree::Admin::DigitalAssetsController do
     describe 'Methods' do
       context 'when params folder_id not present' do
         it { expect(digital_assets).to receive(:page).and_return(digital_assets) }
-        it { expect(digital_assets).to receive(:order).with('created_at DESC').and_return(digital_assets) }
+        it { expect(digital_assets).to receive(:order).with(created_at: :desc).and_return(digital_assets) }
 
         after { send_request }
       end
