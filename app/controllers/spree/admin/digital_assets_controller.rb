@@ -6,7 +6,7 @@ module Spree
       before_action :filter_digital_assets_by_folder, :build_digital_asset, only: :index
 
       def index
-        @digital_assets = @digital_assets.page(params[:page])
+        @digital_assets = @digital_assets.order(created_at: :desc).page(params[:page])
         render 'view_more' if params[:page].to_i > 1
       end
 
