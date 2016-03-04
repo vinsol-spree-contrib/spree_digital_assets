@@ -1,5 +1,6 @@
 <% if @digital_asset.valid? %>
-  $('#folder_assets').append("<%= j render partial: 'spree/admin/shared/digital_asset', object: @digital_asset %>");
+  $('#folder_assets').prepend("<%= j render partial: 'spree/admin/shared/digital_asset', object: @digital_asset %>");
+  $('#folder_assets .asset-area').last().remove();
   $('#upload_asset_modal').modal('hide');
   show_flash('success', '<%= flash[:success] %>');
 <% else %>
