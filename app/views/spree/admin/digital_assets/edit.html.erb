@@ -10,7 +10,7 @@
         <div class="col-md-offset-4 col-md-6">
           <%= button Spree.t('actions.update'), 'save' %>
           <span class="or"><%= Spree.t(:or) %></span>
-          <%= button_link_to Spree.t('actions.cancel'), spree.admin_digital_assets_url, icon: 'delete', id: 'cancel_link' %>
+          <%= button_link_to Spree.t('actions.cancel'), spree.admin_digital_assets_url(folder_id: @digital_asset.folder_id), icon: 'delete', id: 'cancel_link' %>
         </div>
       </div>
     <% end %>
