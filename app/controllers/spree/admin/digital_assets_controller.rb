@@ -21,6 +21,10 @@ module Spree
           @digital_asset = Spree::DigitalAsset.new(folder_id: @current_folder.try(:id))
         end
 
+        def location_after_save
+          collection_url(folder_id: @digital_asset.folder_id)
+        end
+
     end
 
   end
