@@ -75,7 +75,7 @@
 .asset-area img {
   max-width: 140px !important;
   max-height: 140px !important;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 
 .asset-area .corner-menu {
@@ -103,7 +103,7 @@
 }
 
 .digital-assets-image {
-  min-height: 125px;
+  min-height: 115px;
 }
 
 .sidebar-default-font {
@@ -136,6 +136,23 @@ li.active .link.sidebar-default-font {
 
 .asset-area {
   height: 175px;
+}
+
+.asset-area:hover ul.dropdown-menu {
+  width: 30px;
+  min-width: auto;
+  height: 100%;
+  border: none;
+  display: block;
+  top: -2px;
+  right: 0;
+  background: #fff;
+  box-shadow: none;
+}
+
+.asset-area:hover ul.dropdown-menu > li > a {
+  padding: 3px 0;
+  text-align: center;
 }
 
 .asset-area img {
