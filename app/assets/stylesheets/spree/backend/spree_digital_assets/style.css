@@ -188,7 +188,7 @@ li.active .link.sidebar-default-font {
   background: rgba(0, 0, 0, .3);
 }
 
-#upload_asset_modal_body .digital_asset_action_menu {
+#upload_asset_modal_body .asset-area .dropdown-menu {
   display: none;
 }
 
