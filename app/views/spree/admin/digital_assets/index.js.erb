@@ -10,3 +10,4 @@ if ($('#folder_assets:visible').length == 0) {
 $('#folder_assets').attr('data-next-url', "<%= digital_assets_next_page_path(@digital_assets, @current_folder) %>");
 $('#digital_asset_folder_id').val("<%= @current_folder.try(:id) %>");
 $('#upload_asset_button').removeClass('disabled').removeAttr('disabled');
+$('.with-tip').tooltip();

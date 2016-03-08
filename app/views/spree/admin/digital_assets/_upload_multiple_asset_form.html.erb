@@ -14,7 +14,7 @@
   <div class="actions">
     <%= f.label :attachment, t('.upload_new_file') %>
     <%= f.hidden_field :folder_id %>
-    <%= f.file_field :attachment, multiple: true, name: 'digital_asset[attachment]' %>
+    <%= f.file_field :attachment, required: true, multiple: true, name: 'digital_asset[attachment]' %>
     <%= f.submit %>
   </div>
 <% end %>
