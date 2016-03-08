@@ -1,4 +1,4 @@
-<% if @digital_asset.valid? %>
+<% if @digital_asset.persisted? %>
   $('#upload_asset_modal').modal('hide');
   send_ajax_load_assets("<%== spree.admin_digital_assets_path(folder_id: @digital_asset.folder_id) %>");
   show_flash('success', '<%= flash[:success] %>');

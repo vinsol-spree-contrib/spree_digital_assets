@@ -1,0 +1,22 @@
+<%= form_for [:admin, @digital_asset], html: { multipart: true, class: 'form-horizontal', id: 'new_multiple_digital_asset_form' }, remote: true, format: :js, authenticity_token: true do |f| %>
+  <% if @digital_asset.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@digital_asset.errors.count, "error") %> prohibited this upload from being saved:</h2>
+
+      <ul>
+        <% @digital_asset.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.label :attachment, t('.upload_new_file') %>
+    <%= f.hidden_field :folder_id %>
+    <%= f.file_field :attachment, multiple: true, name: 'digital_asset[attachment]' %>
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<script id="template-upload" type="text/x-tmpl"><div class="upload">{%=o.name%}<div class="progress"><div class="progress-bar bar" style="width: 0%"></div></div></div></script>
