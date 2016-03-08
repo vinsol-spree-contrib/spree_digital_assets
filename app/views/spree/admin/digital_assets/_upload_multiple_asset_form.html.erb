@@ -11,11 +11,18 @@
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.label :attachment, t('.upload_new_file') %>
-    <%= f.hidden_field :folder_id %>
-    <%= f.file_field :attachment, required: true, multiple: true, name: 'digital_asset[attachment]' %>
-    <%= f.submit %>
+  <div class="form-group">
+    <%= f.label :attachment, t('.upload_new_file'), class: 'col-md-4 control-label' %>
+    <div class="col-md-6">
+      <%= f.hidden_field :folder_id %>
+      <%= f.file_field :attachment, required: true, multiple: true, name: 'digital_asset[attachment]', class: 'select-file btn btn-default' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-offset-4 col-md-6">
+      <%= f.submit class: 'btn btn-primary' %>
+    </div>
   </div>
 <% end %>
 

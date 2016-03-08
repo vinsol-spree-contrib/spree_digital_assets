@@ -195,3 +195,47 @@ li.active .link.sidebar-default-font {
 .formError {
   color: #f55753 !important;
 }
+
+.modal-body.upload-assets-modal-body {
+  padding: 0;
+}
+
+.upload-assets-tabs-block {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  float: left;
+  list-style: none;
+}
+
+.upload-assets-tabs-block .upload-assets-tabs-holder {
+  width: 50%;
+  border-left: solid 1px #52636f;
+  float: left;
+  text-align: center;
+}
+
+.upload-assets-tabs-block .upload-assets-tabs-holder:first-child {
+  border-left: none;
+}
+
+.upload-assets-tabs-block .upload-assets-tabs-link {
+  height: 30px;
+  display: block;
+  color: #fff;
+  font-size: 13px;
+  font-weight: bold;
+  text-decoration: none;
+  line-height: 30px;
+  background: #162e40;
+}
+
+.upload-assets-tabs-block .upload-assets-tabs-link.current {
+  background: #478DC1;
+}
+
+.upload-assets-tab-content {
+  width: 100%;
+  display: table;
+  padding: 20px;
+}
