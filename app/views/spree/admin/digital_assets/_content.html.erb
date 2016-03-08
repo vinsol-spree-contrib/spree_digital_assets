@@ -22,9 +22,20 @@
         <button type='button' class='close' data-dismiss='modal'>&times;</button>
         <h4 class='modal-title'>Asset Uploader</h4>
       </div>
-      <div id='upload_asset_modal_body' class='modal-body'>
-        <%= render 'upload_asset_form' %>
-        <%= render 'upload_multiple_asset_form' %>
+      <div id='upload_asset_modal_body' class='modal-body upload-assets-modal-body'>
+        <ul class="upload-assets-tabs-block">
+          <li class="upload-assets-tabs-holder">
+            <a href="javascript:" class="upload-assets-tabs-link current" data-tab="tab1">Upload Single Image</a>
+          </li>
+          <li class="upload-assets-tabs-holder">
+            <a href="javascript:" class="upload-assets-tabs-link" data-tab="tab2">Upload Multiple Images</a>
+          </li>
+        </ul>
+
+        <div class="upload-assets-tab-content">
+          <div id="tab1" class="upload-assets-tab-block"><%= render 'upload_asset_form' %></div>
+          <div id="tab2" class="upload-assets-tab-block" style="display: none;"><%= render 'upload_multiple_asset_form' %></div>
+        </div>
       </div>
     </div>
   </div>
