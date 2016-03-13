@@ -1,7 +1,11 @@
-<% if @digital_asset.persisted? %>
-  $('#upload_asset_modal').modal('hide');
-  send_ajax_load_assets("<%== spree.admin_digital_assets_path(folder_id: @digital_asset.folder_id) %>");
-  show_flash('success', '<%= flash[:success] %>');
-<% else %>
-  $('#upload_asset_modal_body').html("<%= j render 'upload_asset_form' %>");
-<% end %>
+if($('.tree-menu .active a').data('id') == <%= @digital_asset.folder_id %>){
+  var $folder_assets = $('#folder_assets'),
+    $asset_area = $('#folder_assets .asset-area');
+  $folder_assets.prepend("<%= j render partial: 'spree/admin/shared/digital_asset', object: @digital_asset %>");
+  if($asset_area.length > 25){
+    if(!$folder_assets.data('next-url')){
+      $folder_assets.attr('data-next-url', "<%== spree.admin_digital_assets_path(folder_id: @digital_asset.folder_id, page: 2) %>");
+    }
+    $asset_area.last().remove();
+  }
+}
