@@ -6,6 +6,7 @@ describe Spree::Admin::DigitalAssetsController do
   let(:folder) { double(Spree::Folder) }
   let(:folders) { [folder] }
   let(:user) { mock_model(Spree::User) }
+  let(:digital_asset) { mock_model(Spree::DigitalAsset) }
   let(:folder_id) { '1' }
 
   before do
@@ -74,6 +75,36 @@ describe Spree::Admin::DigitalAssetsController do
       it { expect(assigns[:digital_assets]).to eq(digital_assets) }
     end
 
+  end
+
+  describe 'POST#create' do
+    def send_request(params={})
+      post :create, params
+    end
+
+    before do
+      allow(Spree::DigitalAsset).to receive(:new).and_return(digital_asset)
+      allow(digital_asset).to receive(:attributes=)
+      allow(digital_asset).to receive(:save).and_return(true)
+    end
+
+    describe 'Response' do
+      context 'successfully saved' do
+        before { send_request(format: :js) }
+
+        it { is_expected.to render_template :create }
+        it { is_expected.to respond_with 200 }
+      end
+
+      context 'not saved successfully' do
+        before do
+          allow(digital_asset).to receive(:save).and_return(false)
+          send_request(format: :js)
+        end
+
+        it { is_expected.to respond_with 422 }
+      end
+    end
   end
 
 end
