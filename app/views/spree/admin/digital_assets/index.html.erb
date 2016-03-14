@@ -4,3 +4,33 @@
 <div id='folder_index' class='row'>
   <%= render 'content' %>
 </div>
+<div class="upload-assets-section hidden">
+  <div class="upload-assets-header">
+    <div class="row upload-assets-header-row">
+      <div class="col-xs-8 upload-assets-header-title header_title"></div>
+      <div class="col-xs-4 text-right upload-assets-header-actions">
+        <a href="javascript:" class="upload-assets-header-actions-link minimize-link">
+          <i class="glyphicon glyphicon-menu-down menu-down"></i>
+          <i class="glyphicon glyphicon-menu-up menu-up"></i>
+        </a>
+        <a href="javascript:" class="upload-assets-header-actions-link close-link"><i class="glyphicon glyphicon-remove"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="upload-assets-content">
+  </div>
+</div>
+
+<div class="upload_assets_row hidden">
+  <div class="upload-assets-content-row working uploading single_request">
+    <div class="upload-assets-uploader-block">
+      <div class="upload-assets-uploader-bg">
+        <a href="javascript:" class="uploader-cancel-button cancel">Cancel</a>
+        <div class="upload-assets-uploader-percentage percent">0%</div>
+        <div class="upload-assets-uploader-fill bar" style="width: 0%;"></div>
+      </div>
+      <div class="upload-assets-file-name file_name"></div>
+      <div class="upload-assets-uploader-status">Status: <strong class="status">Uploading</strong></div>
+    </div>
+  </div>
+</div>

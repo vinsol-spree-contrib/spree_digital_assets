@@ -4,4 +4,4 @@ $(".tree-menu [data-id=<%= @current_folder.try(:id) %>]").parent().addClass('act
 $('.sidebar-menu-item .selected').removeClass('selected');
 $('#folder_index').html("<%= j render 'content' %>");
 $('.with-tip').tooltip();
-initialize_jquery_fileupload();
+new DigitalAssetUploader();

@@ -19,7 +19,7 @@ UploadAssets.prototype.hideUploaderBlock = function () {
   $hideLink = $('.upload-assets-header-actions-link.close-link');
 
   $hideLink.on('click', function () {
-    $(this).parents('.upload-assets-section').hide();
+    $(this).parents('.upload-assets-section').addClass('hidden');
   });
 }
 

@@ -8,5 +8,5 @@
 //= require spree/backend/spree_digital_assets/no_digital_asset_found
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
-//= require spree/backend/spree_digital_assets/upload
+//= require spree/backend/spree_digital_assets/digital_asset_uploader
 //= require spree/backend/spree_digital_assets/upload-assets
