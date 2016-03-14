@@ -1,10 +1,6 @@
 var UploadAssets = function () {}
 
 UploadAssets.prototype.init = function () {
-  this.uploaderSideBar();
-}
-
-UploadAssets.prototype.uploaderSideBar = function () {
   this.toggleUploaderBlock();
   this.hideUploaderBlock();
 }
