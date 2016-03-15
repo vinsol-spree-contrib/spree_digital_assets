@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'spree_core', '~> 3.0.0'
   s.add_dependency 'remotipart', '~> 1.2'
+  s.add_dependency 'jquery-fileupload-rails', '~> 0.4.6'
 
   s.add_development_dependency 'shoulda-matchers', '~> 2.6.2'
   s.add_development_dependency 'rspec-activemodel-mocks'

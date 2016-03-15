@@ -75,7 +75,7 @@
 .asset-area img {
   max-width: 140px !important;
   max-height: 140px !important;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 
 .asset-area .corner-menu {
@@ -87,6 +87,7 @@
 .asset-area .dropdown-menu {
   left: auto;
   right: 0;
+  z-index: 9;
 }
 
 .nav.nav-sidebar .tree-menu-container {
@@ -103,7 +104,7 @@
 }
 
 .digital-assets-image {
-  min-height: 125px;
+  min-height: 115px;
 }
 
 .sidebar-default-font {
@@ -136,6 +137,23 @@ li.active .link.sidebar-default-font {
 
 .asset-area {
   height: 175px;
+}
+
+.asset-area:hover ul.dropdown-menu {
+  width: 30px;
+  min-width: auto;
+  height: 100%;
+  border: none;
+  display: block;
+  top: -2px;
+  right: 0;
+  background: #fff;
+  box-shadow: none;
+}
+
+.asset-area:hover ul.dropdown-menu > li > a {
+  padding: 3px 0;
+  text-align: center;
 }
 
 .asset-area img {
@@ -171,10 +189,204 @@ li.active .link.sidebar-default-font {
   background: rgba(0, 0, 0, .3);
 }
 
-#upload_asset_modal_body .digital_asset_action_menu {
+#upload_asset_modal_body .asset-area .dropdown-menu {
   display: none;
 }
 
 .formError {
   color: #f55753 !important;
+}
+
+.modal-body.upload-assets-modal-body {
+  padding: 0;
+}
+
+.upload-assets-tabs-block {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  float: left;
+  list-style: none;
+}
+
+.upload-assets-tabs-block .upload-assets-tabs-holder {
+  width: 50%;
+  border-left: solid 1px #52636f;
+  float: left;
+  text-align: center;
+}
+
+.upload-assets-tabs-block .upload-assets-tabs-holder:first-child {
+  border-left: none;
+}
+
+.upload-assets-tabs-block .upload-assets-tabs-link {
+  height: 30px;
+  display: block;
+  color: #fff;
+  font-size: 13px;
+  font-weight: bold;
+  text-decoration: none;
+  line-height: 30px;
+  background: #162e40;
+}
+
+.upload-assets-tabs-block .upload-assets-tabs-link.current {
+  background: #478DC1;
+}
+
+.upload-assets-tab-content {
+  width: 100%;
+  display: table;
+  padding: 20px;
+}
+
+.upload-assets-section {
+  width: 360px;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 10;
+  background: #ddd;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.upload-assets-header {
+  padding: 0 10px;
+  color: #fff;
+  font-size: 14px;
+  background: #393939;
+  -moz-border-top-left-radius: 5px;
+  -webkit-border-top-left-radius: 5px;
+  border-top-left-radius: 5px;
+  -moz-border-top-right-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.upload-assets-header-row {
+  padding-bottom: 8px;
+}
+
+.upload-assets-header-title {
+  padding-top: 9px;
+}
+
+.upload-assets-header-actions {
+  padding-top: 8px;
+}
+
+.upload-assets-header-actions-link {
+  width: 24px;
+  height: 24px;
+  margin-left: 5px;
+  padding-top: 1px;
+  border: solid 1px #696969;
+  display: inline-block;
+  color: #fff;
+  text-align: center;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.upload-assets-header-actions-link:hover {
+  border-color: #478DC1;
+  color: #fff;
+  background: #478DC1;
+}
+
+.upload-assets-header-actions-link:focus {
+  color: #fff;
+}
+
+.upload-assets-header-actions-link:first-child {
+  margin-left: 0;
+}
+
+.upload-assets-header-actions-link.minimize-link .menu-up {
+  display: none;
+}
+
+.upload-assets-header-actions-link.minimize-link.condensed .menu-up {
+  display: inline-block;
+}
+
+.upload-assets-header-actions-link.minimize-link.condensed .menu-down {
+  display: none;
+}
+
+.upload-assets-content {
+  max-height: 330px;
+  padding: 10px 10px 2px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.upload-assets-content-row {
+  padding: 8px;
+  border-top: solid 1px #bfbfbf;
+}
+
+.upload-assets-content-row:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+
+.upload-assets-uploader-bg {
+  width: 100%;
+  height: 24px;
+  position: relative;
+  background: #bfbfbf;
+}
+
+.uploader-cancel-button {
+  position: absolute;
+  top: 25px;
+  right: 0;
+  color: #000;
+  font-size: 11px;
+}
+
+.upload-assets-uploader-percentage {
+  width: 100%;
+  height: 24px;
+  position: relative;
+  z-index: 5;
+  color: #000;
+  font-size: 12px;
+  text-align: center;
+  line-height: 24px;
+}
+
+.upload-assets-uploader-fill {
+  width: auto;
+  height: 24px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  background: #478DC1;
+}
+
+.upload-assets-file-name {
+  margin-top: 5px;
+  padding-right: 40px;
+  font-size: 12px;
+  word-break: break-all;
+}
+
+.upload-assets-uploader-status {
+  margin-top: 2px;
+  font-size: 12px;
+}
+
+.upload-assets-uploader-status .success {
+  color: #1ba188;
+}
+
+.upload-assets-uploader-status .fail {
+  color: #ff0000;
 }

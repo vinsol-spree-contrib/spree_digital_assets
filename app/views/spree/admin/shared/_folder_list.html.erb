@@ -9,7 +9,7 @@
       <li>
         <div class="tree-menu-container">
           <%= build_nested_set_tree(Spree::Folder.all) do |folder| %>
-            <%= link_to folder.name, spree.admin_digital_assets_path(folder_id: folder.id), class: 'link sidebar-default-font', remote: true,
+            <%= link_to folder.name, spree.admin_digital_assets_path(folder_id: folder.id), class: 'link sidebar-default-font', remote: digital_assets_index?,
               data: { id: folder.id } %>
           <% end %>
         </div>

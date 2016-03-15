@@ -22,4 +22,8 @@ Spree::Admin::BaseHelper.class_eval do
     digital_assets.last_page? ? '' : spree.admin_digital_assets_path(folder_id: current_folder.try(:id), page: (digital_assets.next_page))
   end
 
+  def digital_assets_index?
+    params[:controller] == 'spree/admin/digital_assets' && params[:action] == 'index'
+  end
+
 end
