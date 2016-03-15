@@ -1,11 +1,8 @@
 Spree::Asset.class_eval do
-  attr_accessor :digital_asset_id
 
-  before_validation :build_from_digital_asset, if: :digital_asset_id?
+  belongs_to :digital_asset
 
-  def digital_asset_id?
-    digital_asset_id.present?
-  end
+  before_validation :build_from_digital_asset, if: :digital_asset_id_changed?
 
   private
     def build_from_digital_asset

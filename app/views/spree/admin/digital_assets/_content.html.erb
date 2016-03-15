@@ -1,30 +1,17 @@
-<div id='folder_index' class='row'>
-  <div  class='col-md-12'>
-    <div class='row'>
-      <div  id='asset_upload_buton' class='col-md-12'>
-        <% if @current_folder.present? %>
-          <button type='button' class='btn btn-primary pull-right'  id='upload_asset_button' data-toggle='modal' data-target='#upload_asset_modal'><i class='glyphicon glyphicon-cloud-upload'></i>Upload Asset</button>
-        <% else %>
-          <button type='button' class='btn btn-primary pull-right disabled'  id='upload_asset_button' data-toggle='modal' data-target='#upload_asset_modal' disabled='true'><i class='glyphicon glyphicon-cloud-upload'></i>Upload Asset</button>
+<div  class='col-md-12'>
+  <div class='row'>
+    <div  id='asset_upload_buton' class='col-md-12'>
+      <%= form_for [:admin, @digital_asset], html: { multipart: true, class: 'form-horizontal', id: 'new_multiple_digital_asset_form' }, remote: true, format: :js, authenticity_token: true do |f| %>
+        <%= f.hidden_field :folder_id, class: 'digital_asset_folder_id' %>
+        <% disabled = 'disabled' unless @current_folder.present? %>
+        <%= f.label :attachment, class: "btn btn-primary pull-right #{disabled}", id: 'upload_asset_button' do %>
+          <%= f.file_field :attachment, multiple: true, name: 'digital_asset[attachment]', class: 'hidden file_upload_attachment_field', disabled: disabled %>
+          <i class='glyphicon glyphicon-cloud-upload'></i>Upload Asset
         <% end %>
-      </div>
-    </div>
-    <div id='folder_assets' class='row' data-next-url='<%= digital_assets_next_page_path(@digital_assets, @current_folder) %>'>
-      <%= render partial: 'spree/admin/shared/digital_asset', collection: @digital_assets  %>
+      <% end %>
     </div>
   </div>
-</div>
-
-<div id='upload_asset_modal' class='modal fade' role='dialog'>
-  <div class='modal-dialog'>
-    <div class='modal-content'>
-      <div class='modal-header'>
-        <button type='button' class='close' data-dismiss='modal'>&times;</button>
-        <h4 class='modal-title'>Asset Uploader</h4>
-      </div>
-      <div id='upload_asset_modal_body' class='modal-body'>
-        <%= render partial: 'upload_asset_form' %>
-      </div>
-    </div>
+  <div id='folder_assets' class='row' data-next-url='<%= digital_assets_next_page_path(@digital_assets, @current_folder) %>'>
+    <%= render partial: 'spree/admin/shared/digital_asset', collection: @digital_assets  %>
   </div>
 </div>

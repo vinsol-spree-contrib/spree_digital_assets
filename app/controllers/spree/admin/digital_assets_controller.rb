@@ -10,11 +10,24 @@ module Spree
         render 'view_more' if params[:page].to_i > 1
       end
 
+      def create
+        @object.assign_attributes(permitted_resource_params)
+        if @object.save
+          render layout: false
+        else
+          render json: { errors: @object.errors.full_messages.to_sentence }, status: 422
+        end
+      end
+
       private
         def filter_digital_assets_by_folder
-          if params[:folder_id].present? && (@current_folder = Spree::Folder.find_by(id: params[:folder_id]))
+          if params[:folder_id].present? && current_folder
             @digital_assets = @digital_assets.where(folder: @current_folder.self_and_descendants)
           end
+        end
+
+        def current_folder
+          @current_folder ||= Spree::Folder.find_by(id: params[:folder_id])
         end
 
         def build_digital_asset
