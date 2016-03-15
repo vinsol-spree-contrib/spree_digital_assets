@@ -15,7 +15,7 @@ module Spree
         if @object.save
           render layout: false
         else
-          render json: { errors: @object.errors.full_messages.join(", ") }, status: 422
+          render json: { errors: @object.errors.full_messages.to_sentence }, status: 422
         end
       end
 
