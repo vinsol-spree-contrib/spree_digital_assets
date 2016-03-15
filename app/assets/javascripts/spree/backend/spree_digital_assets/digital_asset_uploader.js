@@ -1,8 +1,11 @@
-var DigitalAssetUploader = function(){
-  this.upload_assets_section = $('.upload-assets-section');
+GB_BYTES_COUNT = 1000000000;
+MB_BYTES_COUNT = 1000000;
+KB_BYTES_COUNT = 1000;
+
+var DigitalAssetUploader = function(upload_assets_section, new_multiple_digital_asset_form){
+  this.upload_assets_section = upload_assets_section;
   this.upload_assets_content = this.upload_assets_section.find('.upload-assets-content');
-  this.new_multiple_digital_asset_form = $('#new_multiple_digital_asset_form');
-  this.initializeAssetUploader();
+  this.new_multiple_digital_asset_form = new_multiple_digital_asset_form;
 }
 
 DigitalAssetUploader.prototype.initializeAssetUploader = function(){
@@ -45,19 +48,20 @@ DigitalAssetUploader.prototype.initializeAssetUploader = function(){
     }
   });
 }
+
 DigitalAssetUploader.prototype.formatFileSize = function(bytes){
   if (typeof bytes !== 'number') {
     return '';
   }
 
-  if (bytes >= 1000000000) {
-    return (bytes / 1000000000).toFixed(2) + ' GB';
+  if (bytes >= GB_BYTES_COUNT) {
+    return (bytes / GB_BYTES_COUNT).toFixed(2) + ' GB';
   }
 
-  if (bytes >= 1000000) {
-    return (bytes / 1000000).toFixed(2) + ' MB';
+  if (bytes >= MB_BYTES_COUNT) {
+    return (bytes / MB_BYTES_COUNT).toFixed(2) + ' MB';
   }
-  return (bytes / 1000).toFixed(2) + ' KB';
+  return (bytes / KB_BYTES_COUNT).toFixed(2) + ' KB';
 }
 
 DigitalAssetUploader.prototype.showAndInitializeUploadAssetSection = function(){
@@ -92,6 +96,10 @@ DigitalAssetUploader.prototype.calculateProgress = function(data){
 }
 
 $(document).ready(function(){
-  new DigitalAssetUploader();
+  initializeDigitalAssetUploader();
 });
 
+function initializeDigitalAssetUploader(){
+  var digital_asset_uploader = new DigitalAssetUploader($('.upload-assets-section'), $('#new_multiple_digital_asset_form'));
+  digital_asset_uploader.initializeAssetUploader();
+}

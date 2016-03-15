@@ -11,21 +11,23 @@ module Spree
       end
 
       def create
-        @object.attributes = permitted_resource_params
-        unless @object.save
+        @object.assign_attributes(permitted_resource_params)
+        if @object.save
+          render layout: false
+        else
           render json: { errors: @object.errors.full_messages.join(", ") }, status: 422
         end
       end
 
       private
         def filter_digital_assets_by_folder
-          if params[:folder_id].present? && load_current_folder
+          if params[:folder_id].present? && current_folder
             @digital_assets = @digital_assets.where(folder: @current_folder.self_and_descendants)
           end
         end
 
-        def load_current_folder
-          @current_folder = Spree::Folder.find_by(id: params[:folder_id])
+        def current_folder
+          @current_folder ||= Spree::Folder.find_by(id: params[:folder_id])
         end
 
         def build_digital_asset

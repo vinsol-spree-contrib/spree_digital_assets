@@ -19,7 +19,7 @@ describe Spree::Admin::DigitalAssetsController do
     allow(digital_assets).to receive(:order).and_return(digital_assets)
   end
 
-  describe 'GET#index' do
+  describe '#index' do
     def send_request(params={})
       get :index, params
     end
@@ -77,14 +77,14 @@ describe Spree::Admin::DigitalAssetsController do
 
   end
 
-  describe 'POST#create' do
+  describe '#create' do
     def send_request(params={})
       post :create, params
     end
 
     before do
       allow(Spree::DigitalAsset).to receive(:new).and_return(digital_asset)
-      allow(digital_asset).to receive(:attributes=)
+      allow(digital_asset).to receive(:assign_attributes)
       allow(digital_asset).to receive(:save).and_return(true)
     end
 

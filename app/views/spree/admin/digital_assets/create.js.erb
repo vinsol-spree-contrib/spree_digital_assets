@@ -1,8 +1,9 @@
 if($('.tree-menu .active a').data('id') == <%= @digital_asset.folder_id %>){
-  var $folder_assets = $('#folder_assets'),
-    $asset_area = $('#folder_assets .asset-area');
+  var $folder_assets = $('#folder_assets');
   $folder_assets.prepend("<%= j render partial: 'spree/admin/shared/digital_asset', object: @digital_asset %>");
-  if($asset_area.length > 25){
+  $('.with-tip').tooltip();
+  var $asset_area = $folder_assets.find('.asset-area');
+  if($asset_area.length > <%== Kaminari.config.default_per_page %>){
     if(!$folder_assets.data('next-url')){
       $folder_assets.attr('data-next-url', "<%== spree.admin_digital_assets_path(folder_id: @digital_asset.folder_id, page: 2) %>");
     }

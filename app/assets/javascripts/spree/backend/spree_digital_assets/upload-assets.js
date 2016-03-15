@@ -1,4 +1,7 @@
-var UploadAssets = function () {}
+var UploadAssets = function (toggleLink, hideLink) {
+  this.toggleLink = toggleLink;
+  this.hideLink = hideLink;
+}
 
 UploadAssets.prototype.init = function () {
   this.toggleUploaderBlock();
@@ -6,24 +9,19 @@ UploadAssets.prototype.init = function () {
 }
 
 UploadAssets.prototype.toggleUploaderBlock = function () {
-  var $toggleLink = $('.upload-assets-header-actions-link.minimize-link');
-
-  $toggleLink.on('click', function () {
+  this.toggleLink.on('click', function () {
     var $this = $(this);
-
     $this.toggleClass('condensed').parents('.upload-assets-section').find('.upload-assets-content').slideToggle();
   });
 }
 
 UploadAssets.prototype.hideUploaderBlock = function () {
-  $hideLink = $('.upload-assets-header-actions-link.close-link');
-
-  $hideLink.on('click', function () {
+  this.hideLink.on('click', function () {
     $(this).parents('.upload-assets-section').addClass('hidden');
   });
 }
 
 $(function () {
-  var uploadAssets = new UploadAssets();
+  var uploadAssets = new UploadAssets($('.upload-assets-header-actions-link.minimize-link'), $('.upload-assets-header-actions-link.close-link'));
   uploadAssets.init();
 });
