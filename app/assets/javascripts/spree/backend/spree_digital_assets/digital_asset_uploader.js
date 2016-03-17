@@ -66,6 +66,7 @@ DigitalAssetUploader.prototype.formatFileSize = function(bytes){
 
 DigitalAssetUploader.prototype.showAndInitializeUploadAssetSection = function(){
   this.upload_assets_section.removeClass('hidden');
+  this.upload_assets_section.find('.upload-assets-content').show();
   this.upload_assets_section.find('.header_title').html('Uploading ' + this.upload_assets_content.find('.upload-assets-content-row.working:visible').length + ' files');
   this.upload_assets_section.find('.upload-assets-content-row.single_request:visible:not(.uploading)').removeClass('single_request');
 }
