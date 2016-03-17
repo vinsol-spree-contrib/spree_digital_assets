@@ -7,7 +7,7 @@ module Spree
 
       def index
         @digital_assets = @digital_assets.order(created_at: :desc).page(params[:page])
-        render 'view_more' if params[:page].to_i > 1
+        render 'view_more' if params[:view_more].present?
       end
 
       def create
