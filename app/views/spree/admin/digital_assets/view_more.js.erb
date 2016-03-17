@@ -1,3 +1,10 @@
-$('#folder_assets').append("<%= j render partial: 'spree/admin/shared/digital_asset', collection: @digital_assets %>");
+$('.tree-menu .active').removeClass('active');
+$(".tree-menu [data-id=<%= @current_folder.try(:id) %>]").parent().addClass('active');
+var digital_asset_collection_html = "<%= j render partial: 'spree/admin/shared/digital_asset', collection: @digital_assets %>";
+<% if params[:page].to_i > 1 %>
+  $('#folder_assets').append(digital_asset_collection_html);
+<% else %>
+  $('#folder_assets').html(digital_asset_collection_html);
+<% end %>
 $('#folder_assets').attr('data-next-url', "<%= digital_assets_next_page_path(@digital_assets, @current_folder) %>");
 $('.with-tip').tooltip();

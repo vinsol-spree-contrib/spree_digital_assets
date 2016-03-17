@@ -22,7 +22,7 @@
               <%= build_nested_set_tree(@folders) do |folder| %>
 
                 <a href="javascript:void(0)" class="toggle_list_menu glyphicon glyphicon-chevron-right"></a>
-                <%= link_to folder.name, spree.admin_digital_assets_path(folder_id: folder.id), class: 'link', data: { id: folder.id, remote: true } %>
+                <%= link_to folder.name, spree.admin_digital_assets_path(folder_id: folder.id, view_more: true), class: 'link', data: { id: folder.id, remote: true } %>
               <% end %>
             </div>
 
