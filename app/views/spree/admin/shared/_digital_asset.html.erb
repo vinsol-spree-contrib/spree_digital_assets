@@ -1,7 +1,7 @@
 <div class="text-center asset-area">
   <div class="digital-assets-image">
     <%= image_tag(digital_asset.attachment.url(:small), class: 'img-thumbnail attachment digital_asset_attachment' ,
-      data: { id: digital_asset.id, name: digital_asset.name }, onerror: 'imgError(this);')  %>
+      data: { id: digital_asset.id, name: digital_asset.name }, onerror: "this.onerror=null;this.src='#{asset_path('default_file_icon.png')}';")  %>
   </div>
   <p>
     <%= digital_asset.name.truncate(30) %>
