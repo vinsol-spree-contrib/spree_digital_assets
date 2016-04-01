@@ -1,0 +1,7 @@
+<div class="text-center asset-area">
+  <div class="folder-image">
+  </div>
+  <p>
+    <%= link_to folder.name, spree.admin_digital_assets_path(folder_id: folder.id), remote: true, data: { id: folder.id } %>
+  </p>
+</div>

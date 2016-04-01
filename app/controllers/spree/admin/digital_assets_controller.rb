@@ -7,6 +7,7 @@ module Spree
 
       def index
         @digital_assets = @digital_assets.order(created_at: :desc).page(params[:page])
+        @folders = (@folders || Spree::Folder.all).order(created_at: :desc).page(params[:page])
         render 'view_more' if params[:view_more].present?
       end
 
@@ -22,7 +23,8 @@ module Spree
       private
         def filter_digital_assets_by_folder
           if params[:folder_id].present? && current_folder
-            @digital_assets = @digital_assets.where(folder: @current_folder.self_and_descendants)
+            @digital_assets = @digital_assets.where(folder: @current_folder)
+            @folders = Spree::Folder.where(parent_id: @current_folder.id)
           end
         end
 
