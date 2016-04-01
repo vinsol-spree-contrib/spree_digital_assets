@@ -5,5 +5,7 @@ module Spree
     has_many :digital_assets, dependent: :destroy
 
     validates :name, presence: true
+
+    attr_accessor :folder_id
   end
 end

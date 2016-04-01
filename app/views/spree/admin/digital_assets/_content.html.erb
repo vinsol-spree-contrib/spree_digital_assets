@@ -10,7 +10,7 @@
       <%= form_for [:admin, Spree::Folder.new], html: { multipart: true, class: 'form-horizontal', id: 'new_folder_form' }, remote: true, authenticity_token: true do |f| %>
         <div class="modal-body">
           <div class="form-group">
-            <%= hidden_field_tag :folder_id %>
+            <%= f.hidden_field :folder_id %>
             <%= f.label :name, class: 'col-md-4 control-label' %>
             <div class="col-md-6">
               <%= f.text_field :name, required: true, class: 'form-control' %>
@@ -23,7 +23,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <%= f.submit nil, class: 'btn btn-primary' %>
+          <%= f.submit 'Create Folder', class: 'btn btn-primary' %>
         </div>
       <% end %>
     </div>
