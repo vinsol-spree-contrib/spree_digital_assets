@@ -1,6 +1,6 @@
 var Folder = function (selectors) {
   this.folderAssetsContainer = selectors.folderAssetsContainer;
-  this.assetArea = selectors.assetArea;
+  this.folderArea = selectors.folderArea;
   this.treeMenuContainer = selectors.treeMenuContainer;
   this.wrapper = selectors.wrapper;
   this.body = selectors.body;
@@ -10,7 +10,7 @@ var Folder = function (selectors) {
 Folder.prototype.init = function () {
   var _this = this;
 
-  this.body.on('click', '#folder_assets .asset-area a', function(){
+  this.body.on('click', '#folder_assets .folder-area a', function(){
     history.pushState('', '', $(this).attr('href'));
   });
 
@@ -33,6 +33,7 @@ Folder.prototype.init = function () {
     event.preventDefault();
     $.ajax(_this.getCreateRequestParams($(this)));
   });
+
 }
 
 Folder.prototype.handleFolderTreeModification = function (data) {
@@ -187,7 +188,7 @@ Folder.prototype.addNewFolderToCurrentFolder = function (data) {
 }
 
 Folder.prototype.createCenterContainerFolderArea = function (data) {
-  var $assetArea = $('<div>').addClass('text-center asset-area');
+  var $assetArea = $('<div>').addClass('text-center folders-area');
   var $folderLink = $('<a>').attr('data-remote', 'true')
           .attr('data-id', data['id'])
           .attr('href', '/admin/digital_assets?folder_id=' + data['id'])
@@ -202,7 +203,7 @@ Folder.prototype.renameFolderInSideBar = function (data) {
 }
 
 Folder.prototype.renameFolderInCurrentFolder = function (data) {
-  this.assetArea.find('a[data-id="' + data['id'] + '"]').html(data['name']);
+  this.folderArea.find('a[data-id="' + data['id'] + '"]').html(data['name']);
 }
 
 Folder.prototype.deleteFolderInSideBar = function (data) {
@@ -210,7 +211,7 @@ Folder.prototype.deleteFolderInSideBar = function (data) {
 }
 
 Folder.prototype.deleteFolderInCurrentFolder = function (data) {
-  this.assetArea.find('a[data-id="' + data['id'] + '"]').closest('div.asset-area').remove();
+  this.folderArea.find('a[data-id="' + data['id'] + '"]').closest('div.folder-area').remove();
 }
 
 Folder.prototype.addParentId = function (link) {
@@ -253,7 +254,7 @@ Folder.prototype.changeFormForCreate = function (link) {
 $(function () {
   var selectors = {
     folderAssetsContainer: $('#folder_assets'),
-    assetArea: $('.asset-area'),
+    folderArea: $('.folder-area'),
     treeMenuContainer: $('div.tree-menu-container'),
     wrapper: $('#wrapper'),
     body: $('body'),

@@ -10,3 +10,4 @@
 //= require spree/backend/spree_digital_assets/digital_asset_uploader
 //= require spree/backend/spree_digital_assets/upload-assets
 //= require spree/backend/spree_digital_assets/add_folder
+//= require spree/backend/spree_digital_assets/asset_details

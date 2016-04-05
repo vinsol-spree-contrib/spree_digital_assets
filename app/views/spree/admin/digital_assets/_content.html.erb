@@ -43,8 +43,19 @@
       <% end %>
     </div>
   </div>
-  <div id='folder_assets' data-current="<%= @current_folder.try(:id) %>"class='row' data-next-url='<%= digital_assets_next_page_path(@digital_assets, @current_folder) %>'>
+  <div id='folder_assets' data-current="<%= @current_folder.try(:id) %>"class='row col-md-9' data-next-url='<%= digital_assets_next_page_path(@digital_assets, @current_folder) %>'>
     <%= render partial: 'spree/admin/shared/folder', collection: @folders  %>
     <%= render partial: 'spree/admin/shared/digital_asset', collection: @digital_assets  %>
+  </div>
+  <div class="col-md-3 col-md-offset-9 asset-details hide">
+    <h3 id="asset-name"></h3>
+    <h3>File Size:</h3>
+    <p id='file-size'></p>
+    <h3>Added On:</h3>
+    <p id='created-date'></p>
+    <h3>Modified On:</h3>
+    <p id="modified-date"></p>
+    <h3>Related Products:</h3>
+    <p id='related-products'></p>
   </div>
 </div>
