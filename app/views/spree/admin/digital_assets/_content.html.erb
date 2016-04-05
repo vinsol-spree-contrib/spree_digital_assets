@@ -30,6 +30,8 @@
   </div>
 </div>
 
+<%= render partial: 'spree/admin/shared/modification_content' %>
+
 <div  class='col-md-12'>
   <div class='row'>
     <div  id='asset_upload_buton' class='col-md-12'>
@@ -44,7 +46,7 @@
     </div>
   </div>
   <div id='folder_assets' data-current="<%= @current_folder.try(:id) %>"class='row' data-next-url='<%= digital_assets_next_page_path(@digital_assets, @current_folder) %>'>
-    <%= render partial: 'spree/admin/shared/folder', collection: @folders  %>
+    <%= render partial: 'spree/admin/shared/folder', collection: @current_folder.children  %>
     <%= render partial: 'spree/admin/shared/digital_asset', collection: @digital_assets  %>
   </div>
 </div>

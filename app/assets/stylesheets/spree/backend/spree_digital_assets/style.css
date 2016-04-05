@@ -55,11 +55,11 @@
   background: none !important;
 }
 
-.asset-area {
+.asset-area, .folder-area {
   display: inline-block;
   width: 170px;
   margin: 7px;
-  height: 200px;
+  height: 175px;
   padding: 15px;
   position: relative;
   box-shadow: 0 0 0 1px #e2e2e2;
@@ -133,10 +133,6 @@ li.active .link.sidebar-default-font {
 
 .no-border {
   border: 0 solid transparent !important;
-}
-
-.asset-area {
-  height: 175px;
 }
 
 .asset-area:hover ul.dropdown-menu {

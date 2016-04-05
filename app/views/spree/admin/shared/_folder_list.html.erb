@@ -17,7 +17,7 @@
              <li><a href="#" data-toggle="modal" data-target="#add-subfolder" data-id="<%= folder.id %>" data-name="<%= folder.name %>" class="add-folder">New Folder</a></li>
              <li><a href="#"  data-toggle="modal" class="rename-folder" data-target="#add-subfolder" data-id="<%= folder.id %>" data-name="<%= folder.name %>">Rename</a></li>
              <li role="separator" class="divider"></li>
-             <li><%= link_to 'Delete', admin_folder_path(folder), method: 'delete', remote: true, class: 'delete-folder', data: { id: folder.id } %></li>
+             <li><%= link_to 'Delete', admin_folder_path(folder), method: 'delete', remote: true, class: 'delete-folder', data: { id: folder.id } if folder.parent_id %></li>
            </ul>
          </div>
         <a href="#" class="toggle_list_menu glyphicon glyphicon-chevron-right"></a>
