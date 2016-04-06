@@ -26,4 +26,8 @@ Spree::Admin::BaseHelper.class_eval do
     params[:controller] == 'spree/admin/digital_assets' && params[:action] == 'index'
   end
 
+  def current_folder_children
+    @current_folder.try(:children) || Spree::Folder.where(parent_id: nil)
+  end
+
 end

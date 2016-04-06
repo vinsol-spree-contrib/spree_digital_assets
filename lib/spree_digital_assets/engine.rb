@@ -17,6 +17,7 @@ module SpreeDigitalAssets
 
     initializer 'spree.assets.precompile', group: :all do |app|
       app.config.assets.precompile += %w( default_file_icon.png )
+      app.config.assets.precompile += %w( folder_icon.jpeg )
     end
 
     config.to_prepare &method(:activate).to_proc
