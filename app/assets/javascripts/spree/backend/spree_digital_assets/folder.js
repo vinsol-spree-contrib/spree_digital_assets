@@ -4,7 +4,7 @@ var Folder = function (selectors) {
   this.treeMenuContainer = selectors.treeMenuContainer;
   this.wrapper = selectors.wrapper;
   this.body = selectors.body;
-  this.openButtonGroup = selectors.openButtonGroup;
+  this.buttonGroup = selectors.buttonGroup;
 }
 
 Folder.prototype.init = function () {
@@ -25,8 +25,11 @@ Folder.prototype.init = function () {
   });
 
   this.treeMenuContainer.on('click', 'ul.dropdown-menu a.delete-folder', function(event) {
-    event.preventDefault();
-    $.ajax(_this.getDeleteRequestParams($(this)));
+    var currentFolderId = _this.wrapper.find('#folder_assets').data('current');
+    if($(this).data('id') != currentFolderId) {
+      $.ajax(_this.getDeleteRequestParams($(this)));
+      return false;
+    }
   });
 
   this.wrapper.on('click', '.modal input[type="submit"]', function(event) {
@@ -41,17 +44,20 @@ Folder.prototype.handleFolderTreeModification = function (data) {
   if(this.wrapper.find('a[data-id="' + data['id'] + '"]').length) {
     this.renameFolderInSideBar(data);
     this.renameFolderInCurrentFolder(data);
-  }
-  else {
+  } else {
     this.addNewFolderToSideBar(data);
     this.addNewFolderToCurrentFolder(data);
   }
 };
 
 Folder.prototype.deleteFolder = function (data) {
-  this.openButtonGroup.removeClass('open').find('button').attr('aria-expanded', 'false');
-  this.deleteFolderInSideBar(data);
-  this.deleteFolderInCurrentFolder(data);
+  this.buttonGroup.filter('.open').removeClass('open').find('button').attr('aria-expanded', 'false');
+  if(data['folder']) {
+    this.deleteFolderInSideBar(data['folder']);
+    this.deleteFolderInCurrentFolder(data['folder']);
+  } else {
+    alert('Please make sure folder must be empty before deletion.');
+  }
 };
 
 Folder.prototype.addFolder = function (link) {
@@ -69,7 +75,7 @@ Folder.prototype.renameFolder = function (link) {
 };
 
 Folder.prototype.addNewFolderToSideBar = function (data) {
-  var $parent = $('a[data-id="' + data['parent_id'] + '"]').filter('.link').closest('li');
+  var $parent = $('a[data-id="' + data['parent_id'] + '"]').filter('.link').parents('li:first');
   var $folderElement = this.createFolder(data);
   if($parent.children('ul.tree-menu').length)
     $parent.children('ul.tree-menu').append($folderElement);
@@ -79,7 +85,7 @@ Folder.prototype.addNewFolderToSideBar = function (data) {
 }
 
 Folder.prototype.createFolder = function (data) {
-  var $folderElement = $('.modification-content').find('li.active').clone();
+  var $folderElement = $('.modification-content').children('li').clone();
   this.addAttributes($folderElement, data);
   return $folderElement;
 }
@@ -125,7 +131,7 @@ Folder.prototype.getDeleteRequestParams = function (link) {
       'folder_id': link.data('id')
     },
     success: function(data) {
-      _this.deleteFolder(data['folder']);
+      _this.deleteFolder(data);
     }
   };
 };
@@ -151,7 +157,7 @@ Folder.prototype.renameFolderInSideBar = function (data) {
 }
 
 Folder.prototype.renameFolderInCurrentFolder = function (data) {
-  this.wrapper.find('a[data-id="' + data['id'] + '"]').html(data['name']);
+  this.wrapper.find('a[data-id="' + data['id'] + '"]').filter('.folder-link').html(data['name']);
 }
 
 Folder.prototype.deleteFolderInSideBar = function (data) {
@@ -163,8 +169,10 @@ Folder.prototype.deleteFolderInCurrentFolder = function (data) {
   if(data['descendant_ids'].includes(currentFolderId)) {
     this.wrapper.find('#folder_assets').html('');
     history.pushState('', '', '/admin/digital_assets?folder_id=' + data['parent_id']);
+  } else {
+    history.pushState('', '', '/admin/digital_assets?folder_id=' + currentFolderId);
+    this.wrapper.find('a[data-id="' + data['id'] + '"]').closest('div.folder-area').remove();
   }
-  this.wrapper.find('a[data-id="' + data['id'] + '"]').closest('div.folder-area').remove();
 }
 
 Folder.prototype.addParentId = function (link) {
@@ -211,7 +219,7 @@ $(function () {
     treeMenuContainer: $('div.tree-menu-container'),
     wrapper: $('#wrapper'),
     body: $('body'),
-    openButtonGroup: $('.btn-group').filter('.open')
+    buttonGroup: $('.btn-group')
   }
   var folder = new Folder(selectors);
   folder.init();
