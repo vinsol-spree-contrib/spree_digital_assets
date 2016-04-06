@@ -4,32 +4,37 @@ var Folder = function (selectors) {
   this.treeMenuContainer = selectors.treeMenuContainer;
   this.wrapper = selectors.wrapper;
   this.body = selectors.body;
-  this.openButtonGroup = selectors.openButtonGroup;
+  this.buttonGroup = selectors.buttonGroup;
 }
 
 Folder.prototype.init = function () {
   var _this = this;
 
-  this.body.on('click', '#folder_assets .folder-area a', function(){
+  this.body.on('click', '#folder_assets a.folder-link', function(){
     history.pushState('', '', $(this).attr('href'));
   });
 
   this.treeMenuContainer.on('click', 'ul.dropdown-menu a.add-folder', function() {
-    event.preventDefault();
+    _this.addFolder($(this));
+  }); 
+
+  this.wrapper.on('click', 'a.add-root-folder', function() {
     _this.addFolder($(this));
   });
 
   this.treeMenuContainer.on('click', 'ul.dropdown-menu a.rename-folder', function() {
-    event.preventDefault();
     _this.renameFolder($(this));
   });
 
   this.treeMenuContainer.on('click', 'ul.dropdown-menu a.delete-folder', function(event) {
-    event.preventDefault();
-    $.ajax(_this.getDeleteRequestParams($(this)));
+    var currentFolderId = _this.wrapper.find('#folder_assets').data('current');
+    if($(this).data('id') != currentFolderId) {
+      $.ajax(_this.getDeleteRequestParams($(this)));
+      return false;
+    }
   });
 
-  this.wrapper.on('click', '.modal form input[type="submit"]', function(event) {
+  this.wrapper.on('click', '.modal input[type="submit"]', function(event) {
     event.preventDefault();
     $.ajax(_this.getCreateRequestParams($(this)));
   });
@@ -38,26 +43,28 @@ Folder.prototype.init = function () {
 
 Folder.prototype.handleFolderTreeModification = function (data) {
   this.wrapper.find('.modal').modal('hide').data('bs.modal', null);
-  if(data['commit'] == 'create') {
-    this.addNewFolderToSideBar(data);
-    this.addNewFolderToCurrentFolder(data);
-  }
-  else {
+  if(this.wrapper.find('a[data-id="' + data['id'] + '"]').length) {
     this.renameFolderInSideBar(data);
     this.renameFolderInCurrentFolder(data);
+  } else {
+    this.addNewFolderToSideBar(data);
+    this.addNewFolderToCurrentFolder(data);
   }
 };
 
 Folder.prototype.deleteFolder = function (data) {
-  this.openButtonGroup.removeClass('open').find('button').attr('aria-expanded', 'false');
-  this.deleteFolderInSideBar(data);
-  this.deleteFolderInCurrentFolder(data);
+  this.buttonGroup.filter('.open').removeClass('open').find('button').attr('aria-expanded', 'false');
+  if(data['folder']) {
+    this.deleteFolderInSideBar(data['folder']);
+    this.deleteFolderInCurrentFolder(data['folder']);
+  } else {
+    show_flash('danger', 'Please make sure folder must be empty before deletion.');
+  }
 };
 
 Folder.prototype.addFolder = function (link) {
   this.addParentId(link);
   this.removeName();
-  this.setCurrentFolder();
   this.changeFormForCreate(link);
 };
 
@@ -69,8 +76,11 @@ Folder.prototype.renameFolder = function (link) {
 };
 
 Folder.prototype.addNewFolderToSideBar = function (data) {
-  var $parent = $('a[data-id="' + data['parent_id'] + '"]').filter('.link').closest('li');
   var $folderElement = this.createFolder(data);
+  var $parent = $('a[data-id="' + data['parent_id'] + '"]').filter('.link').parents('li:first');
+  if(!$parent.length) {
+    $parent = $('div.tree-menu-container');
+  }
   if($parent.children('ul.tree-menu').length)
     $parent.children('ul.tree-menu').append($folderElement);
   else
@@ -79,69 +89,38 @@ Folder.prototype.addNewFolderToSideBar = function (data) {
 }
 
 Folder.prototype.createFolder = function (data) {
-  var $folderElement = $('<li>').append(this.createListElement(data['id'], data['name']));
-  $folderElement.append($('<a>').addClass('toggle_list_menu glyphicon glyphicon-chevron-right'));
-  $folderElement.append($('<a>').addClass('link sidebar-default-font')
-    .attr('data-id', data['id'])
-    .attr('data-remote', 'true')
-    .text(data['name'])
-    .attr('href', '/admin/digital_assets?folder_id=' + data['id']));
+  var $folderElement = $('.modification-content').children('li').clone();
+  this.addAttributes($folderElement, data);
   return $folderElement;
 }
 
-Folder.prototype.createListElement = function (id, name) {
-  var $sideButtonContainer = $('<div>').addClass('btn-group').append(this.createButton(id));
-  $sideButtonContainer.append(this.createOptionList(id, name));
-  return $sideButtonContainer;
+Folder.prototype.addAttributes = function (element, data) {
+  element.find('a[data-toggle="modal"]').attr('data-id', data['id']).attr('data-name', data['name']);
+  element.find('a.delete-folder').attr('data-id', data['id']).attr('href', '/admin/folders/' + data['id']);
+  element.find('a.sidebar-default-font')
+    .attr('data-id', data['id'])
+    .attr('href', '/admin/digital_assets?folder_id=' + data['id'])
+    .text(data['name']);
 }
-
-Folder.prototype.createButton = function (id) {
-  var $button = $('<button>').addClass('btn btn-xs dropdown-toggle')
-                             .attr('type', 'button')
-                             .attr('aria-expanded', 'false')
-                             .attr('aria-haspopup', 'true')
-                             .attr('data-toggle', 'dropdown');
-  $button.append($('<span>').addClass('glyphicon glyphicon-option-vertical'));
-  return $button;
-}
-
-Folder.prototype.createOptionList = function (id, name) {
-  var $list = $('<ul>').addClass('dropdown-menu');
-  $list.append($('<li>').append(this.addAttributes($('<a>'), 'New Folder', this.getCreateLinkAttributes(id, name, 'add-folder'))));
-  $list.append($('<li>').append(this.addAttributes($('<a>'), 'Rename', this.getCreateLinkAttributes(id, name, 'rename-folder'))));
-  $list.append($('<li>').addClass('divider').attr('role', 'seperator'));
-  $list.append($('<li>').append(this.addAttributes($('<a>'), 'Delete', this.getDeleteLinkAttributes(id))));
-  return $list;
-}
-
-Folder.prototype.getDeleteLinkAttributes = function (id) {
-  return { 
-    'class': 'delete-folder',
-    'data-remote': 'true',
-    'data-method': 'delete',
-    'data-id': id,  
-    'href': '/admin/folders/' + id
-  };
-};
 
 Folder.prototype.getCreateRequestParams = function (link) {
   var _this = this;
   return {
-    'url': this.wrapper.find('.modal form').attr('action'),
-    'method': this.wrapper.find('.modal form').attr('method'), 
+    'url': this.wrapper.find('.modal #new_folder_form').attr('action'),
+    'method': this.wrapper.find('.modal #new_folder_form').attr('method'), 
     'dataType': 'JSON',
     'data': {
-      'utf8': this.wrapper.find('.modal form').find('[name="utf8"]').val(),
-      'authenticity_token': this.wrapper.find('.modal form').find('[name="authenticity_token"]').val(),
+      'utf8': this.wrapper.find('.modal #new_folder_form').find('[name="utf8"]').val(),
+      'authenticity_token': this.wrapper.find('.modal #new_folder_form').find('[name="authenticity_token"]').val(),
       'commit': link.val(),
-      'folder_id': this.wrapper.find('.modal form').find('#folder_id').val(),
+      'folder_id': this.wrapper.find('.modal #new_folder_form').find('#folder_id').val(),
       'folder': {
-        'name': this.wrapper.find('.modal form').find('#folder_name').val(),
-        'parent_id': this.wrapper.find('.modal form').find('.parent_id').val()
+        'name': this.wrapper.find('.modal #new_folder_form').find('#folder_name').val(),
+        'parent_id': this.wrapper.find('.modal #new_folder_form').find('.parent_id').val()
       }
     },
     success: function(data) {
-      _this.handleFolderTreeModification(data);
+      _this.handleFolderTreeModification(data['folder']);
     }
   };
 };
@@ -161,41 +140,20 @@ Folder.prototype.getDeleteRequestParams = function (link) {
   };
 };
 
-Folder.prototype.getCreateLinkAttributes = function (id, name, klass) {
-  return { 
-    'class': klass,
-    'data-toggle': 'modal',
-    'data-target': '#add-subfolder',
-    'data-id': id, 
-    'data-name': name, 
-    'href': '#'
-  };
-};
-
-Folder.prototype.addAttributes = function (element, text, attrs) {
-  element.text(text);
-  $.each(attrs, function(key, value) {
-    element.attr(key, value);
-  });
-  return element;
-};
-
 Folder.prototype.addNewFolderToCurrentFolder = function (data) {
   var currentFolderId = $('#folder_assets').data('current');
   if(data['parent_id'] == currentFolderId) {
-    this.folderAssetsContainer.prepend(this.createCenterContainerFolderArea(data));
+    this.wrapper.find('#folder_assets').prepend(this.createCenterContainerFolderArea(data));
   }
 }
 
 Folder.prototype.createCenterContainerFolderArea = function (data) {
-  var $assetArea = $('<div>').addClass('text-center folders-area');
-  var $folderLink = $('<a>').attr('data-remote', 'true')
-          .attr('data-id', data['id'])
-          .attr('href', '/admin/digital_assets?folder_id=' + data['id'])
-          .text(data['name']);
-  $assetArea.append($('<div>').addClass('folder-image'));
-  $assetArea.append($('<p>').append($folderLink));
-  return $assetArea;
+  var $folderArea = $('.modification-content').find('.folder-area').clone();
+  $folderArea.find('a.folder-link')
+    .attr('data-id', data['id'])
+    .attr('href', '/admin/digital_assets?folder_id=' + data['id'])
+    .text(data['name']);
+  return $folderArea;
 }
 
 Folder.prototype.renameFolderInSideBar = function (data) {
@@ -203,7 +161,7 @@ Folder.prototype.renameFolderInSideBar = function (data) {
 }
 
 Folder.prototype.renameFolderInCurrentFolder = function (data) {
-  this.folderArea.find('a[data-id="' + data['id'] + '"]').html(data['name']);
+  this.wrapper.find('a[data-id="' + data['id'] + '"]').filter('.folder-link').html(data['name']);
 }
 
 Folder.prototype.deleteFolderInSideBar = function (data) {
@@ -211,7 +169,14 @@ Folder.prototype.deleteFolderInSideBar = function (data) {
 }
 
 Folder.prototype.deleteFolderInCurrentFolder = function (data) {
-  this.folderArea.find('a[data-id="' + data['id'] + '"]').closest('div.folder-area').remove();
+  var currentFolderId = this.wrapper.find('#folder_assets').data('current');
+  if(data['descendant_ids'].includes(currentFolderId)) {
+    this.wrapper.find('#folder_assets').html('');
+    history.pushState('', '', '/admin/digital_assets?folder_id=' + data['parent_id']);
+  } else {
+    history.pushState('', '', '/admin/digital_assets?folder_id=' + currentFolderId);
+    this.wrapper.find('a[data-id="' + data['id'] + '"]').closest('div.folder-area').remove();
+  }
 }
 
 Folder.prototype.addParentId = function (link) {
@@ -227,11 +192,6 @@ Folder.prototype.removeName = function () {
   this.wrapper.find('.modal').find('#folder_name').val('');
 }
 
-Folder.prototype.setCurrentFolder = function () {
-  var currentFolderId = $('#folder_assets').data('current');
-  this.wrapper.find('.modal').find('#folder_folder_id').val(currentFolderId);
-}
-
 Folder.prototype.addName = function (link) {
   var folderName = link.data('name');
   this.wrapper.find('.modal').find('#folder_name').val(folderName);
@@ -239,16 +199,15 @@ Folder.prototype.addName = function (link) {
 
 Folder.prototype.changeFormForUpdate = function (link) {
   var folderId = link.data('id');
-  this.wrapper.find('.modal form').attr('action', "/admin/folders/" + folderId);
-  this.wrapper.find('.modal form').attr('method', 'put');
-  this.wrapper.find('.modal form').find('input[type="submit"]').val('Update Folder');
+  this.wrapper.find('.modal #new_folder_form').attr('action', "/admin/folders/" + folderId);
+  this.wrapper.find('.modal #new_folder_form').attr('method', 'put');
+  this.wrapper.find('.modal #new_folder_form').find('input[type="submit"]').val('Update Folder');
 }
 
 Folder.prototype.changeFormForCreate = function (link) {
-  var folderId = link.data('id');
-  this.wrapper.find('.modal form').attr('action', "/admin/folders/");
-  this.wrapper.find('.modal form').attr('method', 'post');
-  this.wrapper.find('.modal form').find('input[type="submit"]').val('Create Folder');
+  this.wrapper.find('.modal #new_folder_form').attr('action', "/admin/folders/");
+  this.wrapper.find('.modal #new_folder_form').attr('method', 'post');
+  this.wrapper.find('.modal #new_folder_form').find('input[type="submit"]').val('Create Folder');
 }
 
 $(function () {
@@ -258,9 +217,8 @@ $(function () {
     treeMenuContainer: $('div.tree-menu-container'),
     wrapper: $('#wrapper'),
     body: $('body'),
-    openButtonGroup: $('.btn-group').filter('.open')
+    buttonGroup: $('.btn-group')
   }
   var folder = new Folder(selectors);
   folder.init();
 });
-
