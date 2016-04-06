@@ -14,10 +14,10 @@
               <span class="glyphicon glyphicon-option-vertical"></span>
             </button>
             <ul class="dropdown-menu">
-             <li><a href="#" data-toggle="modal" data-target="#add-subfolder" data-id="<%= folder.id %>" data-name="<%= folder.name %>" class="add-folder">New Folder</a></li>
-             <li><a href="#"  data-toggle="modal" class="rename-folder" data-target="#add-subfolder" data-id="<%= folder.id %>" data-name="<%= folder.name %>">Rename</a></li>
+             <li><a href="#" data-toggle="modal" data-target="#add-subfolder"  class="add-folder">New Folder</a></li>
+             <li><a href="#"  data-toggle="modal" class="rename-folder" data-target="#add-subfolder" >Rename</a></li>
              <li role="separator" class="divider"></li>
-             <li><%= link_to 'Delete', admin_folder_path(folder), method: 'delete', class: 'delete-folder', data: { id: folder.id } %></li>
+             <li><%= link_to 'Delete', admin_folder_path(folder), method: 'delete', class: 'delete-folder' %></li>
            </ul>
          </div>
         <a href="#" class="toggle_list_menu glyphicon glyphicon-chevron-right"></a>

@@ -3,7 +3,7 @@ module Spree
 
     class DigitalAssetsController < ResourceController
 
-      before_action :filter_digital_assets_by_folder, :build_digital_asset, only: :index
+      before_action :filter_digital_assets_by_folder, :build_digital_asset, :current_folder_children, only: :index
 
       def index
         @digital_assets = @digital_assets.order(created_at: :desc).page(params[:page])
@@ -28,6 +28,10 @@ module Spree
 
         def current_folder
           @current_folder ||= Spree::Folder.find_by(id: params[:folder_id])
+        end
+
+        def current_folder_children
+          @current_folder_children = current_folder.try(:children) || Spree::Folder.where(parent_id: nil)
         end
 
         def build_digital_asset

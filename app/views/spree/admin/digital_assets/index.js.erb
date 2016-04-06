@@ -1,6 +1,6 @@
 window.scrollTo(0, 0);
 $('.tree-menu .active').removeClass('active');
-$(".tree-menu [data-id=<%= @current_folder.try(:id) %>]").filter('.link').parent().addClass('active');
+$(".tree-menu [data-id=<%= @current_folder.try(:id) %>]").parent().addClass('active');
 $('.sidebar-menu-item .selected').removeClass('selected');
 $('#folder_index').html("<%= j render 'content' %>");
 $('.with-tip').tooltip();

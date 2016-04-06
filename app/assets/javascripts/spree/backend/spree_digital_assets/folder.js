@@ -28,7 +28,7 @@ Folder.prototype.init = function () {
 
   this.treeMenuContainer.on('click', 'ul.dropdown-menu a.delete-folder', function(event) {
     var currentFolderId = _this.wrapper.find('#folder_assets').data('current');
-    if($(this).data('id') != currentFolderId) {
+    if($(this).closest('.btn-group').siblings('.link').data('id') != currentFolderId) {
       $.ajax(_this.getDeleteRequestParams($(this)));
       return false;
     }
@@ -44,8 +44,7 @@ Folder.prototype.init = function () {
 Folder.prototype.handleFolderTreeModification = function (data) {
   this.wrapper.find('.modal').modal('hide').data('bs.modal', null);
   if(this.wrapper.find('a[data-id="' + data['id'] + '"]').length) {
-    this.renameFolderInSideBar(data);
-    this.renameFolderInCurrentFolder(data);
+    $('a[data-id="' + data['id'] + '"]').html(data['name']).attr('data-name', data['name']);
   } else {
     this.addNewFolderToSideBar(data);
     this.addNewFolderToCurrentFolder(data);
@@ -56,28 +55,28 @@ Folder.prototype.deleteFolder = function (data) {
   this.buttonGroup.filter('.open').removeClass('open').find('button').attr('aria-expanded', 'false');
   if(data['folder']) {
     this.deleteFolderInSideBar(data['folder']);
-    this.deleteFolderInCurrentFolder(data['folder']);
   } else {
     show_flash('danger', 'Please make sure folder must be empty before deletion.');
   }
 };
 
 Folder.prototype.addFolder = function (link) {
-  this.addParentId(link);
+  var dataLink = link.closest('.btn-group').siblings('.link');
+  this.addParentId(dataLink);
   this.removeName();
-  this.changeFormForCreate(link);
+  this.changeFormForCreate();
 };
 
 Folder.prototype.renameFolder = function (link) {
-  this.addName(link);
+  var dataLink = link.closest('.btn-group').siblings('.link');
+  this.addName(dataLink);
   this.removeParentId();
-  this.setCurrentFolder();
-  this.changeFormForUpdate(link);
+  this.changeFormForUpdate(dataLink);
 };
 
 Folder.prototype.addNewFolderToSideBar = function (data) {
   var $folderElement = this.createFolder(data);
-  var $parent = $('a[data-id="' + data['parent_id'] + '"]').filter('.link').parents('li:first');
+  var $parent = $('a[data-id="' + data['parent_id'] + '"]').closest('li');
   if(!$parent.length) {
     $parent = $('div.tree-menu-container');
   }
@@ -95,8 +94,7 @@ Folder.prototype.createFolder = function (data) {
 }
 
 Folder.prototype.addAttributes = function (element, data) {
-  element.find('a[data-toggle="modal"]').attr('data-id', data['id']).attr('data-name', data['name']);
-  element.find('a.delete-folder').attr('data-id', data['id']).attr('href', '/admin/folders/' + data['id']);
+  element.find('a.delete-folder').attr('href', '/admin/folders/' + data['id']);
   element.find('a.sidebar-default-font')
     .attr('data-id', data['id'])
     .attr('href', '/admin/digital_assets?folder_id=' + data['id'])
@@ -113,17 +111,24 @@ Folder.prototype.getCreateRequestParams = function (link) {
       'utf8': this.wrapper.find('.modal #new_folder_form').find('[name="utf8"]').val(),
       'authenticity_token': this.wrapper.find('.modal #new_folder_form').find('[name="authenticity_token"]').val(),
       'commit': link.val(),
-      'folder_id': this.wrapper.find('.modal #new_folder_form').find('#folder_id').val(),
-      'folder': {
-        'name': this.wrapper.find('.modal #new_folder_form').find('#folder_name').val(),
-        'parent_id': this.wrapper.find('.modal #new_folder_form').find('.parent_id').val()
-      }
+      'folder': this.getFolderAttributes()
     },
     success: function(data) {
       _this.handleFolderTreeModification(data['folder']);
     }
   };
 };
+
+Folder.prototype.getFolderAttributes = function () {
+  var parentFolderId = this.wrapper.find('.modal #new_folder_form').find('.parent_id').val();
+  var folderAttributes = {
+    'name': this.wrapper.find('.modal #new_folder_form').find('#folder_name').val()
+  };
+  if(parentFolderId) {
+    folderAttributes['parent_id'] = parentFolderId;
+  }
+  return folderAttributes;
+}
 
 Folder.prototype.getDeleteRequestParams = function (link) {
   var _this = this;
@@ -156,27 +161,8 @@ Folder.prototype.createCenterContainerFolderArea = function (data) {
   return $folderArea;
 }
 
-Folder.prototype.renameFolderInSideBar = function (data) {
-  $('a[data-id="' + data['id'] + '"]').filter('.link').html(data['name']).attr('data-name', data['name']);
-}
-
-Folder.prototype.renameFolderInCurrentFolder = function (data) {
-  this.wrapper.find('a[data-id="' + data['id'] + '"]').filter('.folder-link').html(data['name']);
-}
-
 Folder.prototype.deleteFolderInSideBar = function (data) {
-  $('a[data-id="' + data['id'] + '"]').filter('.link').closest('li').remove();
-}
-
-Folder.prototype.deleteFolderInCurrentFolder = function (data) {
-  var currentFolderId = this.wrapper.find('#folder_assets').data('current');
-  if(data['descendant_ids'].includes(currentFolderId)) {
-    this.wrapper.find('#folder_assets').html('');
-    history.pushState('', '', '/admin/digital_assets?folder_id=' + data['parent_id']);
-  } else {
-    history.pushState('', '', '/admin/digital_assets?folder_id=' + currentFolderId);
-    this.wrapper.find('a[data-id="' + data['id'] + '"]').closest('div.folder-area').remove();
-  }
+  $('a[data-id="' + data['id'] + '"]').closest('li').remove();
 }
 
 Folder.prototype.addParentId = function (link) {
@@ -193,7 +179,7 @@ Folder.prototype.removeName = function () {
 }
 
 Folder.prototype.addName = function (link) {
-  var folderName = link.data('name');
+  var folderName = link.text();
   this.wrapper.find('.modal').find('#folder_name').val(folderName);
 }
 
@@ -204,7 +190,7 @@ Folder.prototype.changeFormForUpdate = function (link) {
   this.wrapper.find('.modal #new_folder_form').find('input[type="submit"]').val('Update Folder');
 }
 
-Folder.prototype.changeFormForCreate = function (link) {
+Folder.prototype.changeFormForCreate = function () {
   this.wrapper.find('.modal #new_folder_form').attr('action', "/admin/folders/");
   this.wrapper.find('.modal #new_folder_form').attr('method', 'post');
   this.wrapper.find('.modal #new_folder_form').find('input[type="submit"]').val('Create Folder');
