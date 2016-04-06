@@ -72,6 +72,10 @@
   color: #fff;
 }
 
+.add-root-folder {
+  width: 100%;
+}
+
 .asset-area img {
   max-width: 140px !important;
   max-height: 140px !important;

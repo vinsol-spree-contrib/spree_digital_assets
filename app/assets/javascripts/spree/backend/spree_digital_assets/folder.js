@@ -15,12 +15,14 @@ Folder.prototype.init = function () {
   });
 
   this.treeMenuContainer.on('click', 'ul.dropdown-menu a.add-folder', function() {
-    event.preventDefault();
+    _this.addFolder($(this));
+  }); 
+
+  this.wrapper.on('click', 'a.add-root-folder', function() {
     _this.addFolder($(this));
   });
 
   this.treeMenuContainer.on('click', 'ul.dropdown-menu a.rename-folder', function() {
-    event.preventDefault();
     _this.renameFolder($(this));
   });
 
@@ -56,14 +58,13 @@ Folder.prototype.deleteFolder = function (data) {
     this.deleteFolderInSideBar(data['folder']);
     this.deleteFolderInCurrentFolder(data['folder']);
   } else {
-    alert('Please make sure folder must be empty before deletion.');
+    show_flash('danger', 'Please make sure folder must be empty before deletion.');
   }
 };
 
 Folder.prototype.addFolder = function (link) {
   this.addParentId(link);
   this.removeName();
-  this.setCurrentFolder();
   this.changeFormForCreate(link);
 };
 
@@ -75,8 +76,11 @@ Folder.prototype.renameFolder = function (link) {
 };
 
 Folder.prototype.addNewFolderToSideBar = function (data) {
-  var $parent = $('a[data-id="' + data['parent_id'] + '"]').filter('.link').parents('li:first');
   var $folderElement = this.createFolder(data);
+  var $parent = $('a[data-id="' + data['parent_id'] + '"]').filter('.link').parents('li:first');
+  if(!$parent.length) {
+    $parent = $('div.tree-menu-container');
+  }
   if($parent.children('ul.tree-menu').length)
     $parent.children('ul.tree-menu').append($folderElement);
   else
@@ -188,11 +192,6 @@ Folder.prototype.removeName = function () {
   this.wrapper.find('.modal').find('#folder_name').val('');
 }
 
-Folder.prototype.setCurrentFolder = function () {
-  var currentFolderId = $('#folder_assets').data('current');
-  this.wrapper.find('.modal').find('#folder_folder_id').val(currentFolderId);
-}
-
 Folder.prototype.addName = function (link) {
   var folderName = link.data('name');
   this.wrapper.find('.modal').find('#folder_name').val(folderName);
@@ -206,7 +205,6 @@ Folder.prototype.changeFormForUpdate = function (link) {
 }
 
 Folder.prototype.changeFormForCreate = function (link) {
-  var folderId = link.data('id');
   this.wrapper.find('.modal #new_folder_form').attr('action', "/admin/folders/");
   this.wrapper.find('.modal #new_folder_form').attr('method', 'post');
   this.wrapper.find('.modal #new_folder_form').find('input[type="submit"]').val('Create Folder');
