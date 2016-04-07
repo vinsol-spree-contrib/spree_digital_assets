@@ -1,0 +1,19 @@
+<% unless folder.name %>
+  <li class="hide add-sidebar-folder">
+<% end %>
+  <div class="btn-group">
+    <button class="btn btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="glyphicon glyphicon-option-vertical"></span>
+    </button>
+    <ul class="dropdown-menu">
+     <li><a href="javascript:void(0)" data-toggle="modal" data-target="#add-subfolder"  class="add-folder">New Folder</a></li>
+     <li><a href="javascript:void(0)"  data-toggle="modal" class="rename-folder" data-target="#add-subfolder" >Rename</a></li>
+     <li role="separator" class="divider"></li>
+     <li><%= link_to 'Delete', admin_folder_path(folder), method: 'delete', class: 'delete-folder' %></li>
+    </ul>
+  </div>
+  <a href="javascript:void(0)" class="toggle_list_menu glyphicon glyphicon-chevron-right"></a>
+  <%= link_to folder.name, spree.admin_digital_assets_path(folder_id: folder.id), class: 'link sidebar-default-font', remote: true, data: { id: folder.id } %>
+<% unless folder.name %>
+  </li>
+<% end %>

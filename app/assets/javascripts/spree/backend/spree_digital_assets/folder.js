@@ -88,7 +88,7 @@ Folder.prototype.addNewFolderToSideBar = function (data) {
 }
 
 Folder.prototype.createFolder = function (data) {
-  var $folderElement = $('.modification-content').children('li').clone();
+  var $folderElement = $('.add-sidebar-folder').clone().removeClass('add-sidebar-folder hide');
   this.addAttributes($folderElement, data);
   return $folderElement;
 }
@@ -153,7 +153,7 @@ Folder.prototype.addNewFolderToCurrentFolder = function (data) {
 }
 
 Folder.prototype.createCenterContainerFolderArea = function (data) {
-  var $folderArea = $('.modification-content').find('.folder-area').clone();
+  var $folderArea = $('.add-central-folder').find('.folder-area').clone();
   $folderArea.find('a.folder-link')
     .attr('data-id', data['id'])
     .attr('href', '/admin/digital_assets?folder_id=' + data['id'])
