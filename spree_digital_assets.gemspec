@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_digital_assets'
-  s.version     = '3.0.0'
+  s.version     = '3.1.0'
   s.summary     = 'Add gem summary here'
   s.description = 'Add (optional) gem description here'
   s.required_ruby_version = '>= 2.0.0'
@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_core', '~> 3.0.0'
+  s.add_dependency 'spree_core', '~> 3.1.0.rc1'
   s.add_dependency 'remotipart', '~> 1.2'
   s.add_dependency 'jquery-fileupload-rails', '~> 0.4.6'
 

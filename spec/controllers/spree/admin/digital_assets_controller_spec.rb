@@ -56,14 +56,12 @@ describe Spree::Admin::DigitalAssetsController do
     before do
       allow(Spree::Folder).to receive(:find_by).and_return(folder)
       allow(folder).to receive(:present?).and_return(true)
-      allow(folder).to receive(:self_and_descendants).and_return(folders)
       allow(digital_assets).to receive(:where).and_return(digital_assets)
       allow(folder).to receive(:id).and_return(folder_id)
     end
 
     describe 'Methods' do
       it { expect(Spree::Folder).to receive(:find_by).with(id: folder_id).and_return(folder) }
-      it { expect(folder).to receive(:self_and_descendants).and_return(folders) }
 
       after { send_request(folder_id: folder_id) }
     end
