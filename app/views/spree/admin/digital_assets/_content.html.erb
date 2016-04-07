@@ -1,35 +1,5 @@
 
-<!-- Modal -->
-<div class="modal fade" id="add-subfolder" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Add New Folder</h4>
-      </div>
-      <%= form_for [:admin, Spree::Folder.new], html: { multipart: true, class: 'form-horizontal', id: 'new_folder_form' }, remote: true, authenticity_token: true do |f| %>
-        <div class="modal-body">
-          <div class="form-group">
-            <%= f.hidden_field :folder_id %>
-            <%= f.label :name, class: 'col-md-4 control-label' %>
-            <div class="col-md-6">
-              <%= f.text_field :name, required: true, class: 'form-control' %>
-              <%= f.error_message_on :name %>
-            </div>
-          </div>
-          <div class="form-group">
-            <%= f.hidden_field :parent_id, class: 'parent_id' %>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <%= f.submit 'Create Folder', class: 'btn btn-primary' %>
-        </div>
-      <% end %>
-    </div>
-  </div>
-</div>
-
+<%= render partial: 'spree/admin/shared/modal' %>
 <%= render partial: 'spree/admin/shared/modification_content' %>
 
 <div  class='col-md-12'>
@@ -45,9 +15,10 @@
       <% end %>
     </div>
   </div>
-  <div id='folder_assets' data-current="<%= @current_folder.try(:id) %>"class='row col-md-9' data-next-url='<%= digital_assets_next_page_path(@digital_assets, @current_folder) %>'>
-    <%= render partial: 'spree/admin/shared/folder', collection: current_folder_children  %>
-    <%= render partial: 'spree/admin/shared/digital_asset', collection: @digital_assets  %>
+
+  <div id='folder_assets' data-current="<%= @current_folder.try(:id) %>"class='row' data-next-url='<%= digital_assets_next_page_path(@digital_assets, @current_folder) %>'>
+    <%= render partial: 'spree/admin/shared/folder', collection: @current_folder_children  %>
+    <%= render partial: 'spree/admin/shared/digital_asset', collection: @digital_assets if @current_folder %>
   </div>
   <div class="col-md-3 col-md-offset-9 asset-details hide">
     <h3 id="asset-name"></h3>

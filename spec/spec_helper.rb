@@ -17,10 +17,12 @@ require File.expand_path('../dummy/config/environment.rb',  __FILE__)
 
 require 'rspec/rails'
 require 'database_cleaner'
+require 'factory_girl'
 require 'ffaker'
 require 'rspec/active_model/mocks'
 require 'shoulda-matchers'
 require "paperclip/matchers"
+require 'spree_digital_assets/factories'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
