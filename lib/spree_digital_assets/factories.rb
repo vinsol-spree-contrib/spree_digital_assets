@@ -6,7 +6,6 @@ FactoryGirl.define do
 
   factory :folder do
     name 'Documents'
-    parent_id nil
   end
 
 end

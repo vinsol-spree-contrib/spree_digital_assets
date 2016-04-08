@@ -1,6 +1,7 @@
-
+<% folder = Spree::Folder.new(id: 1, name: nil) %>
 <%= render partial: 'spree/admin/shared/modal' %>
-<%= render partial: 'spree/admin/shared/modification_content' %>
+<%= render partial: 'spree/admin/shared/folder', locals: { folder: folder } %>
+<%= render partial: 'spree/admin/shared/sidebar_link', locals: { folder: folder } %>
 
 <div  class='col-md-12'>
   <div class='row'>
