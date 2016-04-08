@@ -7,29 +7,32 @@
   <div class='row'>
     <div  id='asset_upload_buton' class='col-md-12'>
       <%= form_for [:admin, @digital_asset], html: { multipart: true, class: 'form-horizontal', id: 'new_multiple_digital_asset_form' }, remote: true, format: :js, authenticity_token: true do |f| %>
-        <%= f.hidden_field :folder_id, class: 'digital_asset_folder_id' %>
-        <% disabled = 'disabled' unless @current_folder.present? %>
-        <%= f.label :attachment, class: "btn btn-primary pull-right #{disabled}", id: 'upload_asset_button' do %>
-          <%= f.file_field :attachment, multiple: true, name: 'digital_asset[attachment]', class: 'hidden file_upload_attachment_field', disabled: disabled %>
-          <i class='glyphicon glyphicon-cloud-upload'></i>Upload Asset
-        <% end %>
+      <%= f.hidden_field :folder_id, class: 'digital_asset_folder_id' %>
+      <% disabled = 'disabled' unless @current_folder.present? %>
+      <%= f.label :attachment, class: "btn btn-primary pull-right #{disabled}", id: 'upload_asset_button' do %>
+      <%= f.file_field :attachment, multiple: true, name: 'digital_asset[attachment]', class: 'hidden file_upload_attachment_field', disabled: disabled %>
+      <i class='glyphicon glyphicon-cloud-upload'></i>Upload Asset
+      <% end %>
       <% end %>
     </div>
   </div>
 
-  <div id='folder_assets' data-current="<%= @current_folder.try(:id) %>"class='row' data-next-url='<%= digital_assets_next_page_path(@digital_assets, @current_folder) %>'>
-    <%= render partial: 'spree/admin/shared/folder', collection: @current_folder_children  %>
-    <%= render partial: 'spree/admin/shared/digital_asset', collection: @digital_assets if @current_folder %>
-  </div>
-  <div class="col-md-3 col-md-offset-9 asset-details hide">
-    <h3 id="asset-name"></h3>
-    <h3>File Size:</h3>
-    <p id='file-size'></p>
-    <h3>Added On:</h3>
-    <p id='created-date'></p>
-    <h3>Modified On:</h3>
-    <p id="modified-date"></p>
-    <h3>Related Products:</h3>
-    <p id='related-products'></p>
+  <div class="row">
+    <div id='folder_assets' data-current="<%= @current_folder.try(:id) %>"class='col-md-9' data-next-url='<%= digital_assets_next_page_path(@digital_assets, @current_folder) %>'>
+      <%= render partial: 'spree/admin/shared/folder', collection: @current_folder_children  %>
+      <%= render partial: 'spree/admin/shared/digital_asset', collection: @digital_assets if @current_folder %>
+    </div>
+    <div class="col-md-3  asset-details hide">
+      <div class="panel panel-default">
+      <div class="panel-heading"><strong id="asset-name"></strong></div>
+      <div class="panel-body">
+          <p><strong>File Size: </strong><span id='file-size'></span></p>
+          <p><strong>Added On: </strong><span id='created-date'></span></p>
+          <p><strong>Modified On: </strong><span id="modified-date"></span></p>
+          <p><strong>Related Products:</strong></p>
+          <p id='related-products' class="pl15"></p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
