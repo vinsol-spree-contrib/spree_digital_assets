@@ -23,7 +23,7 @@ module Spree
         def filter_digital_assets_by_folder
           if params[:folder_id].present? && current_folder
             @digital_assets = @digital_assets.where(folder: @current_folder)
-          end
+          end 
         end
 
         def current_folder

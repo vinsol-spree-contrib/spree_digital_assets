@@ -22,6 +22,10 @@ Folder.prototype.init = function () {
     _this.addFolder($(this));
   });
 
+  this.wrapper.on('click', '.folder-area .folder-image', function() {
+    _this.openFolder($(this));
+  });
+
   this.treeMenuContainer.on('click', 'ul.dropdown-menu a.rename-folder', function() {
     _this.renameFolder($(this));
   });
@@ -55,6 +59,7 @@ Folder.prototype.deleteFolder = function (data) {
   this.buttonGroup.filter('.open').removeClass('open').find('button').attr('aria-expanded', 'false');
   if(data['folder']) {
     this.deleteFolderInSideBar(data['folder']);
+    this.deleteFolderInCurrentSelectedFolder(data['folder']);
   } else {
     show_flash('danger', 'Please make sure folder must be empty before deletion.');
   }
@@ -91,6 +96,10 @@ Folder.prototype.createFolder = function (data) {
   var $folderElement = $('.add-sidebar-folder').clone().removeClass('add-sidebar-folder hide');
   this.addAttributes($folderElement, data);
   return $folderElement;
+}
+
+Folder.prototype.openFolder = function (folderImage) {
+  folderImage.closest('.folder-area').find('.folder-link').click();
 }
 
 Folder.prototype.addAttributes = function (element, data) {
@@ -163,6 +172,10 @@ Folder.prototype.createCenterContainerFolderArea = function (data) {
 
 Folder.prototype.deleteFolderInSideBar = function (data) {
   $('a[data-id="' + data['id'] + '"]').closest('li').remove();
+}
+
+Folder.prototype.deleteFolderInCurrentSelectedFolder = function (data) {
+  $('a[data-id="' + data['id'] + '"]').closest('.folder-area').remove();
 }
 
 Folder.prototype.addParentId = function (link) {

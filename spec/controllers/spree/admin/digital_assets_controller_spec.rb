@@ -49,7 +49,7 @@ describe Spree::Admin::DigitalAssetsController do
 
   describe 'filter_digital_assets_by_folder' do
 
-    def send_request(params={})
+    def send_request(params = {})
       get :index, params
     end
 
@@ -73,6 +73,40 @@ describe Spree::Admin::DigitalAssetsController do
       it { expect(assigns[:digital_assets]).to eq(digital_assets) }
     end
 
+  end
+
+  describe 'current_folder_children' do
+
+    def send_request(params={})
+      get :index, params
+    end
+
+    before do
+      allow(Spree::Folder).to receive(:find_by).and_return(folder)
+      allow(folder).to receive(:try).with(:children)
+    end
+
+    context 'current_folder.childrens?' do
+      before do
+        allow(folder).to receive(:try).with(:children).and_return(folders)
+      end
+      it 'assigns @current_folder_children' do
+        send_request
+        expect(assigns(:current_folder_children)).to eq(folders)
+      end
+    end
+
+    context '!current_folder.children? && root_folder.present?' do
+      before do
+        allow(Spree::Folder).to receive(:where).with(parent_id: nil).and_return(folders)
+      end
+
+      it 'assigns @current_folder_children' do
+        send_request
+        expect(assigns(:current_folder_children)).to eq(folders)
+      end
+
+    end
   end
 
   describe '#create' do

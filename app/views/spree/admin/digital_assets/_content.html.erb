@@ -1,7 +1,9 @@
-<% folder = Spree::Folder.new(id: 1, name: nil) %>
-<%= render partial: 'spree/admin/shared/modal' %>
-<%= render partial: 'spree/admin/shared/folder', locals: { folder: folder } %>
-<%= render partial: 'spree/admin/shared/sidebar_link', locals: { folder: folder } %>
+<% folder = Spree::Folder.new(id: 1) %>
+<%= render partial: 'spree/admin/shared/new_folder_form' %>
+<%= render partial: 'spree/admin/shared/folder_area', locals: { folder: folder } %>
+<li class="hide add-sidebar-folder">
+  <%= render partial: 'spree/admin/shared/folder_list_element', locals: { folder: folder } %>
+</li>
 
 <div  class='col-md-12'>
   <div class='row'>
@@ -17,7 +19,9 @@
     </div>
   </div>
   <div id='folder_assets' data-current="<%= @current_folder.try(:id) %>"class='row' data-next-url='<%= digital_assets_next_page_path(@digital_assets, @current_folder) %>'>
-    <%= render partial: 'spree/admin/shared/folder', collection: @current_folder_children  %>
+    <% @current_folder_children.each do |folder| %>
+      <%= render partial: 'spree/admin/shared/folder_area', locals: { folder: folder }  %>
+    <% end %>
     <%= render partial: 'spree/admin/shared/digital_asset', collection: @digital_assets if @current_folder %>
   </div>
 </div>
