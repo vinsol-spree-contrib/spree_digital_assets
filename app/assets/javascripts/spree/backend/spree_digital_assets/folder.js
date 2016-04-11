@@ -42,13 +42,13 @@ Folder.prototype.init = function () {
     event.preventDefault();
     $.ajax(_this.getCreateRequestParams($(this)));
   });
-
 }
 
 Folder.prototype.handleFolderTreeModification = function (data) {
   this.wrapper.find('.modal').modal('hide').data('bs.modal', null);
-  if(this.wrapper.find('a.link[data-id="' + data['id'] + '"]').length) {
-    this.wrapper.find('a[data-id="' + data['id'] + '"]').html(data['name']).attr('data-name', data['name']);
+  var $openFolderLink = this.wrapper.find('a.open-folder-link[data-id="' + data['id'] + '"]');
+  if($openFolderLink.length) {
+    $openFolderLink.html(data['name']).attr('data-name', data['name']);
   } else {
     this.addNewFolderToSideBar(data);
     this.addNewFolderToCurrentFolder(data);
@@ -58,8 +58,8 @@ Folder.prototype.handleFolderTreeModification = function (data) {
 Folder.prototype.deleteFolder = function (data) {
   this.buttonGroup.filter('.open').removeClass('open').find('button').attr('aria-expanded', 'false');
   if(data['folder']) {
-    this.deleteFolderInSideBar(data['folder']);
-    this.deleteFolderInCurrentSelectedFolder(data['folder']);
+    this.wrapper.find('a.open-folder-link[data-id="' + data['folder']['id'] + '"]')
+      .closest('.folder-link-container').remove();
   } else {
     show_flash('danger', 'Please make sure folder must be empty before deletion.');
   }
@@ -168,14 +168,6 @@ Folder.prototype.createCenterContainerFolderArea = function (data) {
     .attr('href', '/admin/digital_assets?folder_id=' + data['id'])
     .text(data['name']);
   return $folderArea;
-}
-
-Folder.prototype.deleteFolderInSideBar = function (data) {
-  this.wrapper.find('a.link[data-id="' + data['id'] + '"]').closest('li').remove();
-}
-
-Folder.prototype.deleteFolderInCurrentSelectedFolder = function (data) {
-  this.wrapper.find('a.folder-link[data-id="' + data['id'] + '"]').closest('.folder-area').remove();
 }
 
 Folder.prototype.addParentId = function (link) {
