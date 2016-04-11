@@ -26,4 +26,20 @@ Spree::Admin::BaseHelper.class_eval do
     params[:controller] == 'spree/admin/digital_assets' && params[:action] == 'index'
   end
 
+  def folder_link(folder, options)
+    if folder.persisted?
+      link_to folder.name, spree.admin_digital_assets_path(folder_id: folder.id), options
+    else
+      link_to '', '', options
+    end
+  end
+
+  def delete_folder_link(folder, options)
+    if folder.persisted?
+      link_to 'Delete', admin_folder_path(folder), options
+    else
+      link_to 'Delete', '', options
+    end
+  end
+
 end

@@ -1,8 +1,8 @@
-<div class="text-center folder-area add-central-folder <%= 'hide' unless folder.name %>">
+<div class="text-center folder-area add-central-folder">
   <div class="folder-image">
     <%= image_tag asset_path('folder_icon.png'), class: 'img-thumbnail attachment digital_asset_attachment' %>
   </div>
   <p>
-    <%= link_to folder.name, spree.admin_digital_assets_path(folder_id: folder.id), remote: true, data: { id: folder.id }, class: 'folder-link' %>
+    <%= folder_link folder, { remote: true, data: { id: folder.id }, class: 'folder-link' } %>
   </p>
 </div>

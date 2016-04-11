@@ -82,7 +82,7 @@ Folder.prototype.renameFolder = function (link) {
 Folder.prototype.addNewFolderToSideBar = function (data) {
   var $folderElement = this.createFolder(data);
   var $parent = $('a[data-id="' + data['parent_id'] + '"]').closest('li');
-  if(!$parent.length) {
+  if(!(data['parent_id'] && $parent.length)) {
     $parent = $('div.tree-menu-container');
   }
   if($parent.children('ul.tree-menu').length)
