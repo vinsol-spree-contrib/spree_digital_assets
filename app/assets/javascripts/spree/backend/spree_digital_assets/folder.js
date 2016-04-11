@@ -22,6 +22,10 @@ Folder.prototype.init = function () {
     _this.addFolder($(this));
   });
 
+  this.wrapper.on('click', '.folder-area .folder-image', function() {
+    _this.openFolder($(this));
+  });
+
   this.treeMenuContainer.on('click', 'ul.dropdown-menu a.rename-folder', function() {
     _this.renameFolder($(this));
   });
@@ -43,8 +47,8 @@ Folder.prototype.init = function () {
 
 Folder.prototype.handleFolderTreeModification = function (data) {
   this.wrapper.find('.modal').modal('hide').data('bs.modal', null);
-  if(this.wrapper.find('a[data-id="' + data['id'] + '"]').length) {
-    $('a[data-id="' + data['id'] + '"]').html(data['name']).attr('data-name', data['name']);
+  if(this.wrapper.find('a.link[data-id="' + data['id'] + '"]').length) {
+    this.wrapper.find('a[data-id="' + data['id'] + '"]').html(data['name']).attr('data-name', data['name']);
   } else {
     this.addNewFolderToSideBar(data);
     this.addNewFolderToCurrentFolder(data);
@@ -55,6 +59,7 @@ Folder.prototype.deleteFolder = function (data) {
   this.buttonGroup.filter('.open').removeClass('open').find('button').attr('aria-expanded', 'false');
   if(data['folder']) {
     this.deleteFolderInSideBar(data['folder']);
+    this.deleteFolderInCurrentSelectedFolder(data['folder']);
   } else {
     show_flash('danger', 'Please make sure folder must be empty before deletion.');
   }
@@ -76,7 +81,7 @@ Folder.prototype.renameFolder = function (link) {
 
 Folder.prototype.addNewFolderToSideBar = function (data) {
   var $folderElement = this.createFolder(data);
-  var $parent = $('a[data-id="' + data['parent_id'] + '"]').closest('li');
+  var $parent = this.treeMenuContainer.find('a.link[data-id="' + data['parent_id'] + '"]').closest('li');
   if(!$parent.length) {
     $parent = $('div.tree-menu-container');
   }
@@ -91,6 +96,10 @@ Folder.prototype.createFolder = function (data) {
   var $folderElement = $('.add-sidebar-folder').clone().removeClass('add-sidebar-folder hide');
   this.addAttributes($folderElement, data);
   return $folderElement;
+}
+
+Folder.prototype.openFolder = function (folderImage) {
+  folderImage.closest('.folder-area').find('.folder-link').click();
 }
 
 Folder.prototype.addAttributes = function (element, data) {
@@ -162,7 +171,11 @@ Folder.prototype.createCenterContainerFolderArea = function (data) {
 }
 
 Folder.prototype.deleteFolderInSideBar = function (data) {
-  $('a[data-id="' + data['id'] + '"]').closest('li').remove();
+  this.wrapper.find('a.link[data-id="' + data['id'] + '"]').closest('li').remove();
+}
+
+Folder.prototype.deleteFolderInCurrentSelectedFolder = function (data) {
+  this.wrapper.find('a.folder-link[data-id="' + data['id'] + '"]').closest('.folder-area').remove();
 }
 
 Folder.prototype.addParentId = function (link) {

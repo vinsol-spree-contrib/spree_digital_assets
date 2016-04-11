@@ -9,7 +9,7 @@
       <li>
         <div class="tree-menu-container">
           <%= build_nested_set_tree(Spree::Folder.all) do |folder| %>
-            <%= render partial: 'spree/admin/shared/sidebar_link', locals: { folder: folder } %>
+            <%= render partial: 'spree/admin/shared/folder_list_element', locals: { folder: folder } %>
           <% end %>
         </div>
       </li>
