@@ -9,11 +9,11 @@
       <li>
         <div class="tree-menu-container">
           <%= build_nested_set_tree(Spree::Folder.all) do |folder| %>
-            <%= link_to folder.name, spree.admin_digital_assets_path(folder_id: folder.id), class: 'link sidebar-default-font', remote: digital_assets_index?,
-              data: { id: folder.id } %>
+            <%= render partial: 'spree/admin/shared/folder_list_element', locals: { folder: folder } %>
           <% end %>
         </div>
       </li>
+      <a href="javascript:void(0)" data-toggle="modal" data-target="#add-subfolder" class="add-root-folder btn btn-primary">Add Folder</a>
     </ul>
   </li>
 </ul>

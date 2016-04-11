@@ -1,0 +1,8 @@
+<div class="text-center folder-area add-central-folder">
+  <div class="folder-image">
+    <%= image_tag asset_path('folder_icon.png'), class: 'img-thumbnail attachment digital_asset_attachment' %>
+  </div>
+  <p>
+    <%= folder_link folder, { remote: true, data: { id: folder.id }, class: 'folder-link' } %>
+  </p>
+</div>

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Spree::Folder, :type => :model do
 
   describe 'Associations' do
-    it { is_expected.to have_many(:digital_assets).dependent(:destroy) }
+    it { is_expected.to have_many(:digital_assets).dependent(:restrict_with_error) }
   end
 
   describe 'Valdations' do
