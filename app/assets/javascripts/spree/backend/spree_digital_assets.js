@@ -9,3 +9,4 @@
 //= require jquery-fileupload/vendor/tmpl
 //= require spree/backend/spree_digital_assets/digital_asset_uploader
 //= require spree/backend/spree_digital_assets/upload-assets
+//= require spree/backend/spree_digital_assets/folder

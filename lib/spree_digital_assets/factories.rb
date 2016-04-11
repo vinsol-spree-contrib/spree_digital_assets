@@ -3,4 +3,9 @@ FactoryGirl.define do
   #
   # Example adding this to your spec_helper will load these Factories for use:
   # require 'spree_digital_assets/factories'
+
+  factory :folder do
+    name 'Documents'
+  end
+
 end

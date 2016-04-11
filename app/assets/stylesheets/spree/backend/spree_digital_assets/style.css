@@ -55,11 +55,11 @@
   background: none !important;
 }
 
-.asset-area {
+.asset-area, .folder-area {
   display: inline-block;
   width: 170px;
   margin: 7px;
-  height: 200px;
+  height: 175px;
   padding: 15px;
   position: relative;
   box-shadow: 0 0 0 1px #e2e2e2;
@@ -72,9 +72,13 @@
   color: #fff;
 }
 
-.asset-area img {
-  max-width: 140px !important;
-  max-height: 140px !important;
+.add-root-folder {
+  width: 100%;
+}
+
+.digital-asset-image, .folder-image {
+  max-width: 140px!important;
+  max-height: 140px!important;
   margin-bottom: 5px;
 }
 
@@ -135,10 +139,6 @@ li.active .link.sidebar-default-font {
   border: 0 solid transparent !important;
 }
 
-.asset-area {
-  height: 175px;
-}
-
 .asset-area:hover ul.dropdown-menu {
   width: 30px;
   min-width: auto;
@@ -154,11 +154,6 @@ li.active .link.sidebar-default-font {
 .asset-area:hover ul.dropdown-menu > li > a {
   padding: 3px 0;
   text-align: center;
-}
-
-.asset-area img {
-  max-width: 100px!important;
-  max-height: 100px!important;
 }
 
 .select-file {
