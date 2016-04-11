@@ -26,6 +26,7 @@ describe Spree::Admin::FoldersController do
     context 'successfully created' do
 
       describe 'Methods' do
+        it { expect(Spree::Folder).to receive(:new).and_return(folder) }
         it { expect(folder).to receive(:assign_attributes).and_return(folder) }
         it { expect(folder).to receive(:save).and_return(true) }
 
@@ -73,6 +74,7 @@ describe Spree::Admin::FoldersController do
     context 'successfully updated' do
 
       describe 'Methods' do
+        it { expect(controller).to receive(:load_resource_instance).and_return(folder) }
         it { expect(folder).to receive(:update_attributes).and_return(folder) }
 
         after { send_request(format: :json) }
@@ -120,6 +122,7 @@ describe Spree::Admin::FoldersController do
       context 'successfully destroyed' do
 
         describe 'Methods' do
+          it { expect(controller).to receive(:load_resource_instance).and_return(folder) }
           it { expect(folder).to receive(:destroy).and_return(true) }
 
           after { send_request(format: :json) }

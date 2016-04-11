@@ -25,59 +25,28 @@ describe Spree::Admin::DigitalAssetsController do
       get :index, params
     end
 
-    context 'when folder_id present?' do
-      before do
-        allow(Spree::Folder).to receive(:find_by).with(id: folder_id).and_return(folder)
-        allow(digital_assets).to receive(:where).and_return(digital_assets)
-        allow(folder).to receive(:id).and_return(folder_id)
-      end
-
-      describe 'Methods' do
-        it { expect(digital_assets).to receive(:page).and_return(digital_assets) }
-        it { expect(digital_assets).to receive(:order).with(created_at: :desc).and_return(digital_assets) }
-
-        after { send_request(folder_id: folder_id) }
-      end
-
-      describe 'Response' do
-        before { send_request(folder_id: folder_id) }
-
-        it { is_expected.to render_template :index }
-      end
-
-      describe 'Assignment' do
-        before { send_request(folder_id: folder_id) }
-
-        it { expect(assigns[:digital_assets]).to eq(digital_assets) }
-      end
+    before do
+      allow(digital_assets).to receive(:where).and_return(digital_assets)
     end
 
-    context 'when folder_id not present?' do
-      before do
-        allow(Spree::Folder).to receive(:find_by).with(id: nil)
-        allow(digital_assets).to receive(:where).and_return(digital_assets)
-      end
+    describe 'Methods' do
+      it { expect(digital_assets).to receive(:page).and_return(digital_assets) }
+      it { expect(digital_assets).to receive(:order).with(created_at: :desc).and_return(digital_assets) }
 
-      describe 'Methods' do
-        it { expect(digital_assets).to receive(:page).and_return(digital_assets) }
-        it { expect(digital_assets).to receive(:order).with(created_at: :desc).and_return(digital_assets) }
-
-        after { send_request }
-      end
-
-      describe 'Response' do
-        before { send_request }
-
-        it { is_expected.to render_template :index }
-      end
-
-      describe 'Assignment' do
-        before { send_request }
-
-        it { expect(assigns[:digital_assets]).to eq(digital_assets) }
-      end
+      after { send_request(folder_id: folder_id) }
     end
 
+    describe 'Response' do
+      before { send_request(folder_id: folder_id) }
+
+      it { is_expected.to render_template :index }
+    end
+
+    describe 'Assignment' do
+      before { send_request(folder_id: folder_id) }
+
+      it { expect(assigns[:digital_assets]).to eq(digital_assets) }
+    end
   end
 
   describe 'filter_digital_assets_by_folder' do
@@ -86,47 +55,26 @@ describe Spree::Admin::DigitalAssetsController do
       get :index, params
     end
 
-    context 'when folder.id present?' do
-      before do
-        allow(Spree::Folder).to receive(:find_by).with(id: folder_id).and_return(folder)
-        allow(digital_assets).to receive(:where).and_return(digital_assets)
-        allow(folder).to receive(:id).and_return(folder_id)
-      end
-
-      describe 'Methods' do
-        it { expect(digital_assets).to receive(:where).with(folder: folder).and_return(digital_assets) }
-
-        after { send_request(folder_id: folder_id) }
-      end
-
-      describe 'Assignment' do
-        before { send_request(folder_id: folder_id) }
-
-        it { expect(assigns[:current_folder]).to eq(folder) }
-        it { expect(assigns[:digital_assets]).to eq(digital_assets) }
-      end
+    before do
+      allow(Spree::Folder).to receive(:find_by).with(id: folder_id).and_return(folder)
+      allow(digital_assets).to receive(:where).and_return(digital_assets)
+      allow(folder).to receive(:id).and_return(folder_id)
     end
 
-    context 'when folder.id not present?' do
-      before do
-        allow(Spree::Folder).to receive(:find_by).with(id: nil)
-        allow(digital_assets).to receive(:where).and_return(digital_assets)
-      end
+    describe 'Methods' do
+      it { expect(Spree::Folder).to receive(:find_by).with(id: folder_id).and_return(folder) }
+      it { expect(digital_assets).to receive(:where).with(folder: folder).and_return(digital_assets) }
+      it { expect(folder).to receive(:id).and_return(folder_id) }
 
-      describe 'Methods' do
-        it { expect(digital_assets).to receive(:where).with(folder: nil).and_return(digital_assets) }
-
-        after { send_request }
-      end
-      
-      describe 'Assignment' do
-        before { send_request }
-
-        it { expect(assigns[:current_folder]).to be_nil }
-        it { expect(assigns[:digital_assets]).to eq(digital_assets) }
-      end
+      after { send_request(folder_id: folder_id) }
     end
 
+    describe 'Assignment' do
+      before { send_request(folder_id: folder_id) }
+
+      it { expect(assigns[:current_folder]).to eq(folder) }
+      it { expect(assigns[:digital_assets]).to eq(digital_assets) }
+    end
 
   end
 
@@ -139,7 +87,7 @@ describe Spree::Admin::DigitalAssetsController do
     before do
       allow(Spree::Folder).to receive(:find_by).with(id: folder_id).and_return(folder)
       allow(digital_assets).to receive(:where).and_return(digital_assets)
-      allow(folder).to receive(:children).and_return(children)
+      allow(folder).to receive(:try).with(:children).and_return(children)
       allow(folder).to receive(:id).and_return(folder_id)
       allow(controller).to receive(:build_digital_asset).and_return(true)
     end
@@ -147,7 +95,10 @@ describe Spree::Admin::DigitalAssetsController do
     context 'when folder.id present?' do
 
       describe 'Methods' do
+        it { expect(Spree::Folder).to receive(:find_by).with(id: folder_id).and_return(folder) }
+        it { expect(digital_assets).to receive(:where).and_return(digital_assets) }
         it { expect(folder).to receive(:try).with(:children).and_return(children) }
+        it { expect(controller).to receive(:build_digital_asset).and_return(true) }
 
         after { send_request(folder_id: folder_id) }
       end
@@ -156,6 +107,7 @@ describe Spree::Admin::DigitalAssetsController do
         send_request(folder_id: folder_id)
         expect(assigns(:current_folder_children)).to eq(children)
       end
+
     end
 
     context 'when folder.id not present?' do
@@ -166,6 +118,8 @@ describe Spree::Admin::DigitalAssetsController do
 
       describe 'Methods' do
         it { expect(Spree::Folder).to receive(:where).with(parent_id: nil).and_return(children) }
+        it { expect(digital_assets).to receive(:where).and_return(digital_assets) }
+        it { expect(controller).to receive(:build_digital_asset).and_return(true) }
 
         after { send_request }
       end

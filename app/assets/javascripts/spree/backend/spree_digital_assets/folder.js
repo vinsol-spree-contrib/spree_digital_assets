@@ -47,8 +47,8 @@ Folder.prototype.init = function () {
 
 Folder.prototype.handleFolderTreeModification = function (data) {
   this.wrapper.find('.modal').modal('hide').data('bs.modal', null);
-  if(this.wrapper.find('a[data-id="' + data['id'] + '"]').length) {
-    $('a[data-id="' + data['id'] + '"]').html(data['name']).attr('data-name', data['name']);
+  if(this.wrapper.find('a.link[data-id="' + data['id'] + '"]').length) {
+    this.wrapper.find('a[data-id="' + data['id'] + '"]').html(data['name']).attr('data-name', data['name']);
   } else {
     this.addNewFolderToSideBar(data);
     this.addNewFolderToCurrentFolder(data);
@@ -81,8 +81,8 @@ Folder.prototype.renameFolder = function (link) {
 
 Folder.prototype.addNewFolderToSideBar = function (data) {
   var $folderElement = this.createFolder(data);
-  var $parent = $('a[data-id="' + data['parent_id'] + '"]').closest('li');
-  if(!(data['parent_id'] && $parent.length)) {
+  var $parent = this.treeMenuContainer.find('a.link[data-id="' + data['parent_id'] + '"]').closest('li');
+  if(!$parent.length) {
     $parent = $('div.tree-menu-container');
   }
   if($parent.children('ul.tree-menu').length)
@@ -171,11 +171,11 @@ Folder.prototype.createCenterContainerFolderArea = function (data) {
 }
 
 Folder.prototype.deleteFolderInSideBar = function (data) {
-  $('a[data-id="' + data['id'] + '"]').closest('li').remove();
+  this.wrapper.find('a.link[data-id="' + data['id'] + '"]').closest('li').remove();
 }
 
 Folder.prototype.deleteFolderInCurrentSelectedFolder = function (data) {
-  $('a[data-id="' + data['id'] + '"]').closest('.folder-area').remove();
+  this.wrapper.find('a.folder-link[data-id="' + data['id'] + '"]').closest('.folder-area').remove();
 }
 
 Folder.prototype.addParentId = function (link) {
