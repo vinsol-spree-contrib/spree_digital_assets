@@ -1,7 +1,7 @@
 <div class="text-center asset-area">
   <div class="digital-assets-image">
     <%= image_tag(digital_asset.attachment.url(:small), class: 'img-thumbnail attachment digital_asset_attachment' ,
-      data: { id: digital_asset.id, name: digital_asset.name, size: number_to_human_size(digital_asset.attachment_file_size), created_on: digital_asset.created_at.strftime("%d %b, %Y"), modified_on: digital_asset.updated_at.strftime("%d %b, %Y"), related_products: try(:related_products, digital_asset)  }, onerror: "this.onerror=null;this.src='#{asset_path('default_file_icon.png')}';")  %>
+      data: { id: digital_asset.id, name: digital_asset.name, size: number_to_human_size(digital_asset.attachment_file_size), created_on: digital_asset.created_at.to_date.to_formatted_s(:long), modified_on: digital_asset.updated_at.to_date.to_formatted_s(:long), related_products: related_products(digital_asset)  }, onerror: "this.onerror=null;this.src='#{asset_path('default_file_icon.png')}';")  %>
   </div>
   <p>
     <%= digital_asset.name.truncate(30) %>
