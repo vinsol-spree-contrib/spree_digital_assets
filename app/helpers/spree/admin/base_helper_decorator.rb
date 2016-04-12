@@ -23,7 +23,15 @@ Spree::Admin::BaseHelper.class_eval do
   end
 
   def digital_assets_index?
-    params[:controller] == 'spree/admin/digital_assets' && params[:action] == 'index'
+    index_action? && digital_assets_controller?
+  end
+
+  def digital_assets_controller?
+    controller_name == 'digital_assets'
+  end
+
+  def index_action?
+    action_name == 'index'
   end
 
   def folder_link(folder, options)
@@ -39,6 +47,23 @@ Spree::Admin::BaseHelper.class_eval do
       link_to 'Delete', admin_folder_path(folder), options
     else
       link_to 'Delete', '', options
+    end
+  end
+
+  def asset_details(digital_asset)
+    { 
+      id: digital_asset.id,
+      name: digital_asset.name,
+      size: number_to_human_size(digital_asset.attachment_file_size), 
+      created_on: digital_asset.created_at.to_date.to_formatted_s(:long), 
+      modified_on: digital_asset.updated_at.to_date.to_formatted_s(:long), 
+      related_products: related_products(digital_asset)
+    }
+  end
+
+  def related_products(digital_asset)
+    digital_asset.assets.map do |asset|
+      { parameterize_name: asset.viewable.product.name.parameterize, human_readable_name: asset.viewable.product.name }
     end
   end
 
