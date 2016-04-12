@@ -1,3 +1,9 @@
+/*common classes*/
+.pl15 {
+  padding-left: 15px;
+}
+
+/*tree menu class start*/
 .tree-menu-container {
   border-bottom: solid 1px #eee;
   border-right: solid 1px #eee;
@@ -54,6 +60,8 @@
 .tree-menu-container .tree-menu > li > .btn-group .btn {
   background: none !important;
 }
+/*tree menu class end*/
+
 
 .asset-area, .folder-area {
   display: inline-block;
