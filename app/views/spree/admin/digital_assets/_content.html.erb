@@ -1,12 +1,3 @@
-<% folder = Spree::Folder.new %>
-<%= render partial: 'spree/admin/shared/new_folder_form' %>
-<div class="hide">
-  <%= render partial: 'spree/admin/shared/folder_area', locals: { folder: folder } %>
-  <li class="folder-link-container add-sidebar-folder">
-    <%= render partial: 'spree/admin/shared/folder_list_element', locals: { folder: folder } %>
-  </li>
-</div>
-
 <div  class='col-md-12'>
   <div class='row'>
     <div  id='asset_upload_buton' class='col-md-12'>

@@ -5,6 +5,7 @@ var Folder = function (selectors) {
   this.wrapper = selectors.wrapper;
   this.body = selectors.body;
   this.buttonGroup = selectors.buttonGroup;
+  this.modificationContent = selectors.modificationContent;
 }
 
 Folder.prototype.init = function () {
@@ -162,7 +163,7 @@ Folder.prototype.addNewFolderToCurrentFolder = function (data) {
 }
 
 Folder.prototype.createCenterContainerFolderArea = function (data) {
-  var $folderArea = $('.add-central-folder').find('.folder-area').clone();
+  var $folderArea = this.modificationContent.find('.folder-area').clone();
   $folderArea.find('a.folder-link')
     .attr('data-id', data['id'])
     .attr('href', '/admin/digital_assets?folder_id=' + data['id'])
@@ -208,7 +209,8 @@ $(function () {
     treeMenuContainer: $('div.tree-menu-container'),
     wrapper: $('#wrapper'),
     body: $('body'),
-    buttonGroup: $('.btn-group')
+    buttonGroup: $('.btn-group'),
+    modificationContent: $('.modification-content')
   }
   var folder = new Folder(selectors);
   folder.init();
