@@ -9,7 +9,8 @@ function hide_loader(){
 
 $(document).ready(function() {
   $('.tree-menu-container').on('click', '.toggle_list_menu', function() {
-    $(this).parent().find('.tree-menu').slideToggle();
+    $(this).toggleClass('glyphicon-chevron-right glyphicon-chevron-down');
+    $(this).siblings('.tree-menu').slideToggle();
   });
 
   $("body").on('click', '#main-sidebar #folder_list a[data-remote=true]', function(){
