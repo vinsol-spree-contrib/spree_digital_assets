@@ -1,4 +1,4 @@
-if($('.tree-menu .active a').data('id') == <%= @digital_asset.folder_id %>){
+if($('.tree-menu .active a.open-folder-link').data('id') == <%= @digital_asset.folder_id %>){
   var $folder_assets = $('#folder_assets');
   $folder_assets.prepend("<%= j render partial: 'spree/admin/shared/digital_asset', object: @digital_asset %>");
   $('.with-tip').tooltip();
