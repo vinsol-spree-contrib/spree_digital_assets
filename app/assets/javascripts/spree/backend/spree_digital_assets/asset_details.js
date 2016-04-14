@@ -25,8 +25,8 @@ AssetDetails.prototype.setRelatedProducts = function($assetDetailsArea, data) {
     $relatedProducts.html('None');
   }	
   $.each(data, function(index, product) {
-    $relatedProducts.append($('<a>').attr('href', '/admin/products/' + product.parameterize_name + '/edit')
-      .text(product.human_readable_name).css('display', 'block'));
+    $relatedProducts.append($('<a>').attr('href', '/admin/products/' + product.slug + '/edit')
+      .text(product.name).css('display', 'block'));
   });
 };
 

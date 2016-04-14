@@ -64,8 +64,8 @@ Spree::Admin::BaseHelper.class_eval do
   def related_products(digital_asset)
     products = {}
     digital_asset.assets.each do |asset|
-      name = asset.viewable.product.name
-      products[name.parameterize] = { parameterize_name: name.parameterize, human_readable_name: name }
+      product = asset.viewable.product
+      products[product.id] = { slug: product.slug, name: product.name }
     end
     products.values
   end
