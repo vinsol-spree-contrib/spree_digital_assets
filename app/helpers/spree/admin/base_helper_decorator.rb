@@ -62,9 +62,12 @@ Spree::Admin::BaseHelper.class_eval do
   end
 
   def related_products(digital_asset)
-    digital_asset.assets.map do |asset|
-      { parameterize_name: asset.viewable.product.name.parameterize, human_readable_name: asset.viewable.product.name }
-    end.uniq
+    products = {}
+    digital_asset.assets.each do |asset|
+      name = asset.viewable.product.name
+      products[name.parameterize] = { parameterize_name: name.parameterize, human_readable_name: name }
+    end
+    products.values
   end
 
 end

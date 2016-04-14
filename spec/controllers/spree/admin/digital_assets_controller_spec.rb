@@ -27,11 +27,13 @@ describe Spree::Admin::DigitalAssetsController do
 
     before do
       allow(digital_assets).to receive(:where).and_return(digital_assets)
+      allow(digital_assets).to receive(:includes).and_return(digital_assets)
     end
 
     describe 'Methods' do
-      it { expect(digital_assets).to receive(:page).and_return(digital_assets) }
       it { expect(digital_assets).to receive(:order).with(created_at: :desc).and_return(digital_assets) }
+      it { expect(digital_assets).to receive(:page).and_return(digital_assets) }
+      it { expect(digital_assets).to receive(:includes).with(assets: { viewable: :product }).and_return(digital_assets) }
 
       after { send_request(folder_id: folder_id) }
     end
@@ -59,6 +61,7 @@ describe Spree::Admin::DigitalAssetsController do
       allow(Spree::Folder).to receive(:find_by).with(id: folder_id).and_return(folder)
       allow(digital_assets).to receive(:where).and_return(digital_assets)
       allow(folder).to receive(:id).and_return(folder_id)
+      allow(digital_assets).to receive(:includes).and_return(digital_assets)
     end
 
     describe 'Methods' do
@@ -90,6 +93,7 @@ describe Spree::Admin::DigitalAssetsController do
       allow(folder).to receive(:try).with(:children).and_return(children)
       allow(folder).to receive(:id).and_return(folder_id)
       allow(controller).to receive(:build_digital_asset).and_return(true)
+      allow(digital_assets).to receive(:includes).and_return(digital_assets)
     end
 
     context 'when folder.id present?' do

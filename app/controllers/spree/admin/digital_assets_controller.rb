@@ -7,6 +7,7 @@ module Spree
 
       def index
         @digital_assets = @digital_assets.order(created_at: :desc).page(params[:page])
+        @digital_assets = @digital_assets.includes(assets: { viewable: :product })
         render 'view_more' if params[:view_more].present?
       end
 
