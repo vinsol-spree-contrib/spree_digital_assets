@@ -80,14 +80,16 @@
   color: #fff;
 }
 
-.add-root-folder {
-  width: 100%;
-}
-
 .digital-asset-image, .folder-image {
   max-width: 140px!important;
   max-height: 140px!important;
   margin-bottom: 5px;
+}
+
+.folder-icon {
+  font-size: 90px;
+  color: #555555;
+  margin-bottom: 10px;
 }
 
 .asset-area .corner-menu {

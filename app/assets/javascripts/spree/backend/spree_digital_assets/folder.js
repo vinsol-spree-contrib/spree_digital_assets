@@ -86,6 +86,7 @@ Folder.prototype.addNewFolderToSideBar = function (data) {
   if(!$parent.length) {
     $parent = $('div.tree-menu-container');
   }
+  $parent.children('.toggle_list_menu').removeClass('glyphicon-chevron-right').addClass('glyphicon-chevron-down');
   if($parent.children('ul.tree-menu').length)
     $parent.children('ul.tree-menu').append($folderElement);
   else
