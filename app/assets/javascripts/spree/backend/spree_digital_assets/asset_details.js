@@ -1,4 +1,4 @@
-var $AssetDetails;
+var $assetDetails;
 
 function AssetDetails(selectors) {
   this.wrapper = selectors.wrapper;
@@ -13,8 +13,9 @@ AssetDetails.prototype.init = function() {
   });
 };
 
-AssetDetails.prototype.showFileGlyphicon = function($img) {
-  $img.toggleClass('hide').siblings('.file-icon').toggleClass('hide');
+AssetDetails.prototype.showFileGlyphicon = function(img) {
+  img.onerror = null;
+  $(img).toggleClass('hide').siblings('.file-icon').toggleClass('hide');
 };
 
 AssetDetails.prototype.setAttributes = function($assetDetailsArea, $img) {
@@ -40,7 +41,6 @@ $(function () {
   var selectors = {
     wrapper: $('#wrapper')
   };
-  var assetDetails = new AssetDetails(selectors);  
-  $AssetDetails = assetDetails;
-  assetDetails.init();
+  $assetDetails = new AssetDetails(selectors);
+  $assetDetails.init();
 });
