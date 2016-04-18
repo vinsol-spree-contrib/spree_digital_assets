@@ -1,6 +1,5 @@
 // Placeholder manifest file.
 // the installer will append this file to the app vendored assets here: vendor/assets/javascripts/spree/backend/all.js'
-
 //= require jquery.remotipart
 //= require spree/backend/spree_digital_assets/associate_asset_modal
 //= require spree/backend/spree_digital_assets/delete_digital_asset
