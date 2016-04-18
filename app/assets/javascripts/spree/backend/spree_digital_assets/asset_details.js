@@ -1,3 +1,5 @@
+var $AssetDetails;
+
 function AssetDetails(selectors) {
   this.wrapper = selectors.wrapper;
 };
@@ -9,6 +11,10 @@ AssetDetails.prototype.init = function() {
     _this.setAttributes($assetDetailsArea, $(this).find('img'));
     $assetDetailsArea.removeClass('hide');
   });
+};
+
+AssetDetails.prototype.showFileGlyphicon = function($img) {
+  $img.toggleClass('hide').siblings('.file-icon').toggleClass('hide');
 };
 
 AssetDetails.prototype.setAttributes = function($assetDetailsArea, $img) {
@@ -34,6 +40,7 @@ $(function () {
   var selectors = {
     wrapper: $('#wrapper')
   };
-  var assetDetails = new AssetDetails(selectors);
+  var assetDetails = new AssetDetails(selectors);  
+  $AssetDetails = assetDetails;
   assetDetails.init();
 });
