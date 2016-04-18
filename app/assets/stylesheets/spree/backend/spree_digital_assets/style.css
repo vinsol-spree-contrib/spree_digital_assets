@@ -83,13 +83,11 @@
 .digital-asset-image, .folder-image {
   max-width: 140px!important;
   max-height: 140px!important;
-  margin-bottom: 5px;
 }
 
-.folder-icon {
-  font-size: 90px;
+.folder-icon, .file-icon {
+  font-size: 70px;
   color: #555555;
-  margin-bottom: 10px;
 }
 
 .asset-area .corner-menu {
@@ -117,7 +115,7 @@
   right: 0;
 }
 
-.digital-assets-image {
+.digital-assets-image, .folder-image {
   min-height: 115px;
 }
 
