@@ -9,6 +9,7 @@ describe Spree::Admin::DigitalAssetsController do
   let(:user) { mock_model(Spree::User) }
   let(:digital_asset) { mock_model(Spree::DigitalAsset) }
   let(:folder_id) { '1' }
+  let(:digital_asset_folder_path) { '' }
 
   before do
     allow(controller).to receive(:spree_current_user).and_return(user)
@@ -136,6 +137,35 @@ describe Spree::Admin::DigitalAssetsController do
 
   end
 
+  describe 'build_digital_asset' do
+
+    def send_request(params = {})
+      get :index, params
+    end
+
+    before do
+      allow(Spree::Folder).to receive(:find_by).with(id: folder_id).and_return(folder)
+      allow(digital_assets).to receive(:where).and_return(digital_assets)
+      allow(folder).to receive(:id).and_return(folder_id)
+      allow(Spree::DigitalAsset).to receive(:new).with(folder_id: folder_id).and_return(digital_asset)
+      allow(digital_assets).to receive(:includes).and_return(digital_assets)
+    end
+
+    describe 'Methods' do
+      it { expect(Spree::Folder).to receive(:find_by).with(id: folder_id).and_return(folder) }
+      it { expect(digital_assets).to receive(:where).and_return(digital_assets) }
+      it { expect(Spree::DigitalAsset).to receive(:new).with(folder_id: folder_id).and_return(digital_asset) }
+
+      after { send_request(folder_id: folder_id) }
+    end
+
+    it 'assigns @digital_asset' do
+      send_request(folder_id: folder_id)
+      expect(assigns(:digital_asset)).to eq(digital_asset)
+    end
+
+  end
+
   describe '#create' do
     def send_request(params={})
       post :create, params
@@ -163,6 +193,28 @@ describe Spree::Admin::DigitalAssetsController do
 
         it { is_expected.to respond_with 422 }
       end
+    end
+  end
+
+  describe '#update' do
+    def send_request(params={})
+      spree_put :update, params.merge(id: digital_asset.id)
+    end
+
+    before do
+      allow(controller).to receive(:load_resource_instance).and_return(digital_asset)
+      allow(digital_asset).to receive(:update_attributes).and_return(true)
+      allow(controller).to receive(:collection_url).with(folder_id: digital_asset.folder_id).and_return(digital_asset_folder_path)
+    end
+
+    context 'successfully updated' do
+      describe 'Response' do
+        before { send_request }
+
+        it { is_expected.to respond_with 302 }
+        it { expect(response).to redirect_to(digital_asset_folder_path) }
+      end
+
     end
   end
 
