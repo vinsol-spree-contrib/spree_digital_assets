@@ -4,6 +4,7 @@ describe Spree::DigitalAsset, :type => :model do
 
   let(:folder) { Spree::Folder.create(name: 'folder') }
   let(:digital_asset) { Spree::DigitalAsset.new(folder: folder, attachment: File.new(Spree::Core::Engine.root + "spec/fixtures" + 'thinking-cat.jpg')) }
+  let(:pdf_digital_asset) { Spree::DigitalAsset.new(folder: folder, attachment: File.new(Spree::Core::Engine.root + 'spree_core.gemspec')) }
 
   it { is_expected.to have_attached_file(:attachment) }
 
@@ -44,6 +45,16 @@ describe Spree::DigitalAsset, :type => :model do
       before { digital_asset.name = 'test' }
 
       it { expect { digital_asset.send(:assign_default_name) }.not_to change { digital_asset.name } }
+    end
+  end
+
+  describe '#image?' do
+    context 'image present' do
+      it { expect(digital_asset.send(:image?)).to be true }
+    end
+
+    context 'image not present' do
+      it { expect(pdf_digital_asset.send(:image?)).to be false }
     end
   end
 
