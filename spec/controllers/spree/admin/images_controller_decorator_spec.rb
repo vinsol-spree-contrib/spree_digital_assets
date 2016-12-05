@@ -22,7 +22,7 @@ describe Spree::Admin::ImagesController do
   end
 
   def send_request
-    get :new, product_id: 1
+    get :new, { params: { product_id: 1 } }
   end
 
   before do

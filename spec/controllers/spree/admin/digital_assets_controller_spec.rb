@@ -23,7 +23,7 @@ describe Spree::Admin::DigitalAssetsController do
 
   describe '#index' do
     def send_request(params={})
-      get :index, params
+      get :index, { params: params }
     end
 
     before do
@@ -55,7 +55,7 @@ describe Spree::Admin::DigitalAssetsController do
   describe 'filter_digital_assets_by_folder' do
 
     def send_request(params = {})
-      get :index, params
+      get :index, { params: params }
     end
 
     before do
@@ -85,7 +85,7 @@ describe Spree::Admin::DigitalAssetsController do
   describe 'current_folder_children' do
 
     def send_request(params = {})
-      get :index, params
+      get :index, { params: params }
     end
 
     before do
@@ -140,7 +140,7 @@ describe Spree::Admin::DigitalAssetsController do
   describe 'build_digital_asset' do
 
     def send_request(params = {})
-      get :index, params
+      get :index, { params: params }
     end
 
     before do
@@ -168,7 +168,7 @@ describe Spree::Admin::DigitalAssetsController do
 
   describe '#create' do
     def send_request(params={})
-      post :create, params
+      post :create, { params: params }
     end
 
     before do

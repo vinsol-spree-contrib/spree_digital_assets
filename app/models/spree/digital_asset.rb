@@ -3,7 +3,7 @@ SUPPORTED_IMAGES_REGEX = Regexp.new('\A(' + SUPPORTED_IMAGE_FORMATS.join('|') + 
 
 module Spree
   class DigitalAsset < Spree::Base
-    belongs_to :folder, required: true
+    belongs_to :folder
     has_many :assets
 
     has_attached_file :attachment, styles: { small: '100x100>' },
@@ -12,7 +12,7 @@ module Spree
 
     do_not_validate_attachment_file_type :attachment
 
-    validates :name, :attachment, presence: true
+    validates :name, :attachment, :folder, presence: true
 
     before_post_process :image?
     before_validation :assign_default_name, on: :create
