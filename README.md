@@ -1,4 +1,4 @@
-SpreeDigitalAssets
+[SpreeDigitalAssets](http://vinsol.com/spreecommerce-digital-asset-management)
 ==================
 
 This gem allows you to have a central repository of the assets. The assets can be uploaded well
@@ -22,6 +22,7 @@ and can then be used in different products.
 
 * Associate assets while creating product / variant
 
+For more features or usage manual go [here](http://vinsol.com/spreecommerce-digital-asset-management).
 
 Installation
 ------------
@@ -47,7 +48,7 @@ First bundle your dependencies, then run `rake`. `rake` will default to building
 
 ```shell
 bundle
-bundle exec rake
+bundle exec rspec spec
 ```
 
 When testing your applications integration with this extension you may use it's factories.
@@ -57,4 +58,9 @@ Simply add this require statement to your spec_helper:
 require 'spree_digital_assets/factories'
 ```
 
-Copyright (c) 2016 [vinsol], released under the New BSD License
+Credits
+-------
+
+[![vinsol.com: Ruby on Rails, iOS and Android developers](http://vinsol.com/vin_logo.png "Ruby on Rails, iOS and Android developers")](http://vinsol.com)
+
+Copyright (c) 2016 [vinsol.com](http://vinsol.com "Ruby on Rails, iOS and Android developers"), released under the New MIT License
