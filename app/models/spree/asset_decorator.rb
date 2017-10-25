@@ -11,6 +11,7 @@ Spree::Asset.class_eval do
         self.attachment = digital_asset.attachment
       else
         errors.add(:base, 'invalid digital asset id passed')
+        throw(:abort)
       end
     end
 
