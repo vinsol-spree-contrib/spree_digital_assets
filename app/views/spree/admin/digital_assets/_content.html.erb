@@ -6,7 +6,7 @@
         <% disabled = 'disabled' unless @current_folder.present? %>
         <%= f.label :attachment, class: "btn btn-primary pull-right #{disabled}", id: 'upload_asset_button' do %>
           <%= f.file_field :attachment, multiple: true, name: 'digital_asset[attachment]', class: 'hidden file_upload_attachment_field', disabled: disabled %>
-          <i class='glyphicon glyphicon-cloud-upload'></i>Upload Asset
+          <i class='glyphicon glyphicon-cloud-upload'></i><%= Spree.t(:upload_asset) %>
         <% end %>
       <% end %>
     </div>

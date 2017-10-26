@@ -3,6 +3,9 @@
 
 en:
   spree:
-    folders: 
+    asset_uploader: Asset Uploader
+    associated_products: Associated Products
+    folders:
       success: 'Folder has been deleted successfully'
       failure: '%{error_messages}'
+    upload_asset: Upload Asset

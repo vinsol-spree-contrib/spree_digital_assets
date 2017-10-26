@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Spree::Asset, :type => :model do
+describe Spree::Asset, type: :model do
 
   let(:folder) { Spree::Folder.create(name: 'folder') }
   let(:digital_asset) { Spree::DigitalAsset.create!(name: 'abc', folder: folder, attachment: File.new(Spree::Core::Engine.root + "spec/fixtures" + 'thinking-cat.jpg')) }

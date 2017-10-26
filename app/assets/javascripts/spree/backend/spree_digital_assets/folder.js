@@ -17,7 +17,7 @@ Folder.prototype.init = function () {
 
   this.treeMenuContainer.on('click', 'ul.dropdown-menu a.add-folder', function() {
     _this.addFolder($(this));
-  }); 
+  });
 
   this.wrapper.on('click', 'a.add-root-folder', function() {
     _this.addFolder($(this));

@@ -6,7 +6,7 @@ Spree::Asset.class_eval do
 
   private
     def build_from_digital_asset
-      digital_asset = Spree::DigitalAsset.find_by(id: digital_asset_id)
+      digital_asset = Spree::DigitalAsset.approved.find_by(id: digital_asset_id)
       if digital_asset.present?
         self.attachment = digital_asset.attachment
       else

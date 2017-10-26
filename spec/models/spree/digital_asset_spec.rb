@@ -1,10 +1,11 @@
 require 'spec_helper'
 
-describe Spree::DigitalAsset, :type => :model do
+describe Spree::DigitalAsset, type: :model do
 
   let(:folder) { Spree::Folder.create(name: 'folder') }
-  let(:digital_asset) { Spree::DigitalAsset.new(folder: folder, attachment: File.new(Spree::Core::Engine.root + "spec/fixtures" + 'thinking-cat.jpg')) }
+  let(:digital_asset) { Spree::DigitalAsset.new(folder: folder, attachment: File.new(Spree::Core::Engine.root + "spec/fixtures" + 'thinking-cat.jpg'), approved: true) }
   let(:pdf_digital_asset) { Spree::DigitalAsset.new(folder: folder, attachment: File.new(Spree::Core::Engine.root + 'spree_core.gemspec')) }
+  let(:not_approved_digital_asset) { Spree::DigitalAsset.new(folder: folder, attachment: File.new(Spree::Core::Engine.root + "spec/fixtures" + 'thinking-cat.jpg'), approved: false) }
 
   it { is_expected.to have_attached_file(:attachment) }
 
@@ -33,6 +34,23 @@ describe Spree::DigitalAsset, :type => :model do
 
         it { expect { digital_asset.valid? }.not_to change { digital_asset.name } }
       end
+    end
+  end
+
+  describe 'Scopes' do
+    before do
+      digital_asset.save
+      not_approved_digital_asset.save
+    end
+
+    describe '#approved' do
+      it { expect(Spree::DigitalAsset.approved).to include(digital_asset) }
+      it { expect(Spree::DigitalAsset.approved).not_to include(not_approved_digital_asset) }
+    end
+
+    describe '#not-approved' do
+      it { expect(Spree::DigitalAsset.not_approved).to include(not_approved_digital_asset) }
+      it { expect(Spree::DigitalAsset.not_approved).not_to include(digital_asset) }
     end
   end
 

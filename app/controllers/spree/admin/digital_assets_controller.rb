@@ -6,8 +6,13 @@ module Spree
       before_action :filter_digital_assets_by_folder, :current_folder_children, :build_digital_asset, only: :index
 
       def index
-        @digital_assets = @digital_assets.includes(assets: { viewable: :product }).order(created_at: :desc).page(params[:page])
-        render 'view_more' if params[:view_more].present?
+        digital_assets = @digital_assets.includes(assets: { viewable: :product })
+        if params[:view_more].present?
+          @digital_assets = digital_assets.approved.order(created_at: :desc).page(params[:page])
+          render 'view_more'
+        else
+          @digital_assets = digital_assets.order(created_at: :desc).page(params[:page])
+        end
       end
 
       def create
