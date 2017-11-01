@@ -75,6 +75,16 @@
   vertical-align: top;
 }
 
+.asset-area.approved {
+  border-style: solid;
+  border-color: green;
+}
+
+.asset-area.not-approved {
+  border-style: solid;
+  border-color: red;
+}
+
 .asset-area.active {
   background-color: #478DC1;
   color: #fff;

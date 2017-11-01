@@ -1,4 +1,4 @@
-<div class="text-center asset-area">
+<div class="text-center asset-area <%= digital_asset.approved? ? 'approved' : 'not-approved' %>">
   <div class="digital-assets-image">
     <%= image_tag(digital_asset.attachment.url(:small), class: 'img-thumbnail attachment digital_asset_attachment' ,
       data: asset_details(digital_asset), onerror: "$assetDetails.showFileGlyphicon(this)") %>

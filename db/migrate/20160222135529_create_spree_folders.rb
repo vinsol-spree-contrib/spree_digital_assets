@@ -1,4 +1,4 @@
-class CreateSpreeFolders < ActiveRecord::Migration
+class CreateSpreeFolders < SpreeExtension::Migration[4.2]
   def change
     create_table :spree_folders do |t|
       t.string :name

@@ -5,7 +5,7 @@
 <div class="row">
   <div class="col-md-12">
     <%= form_for [:admin, @digital_asset], html: { multipart: true, class: 'form-horizontal' }, authenticity_token: true do |f| %>
-      <%= render :partial => 'form', locals: { f: f } %>
+      <%= render partial: 'form', locals: { f: f } %>
       <div class="form-group">
         <div class="col-md-offset-4 col-md-6">
           <%= button Spree.t('actions.update'), 'save' %>
@@ -16,3 +16,17 @@
     <% end %>
   </div>
 </div>
+
+<% content_for :sidebar do %>
+    <% associated_products = @digital_asset.associated_products %>
+    <ul class="nav nav-pills nav-stacked">
+      <li class="active"><%= Spree.t(:associated_products) %></li>
+      <% if associated_products.any? %>
+        <% associated_products.each do |product| %>
+          <li>
+            <%= link_to product.name, product_path(id: product.id) %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+<% end %>
