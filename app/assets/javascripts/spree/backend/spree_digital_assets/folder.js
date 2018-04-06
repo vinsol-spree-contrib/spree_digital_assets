@@ -127,6 +127,10 @@ Folder.prototype.getCreateRequestParams = function (link) {
     },
     success: function(data) {
       _this.handleFolderTreeModification(data['folder']);
+    },
+    error: function(data) {
+      var error = $('<p>', { id: 'errorModal'} ).text(data.responseJSON["errors"]).css('color', 'red');
+      error.insertAfter($('input#folder_name'));
     }
   };
 };
@@ -192,6 +196,7 @@ Folder.prototype.addName = function (link) {
 }
 
 Folder.prototype.changeFormForUpdate = function (link) {
+  $('p#errorModal').hide();
   var folderId = link.data('id');
   this.wrapper.find('.modal #new_folder_form').attr('action', this.url + folderId);
   this.wrapper.find('.modal #new_folder_form').attr('method', 'put');
@@ -199,6 +204,7 @@ Folder.prototype.changeFormForUpdate = function (link) {
 }
 
 Folder.prototype.changeFormForCreate = function () {
+  $('p#errorModal').hide();
   this.wrapper.find('.modal #new_folder_form').attr('action', this.url);
   this.wrapper.find('.modal #new_folder_form').attr('method', 'post');
   this.wrapper.find('.modal #new_folder_form').find('input[type="submit"]').val('Create Folder');
