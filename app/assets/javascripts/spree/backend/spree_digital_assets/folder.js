@@ -110,7 +110,7 @@ Folder.prototype.addAttributes = function (element, data) {
   element.find('a.delete-folder').attr('href', this.url + data['id']);
   element.find('a.sidebar-default-font')
     .attr('data-id', data['id'])
-    .attr('href', this.assetUrl + 'folder_id=' + data['id'])
+    .attr('href', this.assetUrl + '?folder_id=' + data['id'])
     .text(data['name']);
 }
 
