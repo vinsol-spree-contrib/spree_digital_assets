@@ -7,6 +7,7 @@ var Folder = function (selectors) {
   this.buttonGroup = selectors.buttonGroup;
   this.modificationContent = selectors.modificationContent;
   this.url = selectors.url
+  this.assetUrl = selectors.assetUrl;
 }
 
 Folder.prototype.init = function () {
@@ -109,7 +110,7 @@ Folder.prototype.addAttributes = function (element, data) {
   element.find('a.delete-folder').attr('href', this.url + data['id']);
   element.find('a.sidebar-default-font')
     .attr('data-id', data['id'])
-    .attr('href', '/admin/digital_assets?folder_id=' + data['id'])
+    .attr('href', this.assetUrl + 'folder_id=' + data['id'])
     .text(data['name']);
 }
 
@@ -172,7 +173,7 @@ Folder.prototype.createCenterContainerFolderArea = function (data) {
   var $folderArea = this.modificationContent.find('.folder-area').clone();
   $folderArea.find('a.folder-link')
     .attr('data-id', data['id'])
-    .attr('href', '/admin/digital_assets?folder_id=' + data['id'])
+    .attr('href', this.assetUrl + '?folder_id=' + data['id'])
     .text(data['name']);
   return $folderArea;
 }
@@ -219,7 +220,8 @@ $(function () {
     body: $('body'),
     buttonGroup: $('.btn-group'),
     modificationContent: $('.modification-content'),
-    url: $("div[data-hook='submit_url']").attr('value')
+    url: $("div[data-hook='submit_url']").attr('value'),
+    assetUrl: $("div[data-hook='asset_url']").attr('value')
   }
   var folder = new Folder(selectors);
   folder.init();
