@@ -14,8 +14,6 @@ module Spree
 
     validates :name, :attachment, :folder, presence: true
 
-    validates :name, uniqueness: true
-
     before_post_process :image?
     before_validation :assign_default_name, on: :create
 
