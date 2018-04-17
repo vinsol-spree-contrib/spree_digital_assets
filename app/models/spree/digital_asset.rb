@@ -13,7 +13,6 @@ module Spree
     do_not_validate_attachment_file_type :attachment
 
     validates :name, :attachment, :folder, presence: true
-
     before_post_process :image?
     before_validation :assign_default_name, on: :create
 
