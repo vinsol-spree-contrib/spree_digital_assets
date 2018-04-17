@@ -2,6 +2,7 @@ var $assetDetails;
 
 function AssetDetails(selectors) {
   this.wrapper = selectors.wrapper;
+  this.productUrl = selectors.productUrl;
 };
 
 AssetDetails.prototype.init = function() {
@@ -30,16 +31,17 @@ AssetDetails.prototype.setRelatedProducts = function($assetDetailsArea, data) {
   var $relatedProducts = $assetDetailsArea.find('#related-products').html('');
   if(!data.length) {
     $relatedProducts.html('None');
-  }	
+  }
   $.each(data, function(index, product) {
-    $relatedProducts.append($('<a>').attr('href', '/admin/products/' + product.slug + '/edit')
+    $relatedProducts.append($('<a>').attr('href', this.productUrl + product.slug + '/edit')
       .text(product.name).css('display', 'block'));
   });
 };
 
 $(function () {
   var selectors = {
-    wrapper: $('#wrapper')
+    wrapper: $('#wrapper'),
+    productsUrl: $("div[data-hook='product_url']").attr('value')
   };
   $assetDetails = new AssetDetails(selectors);
   $assetDetails.init();

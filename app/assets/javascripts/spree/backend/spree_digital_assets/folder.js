@@ -6,6 +6,8 @@ var Folder = function (selectors) {
   this.body = selectors.body;
   this.buttonGroup = selectors.buttonGroup;
   this.modificationContent = selectors.modificationContent;
+  this.url = selectors.url
+  this.assetUrl = selectors.assetUrl;
 }
 
 Folder.prototype.init = function () {
@@ -17,7 +19,7 @@ Folder.prototype.init = function () {
 
   this.treeMenuContainer.on('click', 'ul.dropdown-menu a.add-folder', function() {
     _this.addFolder($(this));
-  }); 
+  });
 
   this.wrapper.on('click', 'a.add-root-folder', function() {
     _this.addFolder($(this));
@@ -105,10 +107,10 @@ Folder.prototype.openFolder = function (folderImage) {
 }
 
 Folder.prototype.addAttributes = function (element, data) {
-  element.find('a.delete-folder').attr('href', '/admin/folders/' + data['id']);
+  element.find('a.delete-folder').attr('href', this.url + data['id']);
   element.find('a.sidebar-default-font')
     .attr('data-id', data['id'])
-    .attr('href', '/admin/digital_assets?folder_id=' + data['id'])
+    .attr('href', this.assetUrl + '?folder_id=' + data['id'])
     .text(data['name']);
 }
 
@@ -116,7 +118,7 @@ Folder.prototype.getCreateRequestParams = function (link) {
   var _this = this;
   return {
     'url': this.wrapper.find('.modal #new_folder_form').attr('action'),
-    'method': this.wrapper.find('.modal #new_folder_form').attr('method'), 
+    'method': this.wrapper.find('.modal #new_folder_form').attr('method'),
     'dataType': 'JSON',
     'data': {
       'utf8': this.wrapper.find('.modal #new_folder_form').find('[name="utf8"]').val(),
@@ -126,6 +128,10 @@ Folder.prototype.getCreateRequestParams = function (link) {
     },
     success: function(data) {
       _this.handleFolderTreeModification(data['folder']);
+    },
+    error: function(data) {
+      var error = $('<p>', { id: 'errorModal'} ).text(data.responseJSON["errors"]).css('color', 'red');
+      error.insertAfter($('input#folder_name'));
     }
   };
 };
@@ -145,7 +151,7 @@ Folder.prototype.getDeleteRequestParams = function (link) {
   var _this = this;
   return {
     'url': link.attr('href'),
-    'method': link.data('method'), 
+    'method': link.data('method'),
     'dataType': 'JSON',
     'data': {
       'folder_id': link.data('id')
@@ -167,7 +173,7 @@ Folder.prototype.createCenterContainerFolderArea = function (data) {
   var $folderArea = this.modificationContent.find('.folder-area').clone();
   $folderArea.find('a.folder-link')
     .attr('data-id', data['id'])
-    .attr('href', '/admin/digital_assets?folder_id=' + data['id'])
+    .attr('href', this.assetUrl + '?folder_id=' + data['id'])
     .text(data['name']);
   return $folderArea;
 }
@@ -191,14 +197,16 @@ Folder.prototype.addName = function (link) {
 }
 
 Folder.prototype.changeFormForUpdate = function (link) {
+  $('p#errorModal').hide();
   var folderId = link.data('id');
-  this.wrapper.find('.modal #new_folder_form').attr('action', "/admin/folders/" + folderId);
+  this.wrapper.find('.modal #new_folder_form').attr('action', this.url + folderId);
   this.wrapper.find('.modal #new_folder_form').attr('method', 'put');
   this.wrapper.find('.modal #new_folder_form').find('input[type="submit"]').val('Update Folder');
 }
 
 Folder.prototype.changeFormForCreate = function () {
-  this.wrapper.find('.modal #new_folder_form').attr('action', "/admin/folders/");
+  $('p#errorModal').hide();
+  this.wrapper.find('.modal #new_folder_form').attr('action', this.url);
   this.wrapper.find('.modal #new_folder_form').attr('method', 'post');
   this.wrapper.find('.modal #new_folder_form').find('input[type="submit"]').val('Create Folder');
 }
@@ -211,7 +219,9 @@ $(function () {
     wrapper: $('#wrapper'),
     body: $('body'),
     buttonGroup: $('.btn-group'),
-    modificationContent: $('.modification-content')
+    modificationContent: $('.modification-content'),
+    url: $("div[data-hook='submit_url']").attr('value'),
+    assetUrl: $("div[data-hook='asset_url']").attr('value')
   }
   var folder = new Folder(selectors);
   folder.init();

@@ -37,10 +37,10 @@ module Spree
           respond_to do |format|
             format.html { redirect_to admin_digital_assets_path(folder_id: @object.id),
                             notice: Spree.t('folders.failure', error_messages: @object.errors.full_messages.to_sentence) }
-            format.json { render json: { errors: @object.errors.full_messages.to_sentence } }
+            format.json { render json: { errors: @object.errors.full_messages.to_sentence }, status: 422 }
           end
         end
-      
+
     end
 
   end

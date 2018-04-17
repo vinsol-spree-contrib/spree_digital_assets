@@ -5,5 +5,6 @@ module Spree
     has_many :digital_assets, dependent: :restrict_with_error
 
     validates :name, presence: true
+    validates :name, uniqueness: { case_sensitive: false }
   end
 end

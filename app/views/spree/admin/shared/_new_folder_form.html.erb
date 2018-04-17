@@ -21,7 +21,10 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <%= f.submit 'Create Folder', class: 'btn btn-primary' %>
-        </div>
+          <div data-hook='submit_url', value="<%= admin_folders_path %>/"> </div>
+          <div data-hook="asset_url" value="<%= admin_digital_assets_path %>"></div>
+          <div data-hook="product_url" value="<%= admin_products_path %>/"></div>
+
       <% end %>
     </div>
   </div>
