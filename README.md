@@ -8,6 +8,12 @@ creation.
 This will also act as a central repository that can be used to access all the assets of the system
 and can then be used in different products.
 
+Demo
+-----------------------------------
+Try Spree Digital Assets for Spree-3-4 with direct deployment on Heroku:
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-digital-assets)
+
 ## Features
 
 * Has default folders “Documents”, “Photos” and “Graphics”
