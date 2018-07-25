@@ -9,3 +9,10 @@ en:
       success: 'Folder has been deleted successfully'
       failure: '%{error_messages}'
     upload_asset: Upload Asset
+    banner: Frontend Banner
+    new_banner: New Banner
+    back_to_banner_list: Back To Banner List
+    successfully_created_banner: Banner is successfully created
+    banners: Banners
+    successfully_updated_banner: Successfully Updated Banner
+    error: Banner couldn't be updated. Please try again

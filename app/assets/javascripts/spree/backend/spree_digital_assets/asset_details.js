@@ -24,13 +24,15 @@ AssetDetails.prototype.setAttributes = function($assetDetailsArea, $img) {
   $assetDetailsArea.find('#created-date').html($img.data('created-on'));
   $assetDetailsArea.find('#modified-date').html($img.data('modified-on'));
   $assetDetailsArea.find('#related-products').html(this.setRelatedProducts($assetDetailsArea, $img.data('related-products')));
+  $assetDetailsArea.find('#image-url').html($img.data('image-url'));
+
 };
 
 AssetDetails.prototype.setRelatedProducts = function($assetDetailsArea, data) {
   var $relatedProducts = $assetDetailsArea.find('#related-products').html('');
   if(!data.length) {
     $relatedProducts.html('None');
-  }	
+  }
   $.each(data, function(index, product) {
     $relatedProducts.append($('<a>').attr('href', '/admin/products/' + product.slug + '/edit')
       .text(product.name).css('display', 'block'));

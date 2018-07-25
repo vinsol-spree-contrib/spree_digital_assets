@@ -1,0 +1,14 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:new_banner) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:back_to_banner_list), spree.admin_banners_path, icon: 'arrow-left', class: 'btn btn-primary' %>
+<% end %>
+
+<%= form_for [:admin, @banner] do |f| %>
+  <fieldset class="no-border-top">
+    <%= render partial: 'form', locals: { f: f } %>
+    <%= render partial: 'spree/admin/shared/new_resource_links', locals: { collection_url: admin_banners_path }  %>
+  </fieldset>
+<% end %>
