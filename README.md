@@ -56,6 +56,12 @@ For more features or usage manual go [here](http://vinsol.com/spreecommerce-digi
   gem 'spree_digital_assets', github: 'vinsol-spree-contrib/spree_digital_assets', branch: 'X-X-stable'
   ```
 
+  Also Add To your gemfile
+
+  ```ruby
+  gem 'browser', '2.0.3'
+  ```
+
   The `branch` option is important: it must match the version of Spree you're using.
   For example, use `3-0-stable` if you're using Spree `3-0-stable` or any `3.0.x` version.
 

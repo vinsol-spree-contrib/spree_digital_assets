@@ -42,7 +42,7 @@ module Spree
       private
 
         def permitted_params
-          params.require(:banner).permit(:title, :attachment, :link, :active)
+          params.require(:banner).permit(:title, :attachment, :link, :active, :mobile_banner)
         end
 
         def load_banner

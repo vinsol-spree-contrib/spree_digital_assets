@@ -16,3 +16,4 @@ en:
     banners: Banners
     successfully_updated_banner: Successfully Updated Banner
     error: Banner couldn't be updated. Please try again
+    only_one_mobile_banner: Only one Mobile banner is allowed. Disable other to enable this.
