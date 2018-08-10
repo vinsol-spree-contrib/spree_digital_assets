@@ -1,4 +1,4 @@
-<% banners = (request.variant.include?(:phone)) ? Spree::Banner.mobile_banner : Spree::Banner.active %>
+<% banners = (request.variant.include?(:phone)) ? Spree::Banner.mobile_active_banner : Spree::Banner.active %>
 <% if banners.present? %>
   <div class="banners-block banner-left banner-list-flex">
     <% banners.each do |banner| %>

@@ -1,6 +1,5 @@
 module Spree
   module Admin
-
     class BannersController < ResourceController
 
       before_action :load_banner, only: [:edit, :update, :destroy, :toggle_banner_active_status]
@@ -22,10 +21,10 @@ module Spree
       end
 
       def toggle_banner_active_status
-        if @banner.toggle!(:active)
+        if @banner.change_active_status
           flash[:success] = Spree.t(:successfully_updated_banner)
         else
-          flash[:danger] = Spree.t(:error)
+          flash[:notice] = @banner.errors.full_messages.join
         end
         redirect_to admin_banners_path
       end

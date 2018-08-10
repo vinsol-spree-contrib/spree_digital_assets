@@ -14,6 +14,9 @@ en:
     back_to_banner_list: Back To Banner List
     successfully_created_banner: Banner is successfully created
     banners: Banners
-    successfully_updated_banner: Successfully Updated Banner
-    error: Banner couldn't be updated. Please try again
-    only_one_mobile_banner: Only one Mobile banner is allowed. Disable other to enable this.
+    successfully_updated_banner: Banner updated Successfully
+    error: Banner couldn't be deleted. Please try again
+    only_one_mobile_banner: Only one mobile banner is allowed. Disable other to enable this
+    successfully_deleted_banner: Banner deleted Successfully
+    cannot_delete_active_banner: Cannot delete Active Banner. Disable first to delete.
+    only_active_mobile_banner: banner can be mobile banner.
