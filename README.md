@@ -1,5 +1,8 @@
 SpreeDigitalAssets
 ==================
+Try Spree Top banner feature:
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-top-banner)
 
 This gem allows you to have a central repository of the assets. The assets can be uploaded well
 in advance and can be associated with the products/variants at the time of product/variant
