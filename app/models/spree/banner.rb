@@ -16,10 +16,12 @@ module Spree
       validates :title, uniqueness: true
       validates :link
       validates :attachment, unless: :images_present?
-      validates :images, unless: :attachment
+      validates :images, unless: :attachment?
     end
 
     validates_format_of :link, with: URL_VALIDATION_REGEX, multiline: true, allow_blank: true
+
+    validate :both_image_and_attachment_not_present
 
     scope :active, -> { where(active: true) }
     scope :mobile_active_banner, -> { where(mobile_banner: true, active: true) }
@@ -60,6 +62,10 @@ module Spree
           errors.add(:base, Spree.t(:cannot_delete_active_banner))
           throw(:abort)
         end
+      end
+
+      def both_image_and_attachment_not_present
+        errors.add(:base, Spree.t(:both_asset_and_attachment)) if images.present? && attachment?
       end
 
   end
