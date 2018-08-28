@@ -3,7 +3,11 @@
   <div class="banners-block banner-left banner-list-flex">
     <% banners.each do |banner| %>
       <a href="<%= banner.link %>" class="top-banner-links banner-list-flex-item">
-        <%= image_tag banner.attachment, class: 'img-responsive'%>
+        <% if banner.attachment.present? %>
+          <%= image_tag banner.attachment, class: 'img-responsive' %>
+        <% else %>
+          <%= image_tag banner.images.first.attachment, class: 'img-responsive' %>
+        <% end %>
       </a>
     <% end %>
   </div>

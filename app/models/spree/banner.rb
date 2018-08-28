@@ -10,11 +10,13 @@ module Spree
 
     validates_attachment :attachment, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
     validate :only_one_mobile_banner
+    has_many :images, -> { order(:position) }, as: :viewable, dependent: :destroy, class_name: 'Spree::Image'
 
     with_options presence: true do
       validates :title, uniqueness: true
       validates :link
-      validates :attachment
+      validates :attachment, unless: :images
+      validates :images, unless: :attachment
     end
 
     validates_format_of :link, with: URL_VALIDATION_REGEX, multiline: true, allow_blank: true
@@ -23,6 +25,7 @@ module Spree
     scope :mobile_active_banner, -> { where(mobile_banner: true, active: true) }
 
     before_destroy :restrict_if_active
+
 
     def change_active_status
       if active?

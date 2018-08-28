@@ -6,40 +6,50 @@
   <%= button_link_to Spree.t(:new_banner), spree.new_admin_banner_path, icon: 'arrow-left', class: 'btn btn-primary' %>
 <% end %>
 
-
-<table class="index table table-hover">
-  <thead>
-    <tr>
-      <th><%= Spree.t(:Title) %></th>
-      <th><%= Spree.t(:Link) %></th>
-      <th><%= Spree.t(:image) %></th>
-      <th><%= Spree.t(:active) %></th>
-      <th><%= Spree.t(:mobile_banner) %></th>
-      <th class="actions" width="100"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @banners.each do |banner| %>
-      <tr id="<%= spree_dom_id banner %>" data-hook="admin_banners_index_rows">
-        <td><%= banner.title %></td>
-        <td><%= link_to banner.link, banner.link, target: :_blank %></td>
-        <td><%= image_tag banner.attachment(:mini) %></td>
-        <td><%= link_to toggle_banner_active_status_admin_banner_path(banner), method: :patch, class: "btn #{banner_active(banner)} btn-site-primary text-uppercase" do %>
-            <span class='glyphicon glyphicon-pencil'> <%= banner.active %> </span>
-          <% end %>
-        </td>
-        <td><%= banner.mobile_banner %></td>
-        <td class="actions">
-          <%= link_to_edit banner, no_text: true if can? :edit, banner %>
-          <% if banner.active? %>
-            <%= link_to_with_icon('delete', '', '#', disabled: true, no_text: true, class: 'btn btn-danger btn-sm') %>
-          <% else %>
-            <%= link_to_delete banner, no_text: true %>
-          <% end %>
-        </td>
+<% if @banners.present? %>
+  <table class="index table table-hover">
+    <thead>
+      <tr>
+        <th><%= Spree.t(:Title) %></th>
+        <th><%= Spree.t(:Link) %></th>
+        <th><%= Spree.t(:image) %></th>
+        <th><%= Spree.t(:active) %></th>
+        <th><%= Spree.t(:mobile_banner) %></th>
+        <th class="actions" width="100"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @banners.each do |banner| %>
+        <tr id="<%= spree_dom_id banner %>" data-hook="admin_banners_index_rows">
+          <td><%= banner.title %></td>
+          <td><%= link_to banner.link, banner.link, target: :_blank %></td>
+          <% if banner.attachment.present? %>
+            <td><%= image_tag banner.attachment(:mini) %></td>
+          <% else %>
+            <td><%= image_tag banner.images.first.attachment(:mini) %></td>
+          <% end %>
+          <td><%= link_to toggle_banner_active_status_admin_banner_path(banner), method: :patch, class: "btn #{banner_active(banner)} btn-site-primary text-uppercase" do %>
+              <span class='glyphicon glyphicon-pencil'> <%= banner.active %> </span>
+            <% end %>
+          </td>
+          <td><%= banner.mobile_banner %></td>
+          <td class="actions">
+            <%= link_to_edit banner, no_text: true if can? :edit, banner %>
+            <% if banner.active? %>
+              <%= link_to_with_icon('delete', '', '#', disabled: true, no_text: true, class: 'btn btn-danger btn-sm') %>
+            <% else %>
+              <%= link_to_delete banner, no_text: true %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::Banner)) %>,
+    <%= link_to Spree.t(:add_one), new_object_url if can?(:create, Spree::Banner) %>!
+  </div>
+<% end %>
 
 <%= paginate @banners %>
