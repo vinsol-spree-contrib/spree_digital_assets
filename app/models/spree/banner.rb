@@ -15,7 +15,7 @@ module Spree
     with_options presence: true do
       validates :title, uniqueness: true
       validates :link
-      validates :attachment, unless: :images
+      validates :attachment, unless: :images_present?
       validates :images, unless: :attachment
     end
 
@@ -36,6 +36,10 @@ module Spree
     end
 
     private
+
+      def images_present?
+        images.present?
+      end
 
       def only_one_mobile_banner
         if mobile_banner?
