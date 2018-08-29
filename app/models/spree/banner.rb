@@ -46,7 +46,7 @@ module Spree
       def only_one_mobile_banner
         if mobile_banner?
           if !active?
-            errors.add(:active, Spree.t(:only_active_mobile_banner))
+            errors.add(:base, Spree.t(:only_active_mobile_banner))
           elsif other_mobile_banner_active?
             errors.add(:base, Spree.t(:only_one_mobile_banner))
           end

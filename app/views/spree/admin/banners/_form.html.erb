@@ -19,7 +19,7 @@
         <%= render partial: "spree/admin/images/upload_digital_asset", locals: { f: form } %>
       <% end %>
       <span class="or"><%= Spree.t(:or) %></span>
-      <%= f.file_field :attachment, class: 'form-control select-file btn btn-default' %>
+      <%= f.file_field :attachment, class: 'form-control select-file btn btn-default', disabled: @attachment_absent %>
       <p class="note text-muted">Upload pic with approximate 1022 × 60 dimensions</p>
     <% end %>
   </div>

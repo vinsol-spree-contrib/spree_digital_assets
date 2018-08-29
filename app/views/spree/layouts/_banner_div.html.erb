@@ -6,7 +6,7 @@
         <% if banner.attachment.present? %>
           <%= image_tag banner.attachment, class: 'img-responsive' %>
         <% else %>
-          <%= image_tag banner.images.first.attachment(:large), class: 'img-responsive' %>
+          <%= image_tag banner.images.first.attachment(:banner), class: 'img-responsive' %>
         <% end %>
       </a>
     <% end %>
