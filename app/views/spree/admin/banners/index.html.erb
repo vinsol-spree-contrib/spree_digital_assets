@@ -28,8 +28,9 @@
           <% else %>
             <td><%= image_tag banner.images.first.attachment(:mini) %></td>
           <% end %>
-          <td><%= link_to toggle_banner_active_status_admin_banner_path(banner), method: :patch, class: "btn #{banner_active(banner)} btn-site-primary text-uppercase" do %>
-              <span class='glyphicon glyphicon-pencil'> <%= banner.active %> </span>
+          <td>
+            <%= link_to toggle_banner_active_status_admin_banner_path(banner), method: :patch do %>
+              <input type="checkbox" <%= banner.active ? 'checked' : '' %> data-toggle="toggle">
             <% end %>
           </td>
           <td><%= banner.mobile_banner %></td>

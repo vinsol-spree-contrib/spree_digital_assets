@@ -1,6 +1,6 @@
-<div class="input-group form-group">
+<div class="input-group form-group <%= @asset_absent ? 'hide' : '' %> ">
   <span class="input-group-btn " id= 'asset_upload_buton'>
-  <button type="button" class="btn btn-default"  id="upload_asset_button" data-toggle="modal" data-target="#associate_asset_modal" <%= @asset_absent ? 'disabled' : '' %>>Select Asset</button>
+  <button type="button" class="btn btn-default"  id="upload_asset_button" data-toggle="modal" data-target="#associate_asset_modal">Select Asset</button>
 
   </span>
   <input type="text" id="digital_asset_file_name" disabled='true' class="form-control">
