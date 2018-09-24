@@ -111,6 +111,12 @@ For more features or usage manual go [here](http://vinsol.com/spreecommerce-digi
   bundle exec rspec spec
   ```
 
+## See It In Action
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=bIdsZgUzfs0
+" target="_blank"><img src="http://img.youtube.com/vi/bIdsZgUzfs0/0.jpg" 
+alt="Youtube Video Tutorial" /></a>
+
 ## Contributing
 
 1. [Fork](https://help.github.com/articles/fork-a-repo) the project
