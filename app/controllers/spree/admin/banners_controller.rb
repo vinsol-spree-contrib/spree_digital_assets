@@ -2,7 +2,7 @@ module Spree
   module Admin
     class BannersController < ResourceController
 
-      before_action :load_banner, only: [:edit, :update, :destroy, :toggle_banner_active_status]
+      before_action :load_banner, only: [:edit, :update, :destroy, :activate, :deactivate]
       before_action :load_folders, only: [:new, :create, :edit, :update]
       before_action :create_banner_and_images, only: [:create]
 
@@ -19,6 +19,22 @@ module Spree
         params[:q] ||= {}
         @search = Spree::Banner.order(created_at: :desc).ransack(params[:q])
         @banners = @search.result(distinct: true).page(params[:page]).per(params[:per_page])
+      end
+
+      def activate
+        if @banner.activate
+          render json: { active: 'Yes' }, status: 200
+        else
+          render json: { error: @banner.errors.full_messages.join(', ') }, status: 422
+        end
+      end
+
+      def deactivate
+        if @banner.deactivate
+          render json: { active: 'No' }, status: 200
+        else
+          render json: { error: @banner.errors.full_messages.join(', ') }, status: 422
+        end
       end
 
       def toggle_banner_active_status

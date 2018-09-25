@@ -4,7 +4,10 @@ Spree::Core::Engine.routes.draw do
     resources :digital_assets
     resources :folders, only: [:create, :update, :destroy]
     resources :banners, except: [:show] do
-      patch :toggle_banner_active_status, on: :member
+      member do
+        patch :activate
+        patch :deactivate
+      end
       resources :images
     end
   end

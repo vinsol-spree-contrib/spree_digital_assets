@@ -1,3 +1,7 @@
+<%= stylesheet_link_tag 'spree/backend/bootstrap_toggle' %>
+<%= javascript_include_tag 'spree/backend/bootstrap_toggle' %>
+<%= javascript_include_tag 'spree/backend/spree_digital_assets/banner_toggler' %>
+
 <% content_for :page_title do %>
   <%= Spree.t(:banners) %>
 <% end %>
@@ -29,9 +33,7 @@
             <td><%= image_tag banner.images.first.attachment(:mini) %></td>
           <% end %>
           <td>
-            <%= link_to toggle_banner_active_status_admin_banner_path(banner), method: :patch do %>
-              <input type="checkbox" <%= banner.active ? 'checked' : '' %> data-toggle="toggle">
-            <% end %>
+            <input type="checkbox" <%= banner.active? ? 'checked' : '' %> data-toggle="toggle" data-banner-id='<%= banner.id %>' data-active= '<%= banner.active? %>' data-toggle-switch='yes' >
           </td>
           <td><%= banner.mobile_banner %></td>
           <td class="actions">

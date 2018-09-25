@@ -29,12 +29,12 @@ module Spree
     before_destroy :restrict_if_active
 
 
-    def change_active_status
-      if active?
-        update_columns(active: false, mobile_banner: false)
-      else
-        update_column(:active, true)
-      end
+    def deactivate
+      update(active: false, mobile_banner: false)
+    end
+
+    def activate
+      update(active: true)
     end
 
     private
