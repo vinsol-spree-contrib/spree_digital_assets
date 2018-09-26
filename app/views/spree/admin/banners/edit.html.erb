@@ -1,0 +1,18 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:editing_banner) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:back_to_banner_list), spree.admin_banners_path, icon: 'arrow-left', class: 'btn btn-primary' %>
+<% end %>
+
+<%= render partial: 'spree/shared/error_messages', locals: { target: @banner } %>
+
+<%= form_for [:admin, @banner] do |f| %>
+  <fieldset class="no-border-top">
+    <% @asset_absent = @banner.images.empty? %>
+    <% @attachment_absent = !@banner.attachment? %>
+    <%= render partial: 'form', locals: { f: f } %>
+    <%= render partial: 'spree/admin/shared/edit_resource_links' %>
+  </fieldset>
+<% end %>

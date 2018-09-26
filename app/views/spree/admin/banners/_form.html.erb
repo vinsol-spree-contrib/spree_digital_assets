@@ -1,0 +1,42 @@
+<div data-hook="admin_banner_form_fields" class="row clearfix">
+  <div class="col-md-5">
+    <%= f.field_container :title do %>
+      <%= f.label :title %> <span class="required">*</span><br/>
+      <%= f.text_field :title, class: 'form-control' %>
+    <% end %>
+  </div>
+  <div class="col-md-5">
+    <%= f.field_container :link do %>
+      <%= f.label :link %> <span class="required">*</span><br/>
+      <%= f.text_field :link, class: 'form-control' %>
+    <% end %>
+  </div>
+
+  <div class="col-md-5" data-hook='file'>
+    <%= f.field_container :attachment do %>
+      <%= f.label :attachment %><span class="required">*</span><br/>
+      <%= f.fields_for :images, @banner.images.build do |form| %>
+        <%= render partial: "spree/admin/images/upload_digital_asset", locals: { f: form } %>
+      <% end %>
+      <span class="or" style='display: <%= action_name == 'edit' ? 'none' : '' %>''><%= Spree.t(:or) %></span>
+      <%= f.file_field :attachment, class: "form-control select-file btn btn-default #{@attachment_absent ? 'hide' : ''} " %>
+      <p class="note text-muted" style='display: <%= action_name == 'edit' ? 'none' : '' %>;  %>display: none'>Attachment can only be attached by any one of the methods.</p>
+      <p class="note text-muted">Upload pic with approximate 1022 × 60 dimensions</p>
+    <% end %>
+  </div>
+
+  <div class="col-md-5">
+    <%= f.field_container :active do %>
+      <%= f.label :active %>
+      <%= f.check_box :active %>
+    <% end %>
+  </div>
+
+  <div class="col-md-5">
+    <%= f.field_container :mobile_banner do %>
+      <%= f.label :mobile_banner %>
+      <%= f.check_box :mobile_banner %>
+    <% end %>
+  </div>
+
+</div>

@@ -51,23 +51,33 @@ Spree::Admin::BaseHelper.class_eval do
   end
 
   def asset_details(digital_asset)
-    { 
+    {
       id: digital_asset.id,
       name: digital_asset.name,
-      size: number_to_human_size(digital_asset.attachment_file_size), 
-      created_on: digital_asset.created_at.to_date.to_formatted_s(:long), 
-      modified_on: digital_asset.updated_at.to_date.to_formatted_s(:long), 
-      related_products: related_products(digital_asset)
+      size: number_to_human_size(digital_asset.attachment_file_size),
+      created_on: digital_asset.created_at.to_date.to_formatted_s(:long),
+      modified_on: digital_asset.updated_at.to_date.to_formatted_s(:long),
+      related_products: related_products(digital_asset),
+      image_url: request.host_with_port + digital_asset.attachment.url
     }
   end
 
   def related_products(digital_asset)
     products = {}
     digital_asset.assets.each do |asset|
-      product = asset.viewable.product
-      products[product.id] = { slug: product.slug, name: product.name }
+      product = asset.viewable.try(:product)
+      products[product.id] = { slug: product.slug, name: product.name } if product
     end
     products.values
   end
+
+  def banner_active(banner)
+    if banner.active
+      "btn-success"
+    else
+      "btn-danger"
+    end
+  end
+
 
 end

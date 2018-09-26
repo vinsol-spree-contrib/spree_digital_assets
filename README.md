@@ -1,5 +1,8 @@
 SpreeDigitalAssets
 ==================
+Try Spree Top banner feature:
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-top-banner)
 
 This gem allows you to have a central repository of the assets. The assets can be uploaded well
 in advance and can be associated with the products/variants at the time of product/variant
@@ -23,6 +26,7 @@ Try Spree Digital Assets for Spree 3-1 with direct deployment on Heroku:
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-digital-assets-3-1)
 
+**Note** Add gem 'bootstrap-toggle-rails' to gemfile.
 
 ## Features
 
@@ -54,6 +58,12 @@ For more features or usage manual go [here](http://vinsol.com/spreecommerce-digi
 
   ```ruby
   gem 'spree_digital_assets', github: 'vinsol-spree-contrib/spree_digital_assets', branch: 'X-X-stable'
+  ```
+
+  Also Add To your gemfile
+
+  ```ruby
+  gem 'browser', '2.0.3'
   ```
 
   The `branch` option is important: it must match the version of Spree you're using.

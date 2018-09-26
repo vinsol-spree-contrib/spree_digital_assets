@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'jquery-fileupload-rails', '~> 0.4.6'
 
   s.add_development_dependency 'appraisal'
+  s.add_development_dependency 'bootstrap-toggle-rails'
   s.add_development_dependency 'capybara', '~> 2.5'
   s.add_development_dependency 'coffee-rails'
   s.add_development_dependency 'database_cleaner'
