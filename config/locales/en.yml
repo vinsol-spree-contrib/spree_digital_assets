@@ -5,6 +5,9 @@ en:
   spree:
     asset_uploader: Asset Uploader
     associated_products: Associated Products
+    digital_asset:
+      attachment_required: Attachment must be present
+      invalid_content_type: Content type of attachment is invalid
     folders:
       success: 'Folder has been deleted successfully'
       failure: '%{error_messages}'

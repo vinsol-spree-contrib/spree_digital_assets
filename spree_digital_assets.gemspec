@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_digital_assets'
-  s.version     = '3.3.0'
+  s.version     = '3.7.0'
   s.summary     = 'This extension allows you to have a central repository of the assets.'
   s.description = 'This extension allows you to have a central repository of the assets. The assets can be uploaded well
     in advance and can be associated with the products/variants at the time of product/variant creation.
@@ -29,8 +29,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'capybara', '~> 2.5'
   s.add_development_dependency 'coffee-rails'
   s.add_development_dependency 'database_cleaner'
-  s.add_development_dependency 'factory_girl', '~> 4.5'
-  s.add_development_dependency 'ffaker',  '~> 2.2.0'
+  s.add_development_dependency 'factory_bot'
+  s.add_development_dependency 'ffaker'
   s.add_development_dependency 'rails-controller-testing'
   s.add_development_dependency 'rspec-activemodel-mocks'
   s.add_development_dependency 'rspec-rails',  '~> 3.4'
