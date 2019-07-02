@@ -6,14 +6,12 @@ module Spree
     belongs_to :folder
     has_many :assets
 
-    has_attached_file :attachment, styles: { small: '100x100>' },
-                      url: '/spree/digital_assets/:id/:style/:basename.:extension',
-                      path: ':rails_root/public/spree/digital_assets/:id/:style/:basename.:extension'
+    has_one_attached :attachment
 
-    do_not_validate_attachment_file_type :attachment
+    validates :name, presence: true
+    validate :check_attachment_presence
+    validate :check_attachment_content_type
 
-    validates :name, :attachment, :folder, presence: true
-    before_post_process :image?
     before_validation :assign_default_name, on: :create
 
     scope :approved, -> { where(approved: true) }
@@ -29,11 +27,25 @@ module Spree
 
     private
       def image?
-        (attachment_content_type =~ SUPPORTED_IMAGES_REGEX).present?
+        (attachment.try(:content_type) =~ SUPPORTED_IMAGES_REGEX).present?
       end
 
       def assign_default_name
-        self.name = File.basename(attachment_file_name.to_s, '.*').titleize.truncate(255) if name.blank?
+        self.name = File.basename(attachment.try(:filename).to_s, '.*').titleize.truncate(255) if name.blank?
+      end
+
+      def check_attachment_presence
+        unless attachment.attached?
+          attachment.purge
+          errors.add(:attachment, Spree.t(:attachment_required, scope: :digital_asset))
+        end
+      end
+
+      def check_attachment_content_type
+        if attachment.attached? && !attachment.content_type.in?(SUPPORTED_IMAGE_FORMATS)
+          attachment.purge
+          errors.add(:attachment, Spree.t(:invalid_content_type, scope: :digital_asset))
+        end
       end
   end
 end

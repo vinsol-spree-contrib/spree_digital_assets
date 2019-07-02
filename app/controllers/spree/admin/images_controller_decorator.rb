@@ -4,7 +4,7 @@ Spree::Admin::ImagesController.class_eval do
   def create
     invoke_callbacks(:create, :before)
     # checking whether the asset is an supported image format.
-    if SUPPORTED_IMAGE_FORMATS.include? Spree::DigitalAsset.find_by(id: permitted_resource_params[:digital_asset_id]).try(:attachment_content_type)
+    if SUPPORTED_IMAGE_FORMATS.include? Spree::DigitalAsset.find_by(id: permitted_resource_params[:digital_asset_id]).try(:attachment).try(:content_type)
       @object.attributes = permitted_resource_params
     end
     if @object.save
