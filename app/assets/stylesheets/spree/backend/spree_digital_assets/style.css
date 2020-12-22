@@ -39,7 +39,7 @@
 }
 .tree-menu-container .tree-menu > li .link {
   display: block;
-  padding: 10px 15px 10px 30px;
+  padding: 10px 66px 17px 30px;
 }
 
 .tree-menu-container .tree-menu > li > .toggle_list_menu {
@@ -403,3 +403,12 @@ li.active .link.sidebar-default-font {
 .upload-assets-uploader-status .fail {
   color: #ff0000;
 }
+.hidden, .hide{
+  display: none;
+}
+
+#sidebar-assets > li {
+  width: 100%;
+}
+
+

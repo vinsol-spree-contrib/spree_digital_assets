@@ -1,11 +1,11 @@
-<ul class="nav nav-sidebar" id='folder_list'>
-  <li class="sidebar-menu-item">
-    <a data-toggle="collapse" data-parent="#sidebar" href="#sidebar-assets">
-      <span class="icon icon-file"></span>
+<ul class="nav nav-sidebar border-bottom">
+  <li class="sidebar-menu-item d-block w-100">
+    <a data-toggle="collapse" class="d-flex w-100 p-3 position-relative align-items-center collapsed" href="#sidebar-assets" aria-expanded="false">
+      <span class="icon icon-file mr-2"></span>
       <span class="text"> Assets</span>
-      <span class="icon icon-chevron-left pull-right"></span>
+      <span class="icon position-absolute icon-chevron-left"></span>
     </a>
-    <ul data-hook="admin_configurations_sidebar_menu" class="collapse nav nav-pills nav-stacked" id="sidebar-assets">
+    <ul data-hook="admin_configurations_sidebar_menu" class="border-top bg-white nav nav-pills nav-stacked collapse" id="sidebar-assets" style="">
       <li>
         <div class="tree-menu-container">
           <%= build_nested_set_tree(Spree::Folder.all) do |folder| %>
