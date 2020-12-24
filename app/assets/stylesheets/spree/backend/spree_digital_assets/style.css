@@ -410,5 +410,11 @@ li.active .link.sidebar-default-font {
 #sidebar-assets > li {
   width: 100%;
 }
+.delete-folder {
+    border: none;
+    background: none;
+    color: #36729f;
+    padding: 0px;
+}
 
 

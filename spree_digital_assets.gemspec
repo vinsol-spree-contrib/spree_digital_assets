@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_core', '>= 3.2.0'
+  s.add_dependency 'spree_core', '>= 4.0'
   s.add_dependency 'spree_extension'
   s.add_dependency 'remotipart', '~> 1.0', '>= 1.0.5'
   s.add_dependency 'jquery-fileupload-rails', '~> 0.4.6'

@@ -7,16 +7,9 @@ module Spree
     has_many :assets
 
     has_one_attached :attachment
-    delegate :attached?, to: :attachment
-
-    # has_attached_file :attachment, styles: { small: '100x100>' },
-    #                   url: '/spree/digital_assets/:id/:style/:basename.:extension',
-    #                   path: ':rails_root/public/spree/digital_assets/:id/:style/:basename.:extension'
-
-    #do_not_validate_attachment_file_type :attachment
 
     validates :name, :attachment, :folder, presence: true
-    #before_save :image?
+    before_save :image?
     before_validation :assign_default_name, on: :create
 
     scope :approved, -> { where(approved: true) }

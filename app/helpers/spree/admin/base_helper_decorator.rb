@@ -44,9 +44,9 @@ Spree::Admin::BaseHelper.class_eval do
 
   def delete_folder_link(folder, options)
     if folder.persisted?
-      link_to 'Delete', admin_folder_path(folder), options
+      button_to 'Delete', admin_folder_path(folder), options
     else
-      link_to 'Delete', '', options
+      button_to 'Delete', '', options
     end
   end
 
