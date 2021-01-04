@@ -44,19 +44,19 @@ Spree::Admin::BaseHelper.class_eval do
 
   def delete_folder_link(folder, options)
     if folder.persisted?
-      link_to 'Delete', admin_folder_path(folder), options
+      button_to 'Delete', admin_folder_path(folder), options
     else
-      link_to 'Delete', '', options
+      button_to 'Delete', '', options
     end
   end
 
   def asset_details(digital_asset)
-    { 
+    {
       id: digital_asset.id,
       name: digital_asset.name,
-      size: number_to_human_size(digital_asset.attachment_file_size), 
-      created_on: digital_asset.created_at.to_date.to_formatted_s(:long), 
-      modified_on: digital_asset.updated_at.to_date.to_formatted_s(:long), 
+      size: number_to_human_size(digital_asset.attachment.byte_size),
+      created_on: digital_asset.created_at.to_date.to_formatted_s(:long),
+      modified_on: digital_asset.updated_at.to_date.to_formatted_s(:long),
       related_products: related_products(digital_asset)
     }
   end

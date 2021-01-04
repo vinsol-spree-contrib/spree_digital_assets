@@ -8,7 +8,7 @@ Spree::Asset.class_eval do
     def build_from_digital_asset
       digital_asset = Spree::DigitalAsset.approved.find_by(id: digital_asset_id)
       if digital_asset.present?
-        self.attachment = digital_asset.attachment
+        self.attachment.attach(digital_asset.attachment.blob)
       else
         errors.add(:base, 'invalid digital asset id passed')
         throw(:abort)

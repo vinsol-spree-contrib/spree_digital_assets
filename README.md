@@ -15,6 +15,10 @@ Try Spree Digital Assets for Spree Master with direct deployment on Heroku:
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-digital-assets-master)
 
+Try Spree Digital Assets for Spree 4.0 and later with direct deployment on Heroku:
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-digital-assets-4-1)
+
 Try Spree Digital Assets for Spree 3-4 with direct deployment on Heroku:
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-digital-assets)
@@ -114,7 +118,7 @@ For more features or usage manual go [here](http://vinsol.com/spreecommerce-digi
 ## See It In Action
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=bIdsZgUzfs0
-" target="_blank"><img src="http://img.youtube.com/vi/bIdsZgUzfs0/0.jpg" 
+" target="_blank"><img src="http://img.youtube.com/vi/bIdsZgUzfs0/0.jpg"
 alt="Youtube Video Tutorial" /></a>
 
 ## Contributing

@@ -1,6 +1,6 @@
 <div class="text-center asset-area <%= digital_asset.approved? ? 'approved' : 'not-approved' %>">
   <div class="digital-assets-image">
-    <%= image_tag(digital_asset.attachment.url(:small), class: 'img-thumbnail attachment digital_asset_attachment' ,
+    <%= image_tag(main_app.url_for(digital_asset.attachment), class: 'img-thumbnail attachment digital_asset_attachment' ,
       data: asset_details(digital_asset), onerror: "$assetDetails.showFileGlyphicon(this)") %>
     <i class="glyphicon glyphicon-file file-icon hide"></i>
   </div>
@@ -18,6 +18,6 @@
       <%= link_to '<i class="glyphicon glyphicon-pencil"></i>'.html_safe(), spree.edit_admin_digital_asset_path(digital_asset), class: 'with-tip', data: { original_title: 'Edit' } %>
     </li>
     <li role="separator" class="divider"></li>
-    <li><%= link_to '<i class="glyphicon glyphicon-download"></i>'.html_safe(), digital_asset.attachment.url(:original, false), target: '_blank', class: 'with-tip', data: { original_title: 'Download' } %></li>
+    <li><%= link_to '<i class="glyphicon glyphicon-download"></i>'.html_safe(), main_app.url_for(digital_asset.attachment), target: '_blank', class: 'with-tip', data: { original_title: 'Download' } %></li>
   </ul>
 </div>

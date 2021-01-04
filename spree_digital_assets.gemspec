@@ -20,9 +20,9 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_core', '>= 3.2.0', '< 4.0'
+  s.add_dependency 'spree_core', '>= 4.0'
   s.add_dependency 'spree_extension'
-  s.add_dependency 'remotipart'
+  s.add_dependency 'remotipart', '~> 1.0', '>= 1.0.5'
   s.add_dependency 'jquery-fileupload-rails', '~> 0.4.6'
 
   s.add_development_dependency 'appraisal'
@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'coffee-rails'
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'factory_girl', '~> 4.5'
-  s.add_development_dependency 'ffaker',  '~> 2.2.0'
+  s.add_development_dependency 'ffaker',  '~> 2.9.0'
   s.add_development_dependency 'rails-controller-testing'
   s.add_development_dependency 'rspec-activemodel-mocks'
   s.add_development_dependency 'rspec-rails',  '~> 3.4'
